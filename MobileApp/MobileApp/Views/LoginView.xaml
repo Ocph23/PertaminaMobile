@@ -5,69 +5,60 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
              xmlns:controls="clr-namespace:MobileApp.Controls"
-             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             mc:Ignorable="d" BackgroundColor="#F0F0F3"
              x:Class="MobileApp.Views.LoginView">
     <ContentPage.Resources>
-        <Style ApplyToDerivedTypes="True" TargetType="sh:Shadows">
-            <Setter Property="CornerRadius" Value="10" />
-            <Setter Property="Shades">
-                <sh:ImmutableShades>
-                    <sh:Shade BlurRadius="10"
-                      Opacity="1"
-                      Offset="-10,-10"
-                      Color="White" />
-                    <sh:Shade BlurRadius="10"
-                      Opacity="1"
-                      Offset="6, 6"
-                      Color="#19000000" />
-                </sh:ImmutableShades>
-            </Setter>
-        </Style>
+       
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="70*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="75*"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="0">
-                <Image Source="logo.png" Background="Gray" HorizontalOptions="Center" VerticalOptions="EndAndExpand" WidthRequest="100" HeightRequest="100">
-                    <Image.Clip>
-                        <EllipseGeometry Center="75,75" RadiusX="50" RadiusY="50"/>
-                    </Image.Clip>
+                <Image Source="logo2.png" HorizontalOptions="Center" VerticalOptions="EndAndExpand" WidthRequest="100" >
                 </Image>
             </StackLayout>
-            <StackLayout Grid.Row="1">
-                <StackLayout Margin="50">
+            <StackLayout Grid.Row="1"  Margin="40,20">
+                <StackLayout>
+                    <Label Margin="5,0,0,0" Text="User Name" Style="{StaticResource dataTitle}"/>
+                    <Frame Style="{StaticResource entryFrameStyle}">
+                        <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
+                            <controls:EntryCustom Text="{Binding UserName}" Placeholder="User Name" CornerRadius="10" HeightRequest="45" Margin="10" ></controls:EntryCustom>
+                        </sh:Shadows>
+                    </Frame>
                     
-                    <Label Margin="5,40,0,0" Text="User Name" Style="{StaticResource dataTitle}"/>
-                    <sh:Shadows Grid.Row="1"
-                    Grid.Column="1"
-                    CornerRadius="10"
-                    Shades="{sh:NeumorphismShades}">
-                        <controls:EntryCustom Placeholder="User Name"  TextColor="Black"  BackgroundColor="White"></controls:EntryCustom>
+                    <Label Margin="5,20,0,0" Text="Password" Style="{StaticResource dataTitle}"/>
+                    <Frame Style="{StaticResource entryFrameStyle}">
+                        <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
+                            <controls:EntryCustom TextChanged="passwordChange"  Placeholder="Password" Margin="10" IsPassword="True"  ></controls:EntryCustom>
+                        </sh:Shadows>
+                    </Frame>
+                    <sh:Shadows Grid.Row="1" Margin="0,20,0,10" CornerRadius="10" 
+                                Shades="{sh:NeumorphismShades}">
+                        <Frame Style="{StaticResource entryFrameStyle}">
+                            <Button Style="{StaticResource okButton}" CornerRadius="10" Text="Login"  Command="{Binding LoginCommand}" />
+                        </Frame>
                     </sh:Shadows>
-                    <Label Margin="5,20,0,0" Text="Password"  Style="{StaticResource dataTitle}"/>
-                    <sh:Shadows  CornerRadius="10" Margin="20" Padding="10" Shades="{sh:NeumorphismShades}">
-                        <controls:EntryCustom Background="#F1F1F1"></controls:EntryCustom>
+                    <sh:Shadows Grid.Row="1" Margin="0,5,0,10" CornerRadius="10" 
+                                Shades="{sh:NeumorphismShades}">
+                        <Frame Style="{StaticResource entryFrameStyle}">
+                            <ImageButton HeightRequest="45" CornerRadius="10" Command="{Binding GoogleLoginCommand}" Aspect="AspectFit" Source="google.png" Padding="10" ></ImageButton>
+                        </Frame>
                     </sh:Shadows>
-                    <Entry  Placeholder="Password" Text="{Binding Model.Password}" Style="{StaticResource entryStyle}" IsPassword="True"/>
-                    <Label FontSize="Small" TextColor="OrangeRed" Text="{Binding Model.ErrorMessage}"/>
-                    <Button Style="{StaticResource okButton}" Text="Login"  Command="{Binding LoginCommand}" />
-                    <Label FontSize="Small" TextColor="LightBlue" Text="Lupa Password">
+                    <Label Style="{StaticResource dataValue}" HorizontalOptions="Center" Text="Forgot Your Password ?">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
                         </Label.GestureRecognizers>
                     </Label>
-                    <Label FontSize="Small"  TextColor="LightBlue" Text="Registrasi">
-                        <Label.GestureRecognizers>
-
-                            <TapGestureRecognizer Command="{Binding RegistrasiCommand}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <Entry Style="{StaticResource entryStyle}" VerticalOptions="EndAndExpand" HorizontalTextAlignment="Center" Text="URL"/>
+                    <ActivityIndicator Margin="50" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="OrangeRed" HorizontalOptions="CenterAndExpand"/>
                 </StackLayout>
+            </StackLayout>
+            <StackLayout Grid.Row="2">
+                <controls:EntryCustom FontSize="8" VerticalOptions="EndAndExpand" HorizontalTextAlignment="Center" Text="URL"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource MainColor}"
+             x:Class="MobileApp.Views.NotificationView">
+    <ContentPage.Content>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <sh:Shadows Style="{StaticResource card}" CornerRadius="25">
+                    <Frame WidthRequest="45" HeightRequest="50" Padding="5"  Margin="0" BorderColor="White"  
+                           CornerRadius="25" Style="{StaticResource entryFrameStyle}" BackgroundColor="White">
+                        <Image Source="logo.png" Aspect="AspectFill" Margin="5" />
+                    </Frame>
+                </sh:Shadows>
+                <StackLayout Grid.Column="1" Margin="0,10">
+                    <Label VerticalOptions="Center" Text="Hello," Margin="0"/>
+                    <Label VerticalOptions="Center" FontSize="Medium" Text="Candra Wijaksana"/>
+                </StackLayout>
+                <StackLayout Grid.Column="2" WidthRequest="100">
+                    <Label Text="&#xf00d;" Style="{StaticResource Icons}" Margin="10" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="End" />
+                </StackLayout>
+            </Grid>
+            <sh:Shadows Grid.Row="1" Style="{StaticResource card}">
+                <Frame Style="{StaticResource entryFrameStyle}">
+                    <ListView Grid.Row="1" BackgroundColor="Transparent" HasUnevenRows="True" SelectionMode="None" >
+                        <ListView.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Baboon</x:String>
+                                <x:String>Xamarin.Android signs all debug builds with the same debug.keystore file. This file is generated when Xamarin.Android is 
+                                    first installed.The steps below detail the process for finding the MD5 or SHA1 signature of the default Xamarin.Android debug.keystore file.
+                                </x:String>
+                                <x:String>Blue Monkey</x:String>
+                                <x:String>Squirrel Monkey</x:String>
+                                <x:String>Golden Lion Tamarin</x:String>
+                                <x:String>Howler Monkey</x:String>
+                                <x:String>Japanese Macaque</x:String>
+                            </x:Array>
+                        </ListView.ItemsSource>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <sh:Shadows Style="{StaticResource card}" >
+                                        <Frame CornerRadius="10" Style="{StaticResource entryFrameStyle}" Padding="10" >
+                                            <Grid >
+                                                <StackLayout>
+                                                    <Label Text="10/10/2020" FontSize="Micro"/>
+                                                    <StackLayout Padding="10">
+                                                        <Label Text="Pelanggaran - Berat" FontSize="Default" FontAttributes="Bold"></Label>
+                                                        <Label Text="{Binding .}"/>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                                <Label Text="&#xf0f3;" Style="{StaticResource Icons}" VerticalOptions="Start" HorizontalOptions="End" />
+
+                                            </Grid>
+                                        </Frame>
+                                    </sh:Shadows>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+            </sh:Shadows>
+        </Grid>
+     
+    </ContentPage.Content>
+</ContentPage>

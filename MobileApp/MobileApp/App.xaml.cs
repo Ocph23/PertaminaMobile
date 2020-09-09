@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using MobileApp.Services;
 using MobileApp.Views;
+using MobileApp.Models;
 
 namespace MobileApp
 {
@@ -12,9 +13,18 @@ namespace MobileApp
         public App()
         {
             InitializeComponent();
+            MessagingCenter.Subscribe<MessagingCenterAlert>(this, "message", async (message) =>
+            {
+                await Current.MainPage.DisplayAlert(message.Title, message.Message, message.Cancel);
+            });
+            
+            //DataStore Register
+            DependencyService.Register<PelanggaranDataStore>();
+            DependencyService.Register<PeriodeDataStore>();
+            DependencyService.Register<AuthService>();
 
-            DependencyService.Register<MockDataStore>();
-            MainPage = new LoginView();
+
+            MainPage = new NavigationPage(new LoginView());
         }
 
         protected override void OnStart()

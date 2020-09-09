@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+﻿using System.ComponentModel;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+using Android.Graphics.Drawables;
 using MobileApp.Controls;
 using MobileApp.Droid.Renderers;
 using Xamarin.Forms;
@@ -19,6 +11,9 @@ namespace MobileApp.Droid.Renderers
 {
     class EntryCustomeRenderer : EntryRenderer
     {
+
+        public EntryCustom ElementV2 => Element as EntryCustom;
+
         public EntryCustomeRenderer(Context context) : base(context)
         {
         }
@@ -33,6 +28,25 @@ namespace MobileApp.Droid.Renderers
 
 
             }
+        }
+
+        protected override FormsEditText CreateNativeControl()
+        {
+            var control = base.CreateNativeControl();
+            Update(control);
+            return control;
+        }
+
+        private void Update(FormsEditText control)
+        {
+            if (control == null) return;
+
+            var gd = new GradientDrawable();
+            gd.SetCornerRadius(Context.ToPixels(ElementV2.CornerRadius));
+            gd.SetStroke((int)Context.ToPixels(ElementV2.BorderThickness), ElementV2.BorderColor.ToAndroid());
+            control.SetBackground(gd);
+            control.SetPadding((int)Context.ToPixels(ElementV2.Padding.Left), (int)Context.ToPixels(ElementV2.Padding.Top),
+                (int)Context.ToPixels(ElementV2.Padding.Right), (int)Context.ToPixels(ElementV2.Padding.Bottom));
         }
     }
 }

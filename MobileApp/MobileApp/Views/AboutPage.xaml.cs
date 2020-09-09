@@ -1,7 +1,9 @@
-﻿using System;
+﻿
+using Microcharts;
+using SkiaSharp;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace MobileApp.Views
 {
@@ -14,5 +16,9 @@ namespace MobileApp.Views
         {
             InitializeComponent();
         }
+
+
+        
+
     }
 }

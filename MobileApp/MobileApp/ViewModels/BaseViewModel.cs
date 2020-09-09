@@ -7,12 +7,15 @@ using Xamarin.Forms;
 
 using MobileApp.Models;
 using MobileApp.Services;
+using MobileApp.Models.Datas;
 
 namespace MobileApp.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataStore<Periode> Periodes => DependencyService.Get<IDataStore<Periode>>();
+        public IDataStore<Pelanggaran> Pelanggarans => DependencyService.Get<IDataStore<Pelanggaran>>();
+        public IAuthInternalService AuthService => DependencyService.Get<IAuthInternalService>();
 
         bool isBusy = false;
         public bool IsBusy

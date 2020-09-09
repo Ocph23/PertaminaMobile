@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" 
+             xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+             NavigationPage.HasNavigationBar="False"
+             mc:Ignorable="d" BackgroundColor="{StaticResource MainColor}"
+             x:Class="MobileApp.Views.AbsenScanView">
+
+    <sh:Shadows Style="{StaticResource card}">
+        <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="10">
+            <Grid  Margin="30,10" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition  Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <sh:Shadows Grid.Row="0" Style="{StaticResource card}">
+                    <zxing:ZXingScannerView x:Name="scannerView" ScanResultCommand="{Binding ScanningCommand}" IsScanning="{Binding IsScanning}"></zxing:ZXingScannerView>
+                </sh:Shadows>
+
+                <sh:Shadows Grid.Row="1" HeightRequest="50" Style="{StaticResource card}" >
+                    <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="10" >
+                        <FlexLayout WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center" >
+                            <Button CornerRadius="5" Command="{Binding AbsenCommand}" Style="{StaticResource okButton}" Text="Absen"></Button>
+                            <BoxView BackgroundColor="LightGray" Margin="3" WidthRequest="1"></BoxView>
+                            <Button CornerRadius="5" Command="{Binding LemburCommand}" Style="{StaticResource okButton}" Text="Lembur"></Button>
+                        </FlexLayout>
+                    </Frame>
+                </sh:Shadows>
+
+            </Grid>
+        </Frame>
+    </sh:Shadows>
+</ContentPage>

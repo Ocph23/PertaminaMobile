@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+             xmlns:controls="clr-namespace:MobileApp.Controls"
+             mc:Ignorable="d"
+             x:Class="MobileApp.Views.Profiles.AbsenView">
+    <ContentPage.Content>
+        <Grid  Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Margin="10">
+                <Label Margin="5,0,0,0" Text="DATA KEHADIRAN" Style="{StaticResource  dataValue}"/>
+                <Label Margin="5,0,0,0" Text="Periode" Style="{StaticResource dataTitle}"/>
+                <Frame Style="{StaticResource entryFrameStyle}">
+                    <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
+                        <Picker ItemsSource="{Binding DataPeriode}" ItemDisplayBinding="{Binding  DisplayName}" />
+                    </sh:Shadows>
+                </Frame>
+            </StackLayout>
+            <sh:Shadows Grid.Row="1" Style="{StaticResource card}">
+                <Frame Style="{StaticResource entryFrameStyle}">
+                    <ListView Grid.Row="1" BackgroundColor="Transparent" HasUnevenRows="True" SelectionMode="None" >
+                        <ListView.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Baboon</x:String>
+                                <x:String>Xamarin.Android signs all debug builds with the same debug.keystore file. This file is generated when Xamarin.Android is 
+                                    first installed.The steps below detail the process for finding the MD5 or SHA1 signature of the default Xamarin.Android debug.keystore file.
+                                </x:String>
+                                <x:String>Blue Monkey</x:String>
+                                <x:String>Squirrel Monkey</x:String>
+                                <x:String>Golden Lion Tamarin</x:String>
+                                <x:String>Howler Monkey</x:String>
+                                <x:String>Japanese Macaque</x:String>
+                            </x:Array>
+                        </ListView.ItemsSource>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <sh:Shadows Style="{StaticResource card}" >
+                                        <Frame CornerRadius="10" Style="{StaticResource entryFrameStyle}" Padding="10" >
+                                            <Grid >
+                                                <StackLayout>
+                                                    <Label Text="Senin, 10/10/2020" FontSize="Default"/>
+                                                    <Label Text="Jam Kerja" FontSize="Micro" FontAttributes="Bold"></Label>
+                                                    <FlexLayout Padding="10,0">
+                                                        <Label Text="Masuk : 07:30" FontSize="Micro" Margin="0,0,50,0" ></Label>
+                                                        <Label Text="Pulang : 13:30" FontSize="Micro" HorizontalOptions="EndAndExpand"></Label>
+                                                    </FlexLayout>
+                                                    <Label Text="Jam Lembur" FontSize="Micro" FontAttributes="Bold"></Label>
+                                                    <FlexLayout Padding="10,0" IsVisible="True">
+                                                        <Label Text="Masuk : 07:30" FontSize="Micro" Margin="0,0,50,0" ></Label>
+                                                        <Label Text="Pulang : 13:30" FontSize="Micro" HorizontalOptions="EndAndExpand"></Label>
+                                                    </FlexLayout>
+                                                </StackLayout>
+                                                <Label Text="&#xf0f3;" Style="{StaticResource Icons}" VerticalOptions="Start" HorizontalOptions="End" />
+
+                                            </Grid>
+                                        </Frame>
+                                    </sh:Shadows>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+            </sh:Shadows>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>
