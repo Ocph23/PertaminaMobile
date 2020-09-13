@@ -74,7 +74,7 @@ namespace MobileApp.Views.Profiles
         public ObservableCollection<BuktiPelanggaran> Files { get; set; } = new ObservableCollection<BuktiPelanggaran>();
         public ObservableCollection<DetailLevel> Details { get; set; } = new ObservableCollection<DetailLevel>();
 
-        public Karyawan Karyawan { get; set; }
+        public new Karyawan Karyawan { get; set; }
         public Command AddDetailPelanggaranCommand { get; }
         public Command CameraCommand { get; }
         public Command FolderCommand { get; }
@@ -83,7 +83,7 @@ namespace MobileApp.Views.Profiles
 
         public AddmelaporkanViewModel(Karyawan karyawan)
         {
-            this.Karyawan = karyawan;
+            Karyawan = karyawan;
            
             AddDetailPelanggaranCommand = new Command(AddDetailAction);
             CameraCommand = new Command(CameraAction);
@@ -96,8 +96,7 @@ namespace MobileApp.Views.Profiles
 
 
             MessagingCenter.Subscribe<List<DetailLevel>>(this, "DetailPelanggaran", async (arg) => {
-
-                SetDetails(arg);
+               await SetDetails(arg);
             });
         }
 
@@ -147,7 +146,9 @@ namespace MobileApp.Views.Profiles
             }
         }
 
-        private async void SetDetails(List<DetailLevel> arg)
+        private async 
+        Task
+SetDetails(List<DetailLevel> arg)
         {
             await Task.Delay(500);
             if (arg != null)

@@ -39,25 +39,25 @@ namespace MobileApp.Views
             switch (param)
             {
                 case TypeProfileView.ChangeProfile:
-                    Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.ChangeProfileView());
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.ChangeProfileView());
                     break;
                 case TypeProfileView.ChangePassword:
-                    Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.ChangePasswordView());
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.ChangePasswordView());
                     break;
                 case TypeProfileView.Absen:
-                    Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.AbsenView());
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.AbsenView());
                     break;
                 case TypeProfileView.Pelanggaran:
-                    Application.Current.MainPage.Navigation.PushModalAsync(new PelanggaranView ());
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new PelanggaranView ());
                     break;
                 case TypeProfileView.Pelaporan:
-                    Application.Current.MainPage.Navigation.PushModalAsync(new MelaporkanView());
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new MelaporkanView());
                     break;
                 case TypeProfileView.Perusahaan:
-                    Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.PerusahaanSekarangView());
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.PerusahaanSekarangView());
                     break;
                 case TypeProfileView.MutasiPerusahaan:
-                    Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.MutasiView());
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.MutasiView());
 
                     break;
                 default:

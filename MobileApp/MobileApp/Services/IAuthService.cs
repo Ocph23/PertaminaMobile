@@ -17,7 +17,7 @@ namespace MobileApp.Services
 
     public interface IAuthInternalService:IAuthService
     {
-        Task Login(AuthProvider provider);
+        new Task Login(AuthProvider provider);
         string UserName { get; set; }
         string Password { get; set; }
     }

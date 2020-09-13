@@ -61,7 +61,7 @@ namespace MobileApp.Views.Profiles
                 return;
             }
 
-            Application.Current.MainPage.Navigation.PopModalAsync();
+           await  Application.Current.MainPage.Navigation.PopModalAsync();
             MessagingCenter.Send(list, "DetailPelanggaran");
 
         }

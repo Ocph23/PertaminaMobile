@@ -16,19 +16,21 @@ namespace MobileApp.Droid
 {
     [Service]
     [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
+    [Obsolete]
     public class MyFirebaseIIDService : FirebaseInstanceIdService
     {
         const string TAG = "MyFirebaseIIDService";
+
+        [Obsolete]
         public override void OnTokenRefresh()
         {
-            SendRegistrationToServer(FirebaseInstanceId.Instance);
+            SendRegistrationToServer(FirebaseInstanceId.Instance.Token, FirebaseInstanceId.Instance.Id);
         }
 
-        private void SendRegistrationToServer(FirebaseInstanceId instance)
+        private void SendRegistrationToServer(string token, string id)
         {
-            MobileApp.Services.RestService.DeviceToken = instance.Token;
-            MobileApp.Services.RestService.DeviceID= instance.Id;
+            MobileApp.Services.RestService.DeviceToken = token;
+            MobileApp.Services.RestService.DeviceID = id;
         }
-
     }
 }

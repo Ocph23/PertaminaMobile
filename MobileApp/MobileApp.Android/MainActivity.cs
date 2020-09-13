@@ -6,7 +6,6 @@ using Android.Gms.Common.Apis;
 using Android.Gms.Auth.Api;
 using Firebase.Auth;
 using Firebase;
-using Android.Gms.Tasks;
 using Android.Content.PM;
 using MobileApp.Services;
 using Android.Widget;
@@ -18,13 +17,14 @@ using System;
 using Plugin.Media;
 using Android.Support.V4.App;
 using Android.Gms.Common;
+using System.Threading.Tasks;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MainActivity))]
 namespace MobileApp.Droid
 {
 
     [Activity(Label = "MobileApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IAuthService, IOnSuccessListener, IOnFailureListener
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IAuthService, Android.Gms.Tasks.IOnSuccessListener, Android.Gms.Tasks.IOnFailureListener
     {
 
         GoogleSignInOptions gso;
@@ -107,12 +107,9 @@ namespace MobileApp.Droid
 
         }
 
-
-
-        public System.Threading.Tasks.Task Login(AuthProvider provider)
+        [Obsolete]
+        public Task Login(AuthProvider provider)
         {
-
-
 
             if (MainActivityInstance.firebaseAuth.CurrentUser != null)
             {
@@ -135,7 +132,7 @@ namespace MobileApp.Droid
                     break;
             }
 
-            return System.Threading.Tasks.Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)

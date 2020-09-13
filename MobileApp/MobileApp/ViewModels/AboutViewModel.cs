@@ -7,6 +7,7 @@ namespace MobileApp.ViewModels
 {
     public class AboutViewModel : BaseViewModel
     {
+        [Obsolete]
         public AboutViewModel()
         {
             Title = "About";

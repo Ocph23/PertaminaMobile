@@ -11,7 +11,6 @@ namespace MobileApp.Services
     {
 
         List<Level> items;
-        string controller = "/api/level";
         public LevelPelangagranDataStore()
         {
             //items = new List<Level>();
@@ -31,17 +30,17 @@ namespace MobileApp.Services
             //items.Add(level);
             //items.Add(level2);
         }
-        public async Task<bool> AddItemAsync(Level item)
+        public  Task<bool> AddItemAsync(Level item)
+        {
+            throw new NotImplementedException( );
+        }
+
+        public  Task<bool> UpdateItemAsync(Level item)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> UpdateItemAsync(Level item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> DeleteItemAsync(string id)
+        public Task<bool> DeleteItemAsync(string id)
         {
             throw new NotImplementedException();
         }
