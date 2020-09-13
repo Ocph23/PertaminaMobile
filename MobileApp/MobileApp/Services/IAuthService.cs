@@ -110,6 +110,7 @@ namespace MobileApp.Services
                 }
                 catch (Exception ex)
                 {
+                    MessagingCenter.Send<IAuthService, UserProfile>(this, "UserLogin", null);
                     Helper.ErrorMessage(ex.Message);
                 }
                

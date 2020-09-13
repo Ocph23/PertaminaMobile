@@ -14,28 +14,30 @@
             <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="20"  Padding="20">
                 <ScrollView Padding="0,10">
                     <StackLayout>
-                        <sh:Shadows Style="{StaticResource card}" CornerRadius="80" WidthRequest="80" HeightRequest="80" HorizontalOptions="Center" >
-                            <Frame  BorderColor="White" HeightRequest="80" WidthRequest="80" Margin="0"  Padding="0"
+                      <sh:Shadows Style="{StaticResource card}" CornerRadius="80" WidthRequest="80" HeightRequest="80" HorizontalOptions="Center" >
+                            <Frame  BorderColor="White" HeightRequest="80" WidthRequest="80" Margin="3"  Padding="0" 
                            CornerRadius="40" Style="{StaticResource entryFrameStyle}" BackgroundColor="{StaticResource MainColor}">
                                 <Image Source="{Binding Photo}"  />
                             </Frame>
                         </sh:Shadows>
                         <StackLayout HorizontalOptions="CenterAndExpand">
-                            <Label Text="{Binding ProfileName}" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold"></Label>
-                            <Label Text="Pertamina" FontSize="Small" HorizontalOptions="Center"></Label>
+                            <Label Text="{Binding ProfileName}" TextColor="Black" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold"></Label>
+                            <Label Text="{Binding Perusahaan.Perusahaan.Nama}" FontSize="Small" HorizontalOptions="Center"></Label>
                         </StackLayout>
-                        
-                        
-                        <sh:Shadows Style="{StaticResource card}">
-                            <Frame Style="{StaticResource entryFrameStyle}" Padding="20">
+                        <ActivityIndicator Margin="5" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="OrangeRed" HorizontalOptions="CenterAndExpand"/>
+                        <sh:Shadows Style="{StaticResource card}" CornerRadius="5">
+                            <Frame Style="{StaticResource entryFrameStyle}"  CornerRadius="10" Padding="20">
                                 <StackLayout>
-                                    <Label Text="Akun" FontSize="Medium"/>
+                                    <Label Text="Akun" FontSize="Medium" TextColor="Black"/>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
-                                    <Label Text="Ubah Profile" FontSize="Small">
-                                        <Label.GestureRecognizers>
+                                    <FlexLayout >
+                                        <FlexLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.ChangeProfile}" />
-                                        </Label.GestureRecognizers>
-                                    </Label>
+                                        </FlexLayout.GestureRecognizers>
+                                        <Label Text="&#xf007;" Style="{StaticResource Icons}"/>
+                                        <Label Text="Ubah Profile" FontSize="Small">
+                                        </Label>
+                                    </FlexLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                     <FlexLayout>
                                         <Label Text="&#xf084;" Style="{StaticResource Icons}"/>
@@ -52,13 +54,16 @@
                         <sh:Shadows Style="{StaticResource card}">
                             <Frame Style="{StaticResource entryFrameStyle}" Padding="20">
                                 <StackLayout>
-                                    <Label Text="Kehadiran" FontSize="Medium"/>
+                                    <Label Text="Kehadiran" FontSize="Medium" TextColor="Black"/>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
-                                    <Label Text="Absen Kehadiran" FontSize="Small">
-                                        <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Absen}" />
-                                        </Label.GestureRecognizers>
-                                    </Label>
+                                    <FlexLayout>
+                                        <Label Text="&#xf783;" Style="{StaticResource Icons}"/>
+                                        <Label Text="Absen Kehadiran" FontSize="Small">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Absen}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </FlexLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                 </StackLayout>
                             </Frame>
@@ -68,17 +73,23 @@
                                 <StackLayout>
                                     <Label Text="Pelanggaran" FontSize="Medium" TextColor="Black"/>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
-                                    <Label Text="Riwayat Pelanggaran" FontSize="Small">
-                                        <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Pelanggaran}" />
-                                        </Label.GestureRecognizers>
-                                    </Label>
+                                    <FlexLayout>
+                                        <Label Text="&#xf46d;" Style="{StaticResource Icons}"/>
+                                        <Label Text="Riwayat Pelanggaran" FontSize="Small">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Pelanggaran}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </FlexLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
-                                    <Label Text="Riwayat Pelaporan" FontSize="Small">
-                                        <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Pelaporan}" />
-                                        </Label.GestureRecognizers>
-                                    </Label>
+                                    <FlexLayout>
+                                        <Label Text="&#xf0a1;" Style="{StaticResource Icons}"/>
+                                        <Label Text="Riwayat Melaporkan" FontSize="Small">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Pelaporan}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </FlexLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                 </StackLayout>
                             </Frame>
@@ -88,9 +99,22 @@
                                 <StackLayout>
                                     <Label Text="Perusahaan" FontSize="Medium" TextColor="Black"/>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
-                                    <Label Text="Perusahaan Sekarang" FontSize="Small"/>
+                                    <FlexLayout>
+                                        <FlexLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Perusahaan}" />
+                                        </FlexLayout.GestureRecognizers>
+                                        <Label Text="&#xf1ad;" Style="{StaticResource Icons}"/>
+                                        <Label Text="Perusahaan Sekarang" FontSize="Small"/>
+                                        
+                                    </FlexLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
-                                    <Label Text="Mutasi Perusahaan ?" FontSize="Small"/>
+                                    <FlexLayout>
+                                        <FlexLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.MutasiPerusahaan}" />
+                                        </FlexLayout.GestureRecognizers>
+                                        <Label Text="&#xf362;" Style="{StaticResource Icons}"/>
+                                        <Label Text="Mutasi Perusahaan ?" FontSize="Small"/>
+                                    </FlexLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                 </StackLayout>
                             </Frame>

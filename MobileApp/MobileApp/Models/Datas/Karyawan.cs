@@ -51,5 +51,42 @@ namespace MobileApp.Models.Datas
         public List<string> Roles { get; set; }
 
         private PerusahaanKaryawan _perusahaan;
+
+        public System.Uri PhotoView
+        {
+            get
+            {
+                if(!string.IsNullOrEmpty(Photo))
+                    return new System.Uri($"{Helper.Url}/images/Profiles/{Photo}");
+                return null;
+            }
+        }
+    }
+
+
+
+    public interface IKaryawan
+    {
+
+        int Id { get; set; }
+        string KodeKaryawan { get; set; }
+
+        string NamaKaryawan { get; set; }
+
+        string Alamat { get; set; }
+
+        string Kontak { get; set; }
+
+        string Email { get; set; }
+
+        string UserId { get; set; }
+
+        string Photo { get; set; }
+
+        bool Status { get; set; }
+
+        byte[] DataPhoto { get; set; }
+
+
     }
 }

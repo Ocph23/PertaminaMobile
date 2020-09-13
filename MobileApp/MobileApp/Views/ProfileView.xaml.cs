@@ -30,8 +30,11 @@ namespace MobileApp.Views
             ShowDetailCommand = new Command(ShowDetailAction, x => true);
         }
 
-        private void ShowDetailAction(object obj)
+        private async void ShowDetailAction(object obj)
         {
+
+            IsBusy = true;
+           await Task.Delay(300);
             var param = (TypeProfileView)obj ;
             switch (param)
             {
@@ -45,16 +48,22 @@ namespace MobileApp.Views
                     Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.AbsenView());
                     break;
                 case TypeProfileView.Pelanggaran:
+                    Application.Current.MainPage.Navigation.PushModalAsync(new PelanggaranView ());
                     break;
                 case TypeProfileView.Pelaporan:
+                    Application.Current.MainPage.Navigation.PushModalAsync(new MelaporkanView());
                     break;
                 case TypeProfileView.Perusahaan:
+                    Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.PerusahaanSekarangView());
                     break;
                 case TypeProfileView.MutasiPerusahaan:
+                    Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.MutasiView());
+
                     break;
                 default:
                     break;
             }
+            IsBusy = false;
         }
 
         public Uri Photo { get; set; }

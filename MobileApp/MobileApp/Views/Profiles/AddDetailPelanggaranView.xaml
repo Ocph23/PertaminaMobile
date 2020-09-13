@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+             mc:Ignorable="d"
+             x:Class="MobileApp.Views.Profiles.AddDetailPelanggaranView">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="90*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <Frame  Margin="0" BorderColor="White"  Padding="10"
+                           HeightRequest="35" BackgroundColor="White">
+                <FlexLayout>
+                    <Label Text="&#xf46d;" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="25" 
+                           Margin="5,0" ></Label>
+                    <Label Text="Pilih Pelanggaran"  FontSize="20" Margin="5,0"></Label>
+                </FlexLayout>
+            </Frame>
+            <sh:Shadows Grid.Row="1" Style="{StaticResource card}">
+                <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="10" Padding="20,0">
+                    <ScrollView>
+                        <StackLayout>
+                            <ListView x:Name="GroupedView" ItemsSource="{Binding Items}"
+                                  GroupDisplayBinding="{Binding Name}"
+                                  GroupShortNameBinding="{Binding Name}"
+                                  IsGroupingEnabled="true">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <FlexLayout>
+                                                <CheckBox IsChecked="{Binding Selected}" VerticalOptions="CenterAndExpand"></CheckBox>
+                                                <Label Text="{Binding Nama}" Margin="7" VerticalOptions="CenterAndExpand"/>
+                                            </FlexLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                                <ListView.GroupHeaderTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Label Text="{Binding Name}" Margin="0,15,0,0" FontSize="20"/>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.GroupHeaderTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </ScrollView>
+                </Frame>
+            </sh:Shadows>
+            <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10" >
+                <sh:Shadows Style="{StaticResource card}" CornerRadius="20" Padding="0" Margin="0" >
+                    <sh:Shadows Style="{StaticResource card}"  Padding="0" Margin="0" CornerRadius="10" >
+                        <Button HeightRequest="40" CornerRadius="10" WidthRequest="75" Padding="10" FontFamily="{StaticResource FontAwesomeSolid}" 
+                                            Style="{StaticResource okButton}" Text="&#xf093;" TextColor="Lime" FontSize="25" Command="{Binding LaporkanCommand}" ></Button>
+                    </sh:Shadows>
+                </sh:Shadows>
+                <sh:Shadows Style="{StaticResource card}"  Padding="0" Margin="0" CornerRadius="20" >
+                    <Button HeightRequest="40" CornerRadius="10" WidthRequest="75" TextColor="OrangeRed" Padding="5" 
+                                    FontFamily="{StaticResource FontAwesomeSolid}" 
+                                            Style="{StaticResource okButton}" Text="&#xf00d;" FontSize="25" Command="{Binding CancelCommand}" ></Button>
+                </sh:Shadows>
+
+            </StackLayout>
+        </Grid>
+
+
+    </ContentPage.Content>
+</ContentPage>

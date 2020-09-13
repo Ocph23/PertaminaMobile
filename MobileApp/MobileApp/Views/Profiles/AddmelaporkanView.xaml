@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+             mc:Ignorable="d"
+             x:Class="MobileApp.Views.Profiles.AddmelaporkanView">
+    <ContentPage.Content>
+        <sh:Shadows Style="{StaticResource card}" CornerRadius="10" >
+            <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="10">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25*"/>
+                        <RowDefinition Height="40*"/>
+                        <RowDefinition Height="30*"/>
+                        <RowDefinition Height="10*"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout Grid.Row="0">
+                        <sh:Shadows Style="{StaticResource card}" CornerRadius="80" WidthRequest="80" HeightRequest="80" HorizontalOptions="Center" >
+                            <Frame  BorderColor="White" HeightRequest="80" WidthRequest="80" Margin="3"  Padding="0" CornerRadius="40" Style="{StaticResource entryFrameStyle}" BackgroundColor="{StaticResource MainColor}">
+                                <Image Source="{Binding Karyawan.PhotoView}"  />
+                            </Frame>
+                        </sh:Shadows>
+                        <StackLayout HorizontalOptions="CenterAndExpand">
+                            <Label Text="{Binding Karyawan.NamaKaryawan}" TextColor="Black" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold"></Label>
+                            <Label Text="{Binding Perusahaan.Perusahaan.Nama}" FontSize="Small" HorizontalOptions="Center"></Label>
+                        </StackLayout>
+                        <ActivityIndicator Margin="5" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="OrangeRed" HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="1">
+                        <StackLayout Orientation="Horizontal"  Padding="0">
+                            <FlexLayout VerticalOptions="CenterAndExpand" Margin="0,10">
+                                <Label Text="&#xf46d;" Style="{StaticResource Icons}"/>
+                                <Label Text="Pelanggaran" VerticalOptions="CenterAndExpand"/>
+                            </FlexLayout>
+                            <sh:Shadows VerticalOptions="CenterAndExpand" Padding="0" Style="{StaticResource card}" HorizontalOptions="EndAndExpand"  CornerRadius="10" >
+                                <Button Text="&#xf46c;" FontFamily="{StaticResource FontAwesomeSolid}"
+                                       Margin="0" WidthRequest="40" HeightRequest="40" CornerRadius="10" Style="{StaticResource okButton}"
+                                    Command="{Binding AddDetailPelanggaranCommand}"></Button>
+                            </sh:Shadows>
+                        </StackLayout>
+                        <ListView ItemsSource="{Binding Details}" SelectionMode="None"  Margin="20,10">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <FlexLayout>
+                                            <Label Text=""></Label>
+                                            <Label Text="{Binding Nama}"></Label>
+                                        </FlexLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                    <StackLayout Grid.Row="2">
+                        <StackLayout Orientation="Horizontal">
+                            <FlexLayout>
+                                <Label Text="&#xf46d;" Style="{StaticResource Icons}"/>
+                                <Label Text="Bukti" VerticalOptions="CenterAndExpand"/>
+                            </FlexLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
+                                <sh:Shadows Style="{StaticResource card}" CornerRadius="10" Padding="0" Margin="0" >
+                                    <Button HeightRequest="40" CornerRadius="10" WidthRequest="40" Padding="10" FontFamily="{StaticResource FontAwesomeSolid}"
+                                            Style="{StaticResource okButton}" Text="&#xf07c;" Command="{Binding FolderCommand}" ></Button>
+                                </sh:Shadows>
+                                <sh:Shadows Style="{StaticResource card}"  Padding="0" Margin="0" CornerRadius="10" >
+                                    <Button HeightRequest="40" CornerRadius="10" WidthRequest="40" Padding="10" FontFamily="{StaticResource FontAwesomeSolid}" 
+                                            Style="{StaticResource okButton}" Text="&#xf030;" Command="{Binding CameraCommand}" ></Button>
+                                </sh:Shadows>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout  >
+                            <CarouselView x:Name="TheCarousel" ItemsSource="{Binding Files}" HeightRequest="200" WidthRequest="200" IndicatorView="indicatorview">
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout >
+                                            <StackLayout HorizontalOptions="CenterAndExpand">
+                                                <sh:Shadows Style="{StaticResource card}" CornerRadius="10"  >
+                                                    <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="10" Padding="10" MinimumHeightRequest="150">
+                                                        <Image Source="{Binding DataView }" Aspect="AspectFill" WidthRequest="150" HeightRequest="150" />
+                                                    </Frame>
+                                                </sh:Shadows>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView
+                                x:Name="indicatorview"
+                                AbsoluteLayout.LayoutBounds="0.5,0.95,100,100"
+                                AbsoluteLayout.LayoutFlags="PositionProportional"
+                                IndicatorColor="LightGray"
+                                IndicatorSize="10"   
+                                SelectedIndicatorColor="Black" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10" >
+                        <sh:Shadows Style="{StaticResource card}" CornerRadius="20" Padding="0" Margin="0" >
+                            <sh:Shadows Style="{StaticResource card}"  Padding="0" Margin="0" CornerRadius="10" >
+                                <Button HeightRequest="40" CornerRadius="10" WidthRequest="75" Padding="10" FontFamily="{StaticResource FontAwesomeSolid}" 
+                                            Style="{StaticResource okButton}" Text="&#xf093;" TextColor="Lime" FontSize="25" Command="{Binding SaveCommand}" ></Button>
+                            </sh:Shadows>
+                        </sh:Shadows>
+                        <sh:Shadows Style="{StaticResource card}"  Padding="0" Margin="0" CornerRadius="20" >
+                            <Button HeightRequest="40" CornerRadius="10" WidthRequest="75" TextColor="OrangeRed" Padding="5" 
+                                    FontFamily="{StaticResource FontAwesomeSolid}" 
+                                            Style="{StaticResource okButton}" Text="&#xf00d;" FontSize="25" Command="{Binding CancelCommand}" ></Button>
+                        </sh:Shadows>
+                    </StackLayout>
+                </Grid>
+
+            </Frame>
+
+        </sh:Shadows>
+           
+    </ContentPage.Content>
+</ContentPage>

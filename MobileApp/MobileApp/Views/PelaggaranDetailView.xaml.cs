@@ -1,4 +1,5 @@
-﻿using MobileApp.ViewModels;
+﻿using MobileApp.Models.Datas;
+using MobileApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +19,21 @@ namespace MobileApp.Views
         public PelaggaranDetailView(object data)
         {
             InitializeComponent();
-            BindingContext = viewModels = new PelaggaranDetailViewModel(data);
+            var dataModel = data as Pelanggaran;
+            BindingContext = viewModels = new PelaggaranDetailViewModel(dataModel);
+        }
+
+        private void closetap(object sender, EventArgs e)
+        {
+            Navigation.PopModalAsync();
         }
     }
 
     public class PelaggaranDetailViewModel : BaseViewModel
     {
-        private object Data;
+        public Pelanggaran Data { get; set; }
 
-        public PelaggaranDetailViewModel(object data)
+        public PelaggaranDetailViewModel(Pelanggaran data)
         {
             this.Data = data;
         }

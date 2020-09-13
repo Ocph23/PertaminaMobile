@@ -11,6 +11,7 @@ namespace MobileApp.Services
     public class RestService : HttpClient
     {
         public static string DeviceToken { get; set; }
+        public static string DeviceID { get; set; }
 
         public RestService()
         {
@@ -31,11 +32,6 @@ namespace MobileApp.Services
 
         public void CekTokenAsync()
         {
-            //if (Helper.Account != null)
-            //{
-            //    this.DefaultRequestHeaders.Authorization =
-            //       new AuthenticationHeaderValue("", Helper.Account.Token);
-            //}
         }
 
 
@@ -75,7 +71,7 @@ namespace MobileApp.Services
                 }
                 else
                 {
-                    return content;
+                    throw new SystemException();
                 }
             }
             catch (Exception)

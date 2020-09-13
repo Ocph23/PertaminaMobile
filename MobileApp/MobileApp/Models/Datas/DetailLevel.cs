@@ -21,6 +21,8 @@ namespace MobileApp.Models.Datas
 
         public int LevelId { get; set; }
 
+        public bool Selected { get; set; }
+
         public virtual Level Level { get; set; }
 
 

@@ -8,7 +8,7 @@ namespace MobileApp
 {
     public class Helper
     {
-        private static string url= "http://192.168.1.5/";
+        private static string url= "http://192.168.1.4/";
       //  private static string url= "https://192.168.1.10:44308/";
 
         public static string Url
@@ -24,6 +24,11 @@ namespace MobileApp
         public static void ErrorMessage(string message)
         {
             MessagingCenter.Send(new MessagingCenterAlert { Cancel = "OK", Message = message, Title = "Error" }, "message");
+        }
+
+        public static void InfoMessage(string message)
+        {
+            MessagingCenter.Send(new MessagingCenterAlert { Cancel = "OK", Message = message, Title = "Info" }, "message");
         }
 
     }

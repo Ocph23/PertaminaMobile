@@ -15,6 +15,9 @@ using MobileApp.Droid;
 using Xamarin.Forms;
 using MobileApp.Models;
 using System;
+using Plugin.Media;
+using Android.Support.V4.App;
+using Android.Gms.Common;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MainActivity))]
 namespace MobileApp.Droid
@@ -28,15 +31,26 @@ namespace MobileApp.Droid
         private GoogleApiClient googleApiClient;
         private FirebaseAuth firebaseAuth;
         public static MainActivity MainActivityInstance { get; private set; }
+        public static bool IsBackground { get; private set; }
+        public static readonly string CHANNEL_ID = "ChannelId1";
+        public static readonly int NOTIFICATION_ID = 100;
         public UserProfile Profile { get; set; }
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
+            await CrossMedia.Current.Initialize();
+
+
+            Firebase.Messaging.FirebaseMessaging.Instance.SubscribeToTopic("all");
+            CreateNotificationChannel();
+
+
+
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
             gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DefaultSignIn)
              .RequestIdToken("505524341439-7uau390b9vq18qb11r0lcuh3h9cdeiup.apps.googleusercontent.com")
@@ -87,8 +101,15 @@ namespace MobileApp.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
+        protected override void OnNewIntent(Android.Content.Intent intent)
+        {
+            base.OnNewIntent(intent);
 
-        public  System.Threading.Tasks.Task Login(AuthProvider provider)
+        }
+
+
+
+        public System.Threading.Tasks.Task Login(AuthProvider provider)
         {
 
 
@@ -161,6 +182,65 @@ namespace MobileApp.Droid
             Toast.MakeText(this, "Login Failed", ToastLength.Short).Show();
         }
 
-      
+        public bool IsPlayServicesAvailable()
+        {
+            string text = "";
+            int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
+            if (resultCode != ConnectionResult.Success)
+            {
+                if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
+                    text = GoogleApiAvailability.Instance.GetErrorString(resultCode);
+                else
+                {
+                    text = "This device is not supported";
+                    Finish();
+                }
+                Toast.MakeText(this, text, ToastLength.Long).Show();
+                return false;
+            }
+            else
+            {
+                text = "Google Play Services is available.";
+                Toast.MakeText(this, text, ToastLength.Long).Show();
+                return true;
+            }
+        }
+
+        void CreateNotificationChannel()
+        {
+            if (Build.VERSION.SdkInt < BuildVersionCodes.O)
+            {
+                // Notification channels are new in API 26 (and not a part of the
+                // support library). There is no need to create a notification
+                // channel on older versions of Android.
+                return;
+            }
+
+            var bigStyle = new NotificationCompat.BigTextStyle().BigText("Pemberitahuan");
+            NotificationManager notificationManager = (NotificationManager)GetSystemService(Android.Content.Context.NotificationService);
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID.ToString())
+                //  .SetContentIntent(pendingIntent)
+                .SetContentTitle("Pertamina")
+                .SetContentText("Pemberitahuan")
+                .SetAutoCancel(true)
+                .SetStyle(bigStyle)
+                .SetPriority(NotificationCompat.PriorityMax)
+                .SetSmallIcon(Resource.Drawable.xamarin_logo);
+
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop)
+            {
+                builder.SetVisibility(NotificationCompat.VisibilityPublic);
+            }
+
+            Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(""));
+            PendingIntent pendingIntent = PendingIntent.GetActivity(this, MainActivity.NOTIFICATION_ID, intent, PendingIntentFlags.UpdateCurrent);
+
+            builder.AddAction(Resource.Drawable.abc_ic_menu_overflow_material, "VIEW", pendingIntent);
+
+            notificationManager.Notify(MainActivity.NOTIFICATION_ID, builder.Build());
+
+        }
+
     }
 }

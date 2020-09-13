@@ -4,6 +4,9 @@ using Xamarin.Forms.Xaml;
 using MobileApp.Services;
 using MobileApp.Views;
 using MobileApp.Models;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace MobileApp
 {
@@ -19,10 +22,14 @@ namespace MobileApp
             });
             
             //DataStore Register
+            DependencyService.Register<AuthService>();
             DependencyService.Register<PelanggaranDataStore>();
             DependencyService.Register<PeriodeDataStore>();
-            DependencyService.Register<AuthService>();
-
+            DependencyService.Register<AbsenDataStore>();
+            DependencyService.Register<KaryawanDataStore>();
+            DependencyService.Register<LevelPelangagranDataStore>();
+            AppCenter.Start("2531af1d-fce1-49da-94ba-d603aff80d84",
+                   typeof(Analytics), typeof(Crashes));
 
             MainPage = new NavigationPage(new LoginView());
         }

@@ -18,7 +18,11 @@
                 <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
                 <On Platform="iOS" Value="fa-solid-900" />
             </OnPlatform>
-            
+            <OnPlatform x:Key="Material" x:TypeArguments="x:String">
+                <On Platform="Android" Value="MaterialIcons-Regular.ttf#Material Icons" />
+                <On Platform="iOS" Value="MaterialIcons-Regular" />
+            </OnPlatform>
+
             <Style x:Key="Icons" TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid }" />
                 <Setter Property="FontSize" Value="16" />
@@ -31,6 +35,12 @@
                 <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
+
+
+            <Style TargetType="FlexLayout">
+                <Setter Property="Padding" Value="5" />
+            </Style>
+            
             <Style x:Key="dataTitle" TargetType="Label">
                 <Setter Property="FontSize" Value="Micro"/>
                 <Setter Property="TextColor" Value="Black"/>
@@ -66,29 +76,29 @@
                     <sh:ImmutableShades>
                         <sh:Shade BlurRadius="10"
                       Opacity="1"
-                      Offset="-5,-5"
+                      Offset="-6,-6"
                       Color="#d9d9d9" />
                         <sh:Shade BlurRadius="10"
                       Opacity="1"
-                      Offset="5,5"
+                      Offset="6,6"
                       Color="White" />
                     </sh:ImmutableShades>
                 </Setter>
             </Style>
 
             <Style x:Key="card" ApplyToDerivedTypes="True" TargetType="sh:Shadows">
-                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="CornerRadius" Value="20" />
                 <Setter Property="Padding" Value="10" />
                 <Setter Property="Shades">
                     <sh:ImmutableShades>
                         <sh:Shade BlurRadius="10"
-                      Opacity="1"
-                      Offset="-6,-6"
-                      Color="White" />
-                        <sh:Shade BlurRadius="10"
-                      Opacity="1"
-                      Offset="6,6"
-                      Color="#d9d9d9" />
+                          Opacity="1"
+                          Offset="-3,-3"
+                         Color="White" />
+                        <sh:Shade BlurRadius="5"
+                          Opacity="1"
+                          Offset="3,3"
+                          Color="#d9d9d9" />
                     </sh:ImmutableShades>
                 </Setter>
             </Style>

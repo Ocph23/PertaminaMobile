@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MobileApp.Models.Datas
 {
@@ -18,6 +19,53 @@ namespace MobileApp.Models.Datas
         public StatusPelanggaran Status { get; set; }
         public virtual ICollection<DetailPelanggaran> ItemPelanggarans { get; set; }
         public virtual ICollection<BuktiPelanggaran> Files { get; set; }
+
+        [Newtonsoft.Json.JsonIgnore]
+        public string PelanggaranDisplay
+        {
+            get
+            {
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                foreach (var item in ItemPelanggarans)
+                {
+                    if (item.DetailLevel != null)
+                        sb.Append($"-{item.DetailLevel.Nama}\n");
+                }
+
+                return sb.ToString();
+            }
+        }
+
+
+
+        [Newtonsoft.Json.JsonIgnore]
+        public Uri Photo
+        {
+            get
+            {
+                if (Files != null && Files.Count > 0)
+                {
+                    var images = Files.FirstOrDefault();
+                    return new Uri($"{Helper.Url}/bukti/profiles/images/{images.Thumb}");
+                } else
+                    return new Uri($"noimage.png");
+            }
+        }
+
+        [Newtonsoft.Json.JsonIgnore]
+
+        public double TotalPengurangan
+        {
+            get
+            {
+                if (ItemPelanggarans != null)
+                {
+                    return ItemPelanggarans.Sum(x => x.NilaiKaryawan);
+                }
+
+                return 0;
+            }
+        }
 
     }
 }

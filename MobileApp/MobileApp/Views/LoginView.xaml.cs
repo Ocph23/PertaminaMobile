@@ -1,11 +1,5 @@
 ﻿using MobileApp.Models;
 using MobileApp.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -46,15 +40,19 @@ namespace MobileApp.Views
             _nav = navigation;
 
             MessagingCenter.Subscribe<IAuthService, UserProfile>(this, "UserLogin", (sender, arg)=> {
+
+                if (arg != null)
+                {
+                    AuthService.Profile = arg;
+                    App.Current.MainPage = new MainPage();
+                }
                 IsBusy = false;
-                AuthService.Profile = arg;
-                App.Current.MainPage = new MainPage();
             });
         }
 
         private bool LoginValidate(object arg)
         {
-            if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
+            if (IsBusy || string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
             {
                 return false;
             }
@@ -72,10 +70,7 @@ namespace MobileApp.Views
 
         private bool GoogleLoginValidate(object arg)
         {
-            return true;
-            if (string.IsNullOrEmpty(UserName) && string.IsNullOrEmpty(Password))
-                return false;
-            return true;
+            return IsBusy ? false: true;
         }
 
         private async void GoogleLoginAction(object obj)
