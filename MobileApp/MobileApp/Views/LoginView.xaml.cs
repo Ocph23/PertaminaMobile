@@ -38,6 +38,7 @@ namespace MobileApp.Views
             LoginCommand = new Command(LoginAction, LoginValidate);
             GoogleLoginCommand = new Command(GoogleLoginAction, GoogleLoginValidate);
             _nav = navigation;
+            url = Helper.Url;
 
             MessagingCenter.Subscribe<IAuthService, UserProfile>(this, "UserLogin", (sender, arg)=> {
 
@@ -104,6 +105,16 @@ namespace MobileApp.Views
         private INavigation _nav;
         private string userName;
         private string password;
+
+
+        string url;
+
+        public string URL
+        {
+            get { return url; }
+            set { SetProperty(ref url, value); Helper.Url = value; }
+        }
+
 
     }
 }

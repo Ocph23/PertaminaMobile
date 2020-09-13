@@ -58,7 +58,7 @@
                 </StackLayout>
             </StackLayout>
             <StackLayout Grid.Row="2">
-                <controls:EntryCustom FontSize="8" VerticalOptions="EndAndExpand" HorizontalTextAlignment="Center" Text="URL"/>
+                <controls:EntryCustom FontSize="8" VerticalOptions="EndAndExpand" HorizontalTextAlignment="Center" Text="{Binding URL}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

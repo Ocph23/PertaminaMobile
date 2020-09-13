@@ -6,26 +6,21 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-	<application android:label="MobileApp.Android" android:icon="@drawable/logo">
-	<meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/logo" />
-			<meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="@string/channel_id" />
-			<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="true" />
-			<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" 
-                android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
-				<intent-filter>
-					<action android:name="com.google.android.c2dm.intent.RECEIVE" />
-					<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-					<category android:name="com.ocs.pertamina" />
-				</intent-filter>
-			</receiver>
-    <provider android:name="android.support.v4.content.FileProvider"
-                android:authorities="com.ocs.pertamina.fileprovider"
-                android:exported="false"
-                android:grantUriPermissions="true">
-      <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
-      android:resource="@xml/file_paths"></meta-data>
-    </provider>
-  </application>
+	<application android:label="Pertamina Jayapura" android:icon="@drawable/logo">
+		<meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/logo" />
+		<meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="@string/channel_id" />
+		<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="true" />
+		<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
+			<intent-filter>
+				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+				<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+				<category android:name="com.ocs.pertamina" />
+			</intent-filter>
+		</receiver>
+		<provider android:name="android.support.v4.content.FileProvider" android:authorities="com.ocs.pertamina.fileprovider" android:exported="false" android:grantUriPermissions="true">
+			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"></meta-data>
+		</provider>
+	</application>
 </manifest>

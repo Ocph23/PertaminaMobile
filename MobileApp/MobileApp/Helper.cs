@@ -8,7 +8,7 @@ namespace MobileApp
 {
     public class Helper
     {
-        private static string url= "http://192.168.1.4/";
+        private static string url= "http://192.168.1.4";
       //  private static string url= "https://192.168.1.10:44308/";
 
         public static string Url
