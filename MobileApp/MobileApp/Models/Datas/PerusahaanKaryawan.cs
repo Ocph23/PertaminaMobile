@@ -17,5 +17,19 @@ namespace MobileApp.Models.Datas
         public virtual Perusahaan Perusahaan { get; set; }
 
 
+        public string SelesaiView
+        {
+            get
+            {
+                if(SelesaiKerja== null)
+                {
+                    return "Sekarang";
+                }
+
+                return SelesaiKerja.Value.ToString("dd MMMM yyyyy");
+            }
+        }
+
+
     }
 }

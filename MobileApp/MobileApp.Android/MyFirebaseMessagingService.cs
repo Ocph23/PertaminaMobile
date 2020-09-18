@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Support.V4.App;
-using Android.Util;
-using Android.Views;
-using Android.Widget;
 using Firebase.Messaging;
+using Xamarin.Forms;
 
 namespace MobileApp.Droid
 {
     [Service]
     [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
-    public class MyFirebaseMessagingService : FirebaseMessagingService
+    public class MyFirebaseMessagingService : FirebaseMessagingService, MobileApp.Services.INotification
     {
         const string TAG = "MyFirebaseMsgService";
 
@@ -54,7 +48,13 @@ namespace MobileApp.Droid
             {
                 SendNotification(message.GetNotification().Title, message.GetNotification().Body, message.Data);
             }
-           
+
+            var msg = new Models.Datas.Notification()
+            { 
+                Created=DateTime.Now, Sender="Administrator", Topic="Pengumuman",
+                Message = message.Data.Where(x => x.Key == "message").FirstOrDefault().Value
+            };
+            MessagingCenter.Send<Services.INotification, Models.Datas.Notification>(this, "notification", msg); 
             base.OnMessageReceived(message);
         }
 
@@ -79,7 +79,7 @@ namespace MobileApp.Droid
                 builder.SetVisibility(NotificationCompat.VisibilityPublic);
             }
 
-            Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://inatews.bmkg.go.id/terkini.php"));
+            Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(Helper.Url));
             PendingIntent pendingIntent = PendingIntent.GetActivity(context, MainActivity.NOTIFICATION_ID, intent, PendingIntentFlags.UpdateCurrent);
 
 

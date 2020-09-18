@@ -16,19 +16,36 @@ namespace MobileApp.Views.Profiles
     {
         private PerusahaanSekarangViewModel vm;
 
+        public PerusahaanSekarangView(PerusahaanKaryawan data)
+        {
+            InitializeComponent();
+            BindingContext = vm = new PerusahaanSekarangViewModel(data);
+        }
+
         public PerusahaanSekarangView()
         {
             InitializeComponent();
             BindingContext = vm = new PerusahaanSekarangViewModel();
+        }
+
+        private void closetap(object sender, EventArgs e)
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
         }
     }
 
 
     public class PerusahaanSekarangViewModel : BaseViewModel
     {
+
         public PerusahaanSekarangViewModel()
         {
             Data = Helper.Profile.Karyawan.Perusahaan;
+        }
+
+        public PerusahaanSekarangViewModel(PerusahaanKaryawan data)
+        {
+            Data= data;
         }
 
         public PerusahaanKaryawan Data { get; }

@@ -25,6 +25,7 @@ namespace MobileApp.Models.Datas
         public bool Status { get; set; } = true;
 
         public byte[] DataPhoto { get; set; }
+        public string DeviceId { get; set; }
 
         public PerusahaanKaryawan Perusahaan
         {

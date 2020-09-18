@@ -29,8 +29,8 @@ namespace MobileApp.Droid
 
         private void SendRegistrationToServer(string token, string id)
         {
-            MobileApp.Services.RestService.DeviceToken = token;
-            MobileApp.Services.RestService.DeviceID = id;
+            Xamarin.Essentials.SecureStorage.SetAsync("DeviceId", id);
+            Xamarin.Essentials.SecureStorage.SetAsync("DeviceToken", token);
         }
     }
 }

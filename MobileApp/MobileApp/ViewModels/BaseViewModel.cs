@@ -19,6 +19,7 @@ namespace MobileApp.ViewModels
         public IDataStore<Pelanggaran> Pelanggarans => DependencyService.Get<IDataStore<Pelanggaran>>();
         public IDataStore<Karyawan> Karyawan=> DependencyService.Get<IDataStore<Karyawan>>();
         public IAuthInternalService AuthService => DependencyService.Get<IAuthInternalService>();
+        public IDataStore<Notification> Notifications=> DependencyService.Get<IDataStore<Notification>>();
 
         bool isBusy = false;
         public bool IsBusy

@@ -9,22 +9,27 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="90*"/>
-                <RowDefinition Height="10*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Frame  Margin="0" BorderColor="White"  Padding="10"
-                           HeightRequest="35" BackgroundColor="White">
-                <FlexLayout>
-                    <Label Text="&#xf46d;" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="25" 
-                           Margin="5,0" ></Label>
-                    <Label Text="Pilih Pelanggaran"  FontSize="20" Margin="5,0"></Label>
-                </FlexLayout>
-            </Frame>
-            <sh:Shadows Grid.Row="1" Style="{StaticResource card}">
-                <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="10" Padding="20,0">
+            
+            <sh:Shadows Grid.Row="0" Style="{StaticResource card}">
+                <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="10" Padding="10">
                     <ScrollView>
                         <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <FlexLayout >
+                                    <Label Margin="0,0,0,0" Text="&#xf46d;" 
+                               FontFamily="{StaticResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
+                                    <Label Margin="5,0,0,20" Text="PILIH PELANGGARAN"  FontSize="Small" FontAttributes="Bold"/>
+                                </FlexLayout>
+                                <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
+                               FontFamily="{StaticResource FontAwesomeSolid}" FontSize="20" >
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </StackLayout>
                             <ListView x:Name="GroupedView" ItemsSource="{Binding Items}"
                                   GroupDisplayBinding="{Binding Name}"
                                   GroupShortNameBinding="{Binding Name}"
@@ -51,18 +56,14 @@
                     </ScrollView>
                 </Frame>
             </sh:Shadows>
-            <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10" >
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="5" >
                 <sh:Shadows Style="{StaticResource card}" CornerRadius="20" Padding="0" Margin="0" >
-                    <sh:Shadows Style="{StaticResource card}"  Padding="0" Margin="0" CornerRadius="10" >
-                        <Button HeightRequest="40" CornerRadius="10" WidthRequest="75" Padding="10" FontFamily="{StaticResource FontAwesomeSolid}" 
-                                            Style="{StaticResource okButton}" Text="&#xf093;" TextColor="Lime" FontSize="25" Command="{Binding LaporkanCommand}" ></Button>
+                    <sh:Shadows Style="{StaticResource card}"  Padding="0" Margin="0" CornerRadius="5" >
+                        <Button HeightRequest="40" CornerRadius="5" WidthRequest="100" Padding="10" FontFamily="{StaticResource FontAwesomeSolid}" 
+                                            Style="{StaticResource okButton}" Text="&#xf093;"  FontSize="15" Command="{Binding LaporkanCommand}" ></Button>
                     </sh:Shadows>
                 </sh:Shadows>
-                <sh:Shadows Style="{StaticResource card}"  Padding="0" Margin="0" CornerRadius="20" >
-                    <Button HeightRequest="40" CornerRadius="10" WidthRequest="75" TextColor="OrangeRed" Padding="5" 
-                                    FontFamily="{StaticResource FontAwesomeSolid}" 
-                                            Style="{StaticResource okButton}" Text="&#xf00d;" FontSize="25" Command="{Binding CancelCommand}" ></Button>
-                </sh:Shadows>
+              
 
             </StackLayout>
         </Grid>

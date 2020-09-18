@@ -121,7 +121,7 @@
                         </sh:Shadows>
                         <sh:Shadows Style="{StaticResource inputShadow}">
                             <Frame Style="{StaticResource entryFrameStyle}" Padding="20">
-                                <Button Style="{StaticResource okButton}" Text="Sign Out"></Button>
+                                <Button Style="{StaticResource okButton}" Text="Sign Out" Command="{Binding SignoutCommand}"></Button>
                             </Frame>
                         </sh:Shadows>
                     </StackLayout>

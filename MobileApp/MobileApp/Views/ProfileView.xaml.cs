@@ -25,9 +25,19 @@ namespace MobileApp.Views
     {
         public ProfileViewModel()
         {
-            Photo = AuthService.Profile.PhotoUrl;
-            ProfileName = AuthService.Profile.DisplayName;
+            Photo = Helper.Account.PhotoUrl;
+            ProfileName = Helper.Account.DisplayName;
             ShowDetailCommand = new Command(ShowDetailAction, x => true);
+            SignoutCommand = new Command(SignoutAction, x => true);
+        }
+
+        private async void SignoutAction(object obj)
+        {
+           var result =  await Application.Current.MainPage.DisplayAlert("Yakin ?", "Anda Ingin Keluar ?", "Ya", "Tidak");
+            if (result)
+            {
+               await AuthService.SignOut();
+            }
         }
 
         private async void ShowDetailAction(object obj)
@@ -69,6 +79,7 @@ namespace MobileApp.Views
         public Uri Photo { get; set; }
         public string ProfileName { get; set; }
         public Command ShowDetailCommand { get; }
+        public Command SignoutCommand { get; }
         public Command NotifCommand { get; }
     }
 }

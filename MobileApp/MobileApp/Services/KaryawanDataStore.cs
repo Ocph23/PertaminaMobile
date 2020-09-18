@@ -27,11 +27,22 @@ namespace MobileApp.Services
 
         public async Task<bool> UpdateItemAsync(Karyawan item)
         {
-            var oldKaryawan= items.Where((Karyawan arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(oldKaryawan);
-            items.Add(item);
-
-            return await Task.FromResult(true);
+            using (var client = new RestService())
+            {
+                var result = await client.PutAsync($"/api/karyawan/{item.Id}", client.GenerateHttpContent(item));
+                if (result.IsSuccessStatusCode)
+                {
+                    var resultString = await result.Content.ReadAsStringAsync();
+                    var data = JsonConvert.DeserializeObject<Karyawan>(resultString);
+                    if (item != null)
+                        return true;
+                    throw new SystemException("Data tidak berhasil diubah !");
+                }
+                else
+                {
+                    throw new SystemException(await client.Error(result));
+                }
+            }
         }
 
         public async Task<bool> DeleteItemAsync(string id)

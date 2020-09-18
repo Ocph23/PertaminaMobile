@@ -8,39 +8,54 @@
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Profiles.AbsenView">
     <ContentPage.Content>
-        <Grid  Padding="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <StackLayout Margin="10">
-                <Label Margin="5,0,0,0" Text="DATA KEHADIRAN" Style="{StaticResource  dataValue}"/>
-                <Label Margin="5,0,0,0" Text="Periode" Style="{StaticResource dataTitle}"/>
-                <Frame Style="{StaticResource entryFrameStyle}">
-                    <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
-                        <Picker ItemsSource="{Binding DataPeriode}" ItemDisplayBinding="{Binding  DisplayName}" />
-                    </sh:Shadows>
-                </Frame>
-            </StackLayout>
-            <sh:Shadows Grid.Row="1" Style="{StaticResource card}">
-                <Frame Style="{StaticResource entryFrameStyle}">
-                    <ListView ItemsSource="{Binding Datas}" Grid.Row="1" BackgroundColor="Transparent" IsRefreshing="{Binding IsBusy}" RefreshCommand="{Binding LoadCommand}" HasUnevenRows="True" SelectionMode="None" >
+            <sh:Shadows Grid.Row="1" Style="{StaticResource card}" CornerRadius="20">
+                <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="20">
+                <Grid  Padding="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout Orientation="Horizontal">
+                        <FlexLayout >
+                            <Label Margin="5,0,0,0" Text="&#xf783;" 
+                               FontFamily="{StaticResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
+                            <Label Margin="5,0,0,0" Text="ABSENSI"  FontSize="Small" FontAttributes="Bold"/>
+                        </FlexLayout>
+                        <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
+                               FontFamily="{StaticResource FontAwesomeSolid}" FontSize="20" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <StackLayout Margin="10" Grid.Row="1" VerticalOptions="StartAndExpand">
+                        <Label Margin="5,0,0,0" Text="Periode" Style="{StaticResource dataTitle}"/>
+                        <Frame Style="{StaticResource entryFrameStyle}">
+                            <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
+                                <Picker ItemsSource="{Binding DataPeriode}" ItemDisplayBinding="{Binding  DisplayName}" />
+                            </sh:Shadows>
+                        </Frame>
+                    </StackLayout>
+                    <ListView ItemsSource="{Binding Datas}" Grid.Row="2" SeparatorVisibility="None" BackgroundColor="Transparent" IsRefreshing="{Binding IsBusy}" RefreshCommand="{Binding LoadCommand}" HasUnevenRows="True" SelectionMode="None" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <sh:Shadows Style="{StaticResource card}" >
-                                        <Frame CornerRadius="10" Style="{StaticResource entryFrameStyle}" Padding="10" >
+                                    <sh:Shadows Style="{StaticResource card}" Margin="-6">
+                                        <Frame CornerRadius="10" Style="{StaticResource entryFrameStyle}" Margin="0" Padding="0" >
                                             <Grid >
-                                                <StackLayout Padding="20">
-                                                    <Label Text="Senin, 10/10/2020" FontSize="Default"/>
-                                                    <Label Text="{Binding AbsenType, StringFormat='Jam {0}'}" FontSize="Micro" FontAttributes="Bold"></Label>
+                                                <StackLayout Padding="10">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="{Binding AbsenType, StringFormat='Jam {0}'}" FontSize="Small" FontAttributes="Bold"></Label>
+                                                        <Label Text="&#xf783;" Style="{StaticResource Icons}" VerticalOptions="Start" HorizontalOptions="EndAndExpand" />
+                                                    </StackLayout>
+                                                    <Label Text="Senin, 10/10/2020" FontSize="Micro"/>
                                                     <FlexLayout Padding="10,0">
                                                         <Label Text="{Binding Masuk, StringFormat='Masuk : {0:HH:mm}'}" FontSize="Small" Margin="0,0,50,0" ></Label>
                                                         <Label Text="{Binding Pulang,StringFormat='Pulang : {0:HH:mm}'}" FontSize="Small" HorizontalOptions="EndAndExpand"></Label>
                                                     </FlexLayout>
                                                 </StackLayout>
-                                                <Label Text="&#xf783;" Style="{StaticResource Icons}" VerticalOptions="Start" HorizontalOptions="End" />
-
+                                               
                                             </Grid>
                                         </Frame>
                                     </sh:Shadows>
@@ -48,9 +63,11 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </Frame>
+
+                </Grid>
+            </Frame>
             </sh:Shadows>
-        </Grid>
+     
 
     </ContentPage.Content>
 </ContentPage>

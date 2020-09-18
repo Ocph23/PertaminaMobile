@@ -98,12 +98,18 @@ namespace MobileApp.Views
                         _ItemsUnfiltered.Add(item);
                     }
 
-                    SourceView = _ItemsUnfiltered;
+                    SourceView = new ObservableCollection<Karyawan>(_ItemsUnfiltered.Where(x=>x.Id != Helper.Profile.Karyawan.Id));
                 }
+                IsBusy = false;
             }
             catch (Exception ex)
             {
+                IsBusy = false;
                 Helper.ErrorMessage(ex.Message);
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 

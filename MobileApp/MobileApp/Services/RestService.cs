@@ -63,6 +63,12 @@ namespace MobileApp.Services
         {
             try
             {
+                if(response.StatusCode== System.Net.HttpStatusCode.Unauthorized)
+                {
+                    Helper.ErrorMessage("Silahkan Login Terlebih Dahulu !");
+                    Xamarin.Forms.Application.Current.MainPage = new MobileApp.Views.LoginView();
+                }
+
                 var content = await response.Content.ReadAsStringAsync();
                 if (content.Contains("message"))
                 {

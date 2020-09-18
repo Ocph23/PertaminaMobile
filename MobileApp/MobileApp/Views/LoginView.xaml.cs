@@ -1,5 +1,7 @@
 ﻿using MobileApp.Models;
 using MobileApp.Services;
+using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,7 +9,6 @@ using Xamarin.Forms.Xaml;
 
 namespace MobileApp.Views
 {
-
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginView : ContentPage
@@ -30,7 +31,6 @@ namespace MobileApp.Views
     }
 
 
-
     public class LoginViewModel: MobileApp.ViewModels.BaseViewModel
     {
         public LoginViewModel(INavigation navigation)
@@ -40,14 +40,30 @@ namespace MobileApp.Views
             _nav = navigation;
             url = Helper.Url;
 
-            MessagingCenter.Subscribe<IAuthService, UserProfile>(this, "UserLogin", (sender, arg)=> {
-
-                if (arg != null)
+            MessagingCenter.Subscribe<IAuthService, UserProfile>(this, "UserLogin", async (sender, arg) => {
+                try
                 {
-                    AuthService.Profile = arg;
-                    App.Current.MainPage = new MainPage();
+                    await Task.Delay(200);
+                    if (arg != null)
+                    {
+                        Helper.Account = arg;
+
+                        if (arg.Provider == AuthProvider.Google)
+                        {
+                           await AuthService.GetProfileByProviderId(arg);
+                        }
+                        Helper.SetMainPage();
+                    }
+                    else
+                    {
+                        throw new SystemException("Anda Tidak Memiliki Akses !");
+                    }
                 }
-                IsBusy = false;
+                catch (Exception ex)
+                {
+                    Helper.ErrorMessage(ex.Message);
+                    IsBusy = false;
+                }
             });
         }
 

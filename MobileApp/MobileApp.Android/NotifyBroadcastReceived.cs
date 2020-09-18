@@ -20,10 +20,8 @@ namespace MobileApp.Droid
     {
         public override void OnReceive(Context context, Intent intent)
         {
-
             var message = intent.GetStringExtra("message");
             var role = intent.GetStringExtra("role");
-
             var bigStyle = new NotificationCompat.BigTextStyle().BigText("Telah Terjadi Tsunami");
             // Create a PendingIntent; we're only using one PendingIntent (ID = 0):
             NotificationManager notificationManager = context.GetSystemService(Context.NotificationService) as NotificationManager;
@@ -42,7 +40,7 @@ namespace MobileApp.Droid
                 builder.SetVisibility(NotificationCompat.VisibilityPublic);
             }
 
-            Intent intents = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://inatews.bmkg.go.id/terkini.php"));
+            Intent intents = new Intent(Intent.ActionView, Android.Net.Uri.Parse(Helper.Url));
             PendingIntent pendingIntent = PendingIntent.GetActivity(context, MainActivity.NOTIFICATION_ID, intents, PendingIntentFlags.UpdateCurrent);
 
 

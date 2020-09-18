@@ -22,6 +22,10 @@ namespace MobileApp.Views.Profiles
             BindingContext = vm = new ChangeProfileViewModel();
         }
 
+        private void closetap(object sender, EventArgs e)
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
     }
 
     public class ChangeProfileViewModel : BaseViewModel, IKaryawan
@@ -29,7 +33,7 @@ namespace MobileApp.Views.Profiles
         public ChangeProfileViewModel()
         {
             SaveCommand = new Command(SaveAction, saveValidate);
-            var karyawan = Helper.Profile.Karyawan;
+            karyawan = Helper.Profile.Karyawan;
             Id = karyawan.Id;
             Alamat= karyawan.Alamat;
             DataPhoto= karyawan.DataPhoto;
@@ -49,9 +53,54 @@ namespace MobileApp.Views.Profiles
             return true;
         }
 
-        private void SaveAction(object obj)
+        private async void SaveAction(object obj)
         {
-            
+            if (string.IsNullOrEmpty(NamaKaryawan) || string.IsNullOrEmpty(Kontak) || string.IsNullOrEmpty(Alamat))
+            {
+                Helper.ErrorMessage("Lengkapi Data Anda !");
+                return;
+            }
+
+            if (!EmailValidate(Email))
+            {
+                Helper.ErrorMessage("Email anda tidak valid !");
+                return;
+            }
+
+            try
+            {
+                IsBusy = true;
+
+              var result= await Karyawan.UpdateItemAsync(new Models.Datas.Karyawan
+                {
+                    Alamat = Alamat,
+                    Email = Email,
+                    Id = karyawan.Id,
+                    KodeKaryawan = karyawan.KodeKaryawan,
+                    Kontak = Kontak,
+                    NamaKaryawan = NamaKaryawan,
+                    Photo = karyawan.Photo,
+                    UserId = karyawan.UserId, 
+                    Perusahaan=karyawan.Perusahaan
+                });
+
+                if (result)
+                    Helper.InfoMessage("Data Berhasil Diubah !");
+                else
+                throw new SystemException("Data tidak berhasil diubah !");
+            }
+            catch (Exception ex)
+            {
+                Helper.ErrorMessage("Data Berhasil Diubah !");
+            }finally
+            {
+                IsBusy = false;
+            }
+
+
+
+
+
         }
 
         private int _id;
@@ -70,12 +119,30 @@ namespace MobileApp.Views.Profiles
         public string NamaKaryawan { get { return _nama; } set {SetProperty(ref _nama ,value); }}
         public string Alamat { get { return _alamat; } set {SetProperty(ref _alamat,value); }}
         public string Kontak { get { return _kontak; } set {SetProperty(ref _kontak,value); }}
-        public string Email { get { return _email; } set {SetProperty(ref _email,value); }}
+        public string Email { get { return _email; } set {SetProperty(ref _email,value);}
+        }
+
+        private bool EmailValidate(string value)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(value);
+                return addr.Address == value;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
         public string UserId { get { return _userId; } set {SetProperty(ref _userId,value); }}
         public string Photo { get { return _photo; } set {SetProperty(ref _photo,value); }}
         public bool Status { get { return _status; } set {SetProperty(ref _status,value); }}
         public byte[] DataPhoto { get { return _dataPhoto; } set {SetProperty(ref _dataPhoto ,value); }}
 
         public Command SaveCommand { get; }
+
+        private Karyawan karyawan;
     }
 }

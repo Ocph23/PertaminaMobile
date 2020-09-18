@@ -64,7 +64,10 @@ namespace MobileApp.Views.Profiles
             //};
         }
 
-        
+        private void closetap(object sender, EventArgs e)
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
     }
 
 

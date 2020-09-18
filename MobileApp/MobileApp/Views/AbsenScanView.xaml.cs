@@ -85,12 +85,16 @@ namespace MobileApp.Views
         {
             SanningStatus =  SanningStatus.Absen;
             IsScanning = true;
+            AbsenCommand = new Command(AbsenAction, AbsenValidate);
+            LemburCommand = new Command(LemburAction, LemburValidate);
         }
 
         private void LemburAction(object obj)
         {
             SanningStatus =  SanningStatus.Lembur;
             IsScanning = true;
+            AbsenCommand = new Command(AbsenAction, AbsenValidate);
+            LemburCommand = new Command(LemburAction, LemburValidate);
         }
 
 

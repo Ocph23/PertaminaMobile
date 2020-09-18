@@ -8,7 +8,7 @@
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-	<application android:label="Pertamina Jayapura" android:icon="@drawable/logo">
+	<application android:label="Pertamina Jayapura" android:icon="@drawable/logo" android:fullBackupContent="@xml/auto_backup_rules">
 		<meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/logo" />
 		<meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="@string/channel_id" />
 		<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="true" />

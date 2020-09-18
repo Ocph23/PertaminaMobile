@@ -9,29 +9,37 @@
              mc:Ignorable="d" BackgroundColor="{StaticResource MainColor}"
              x:Class="MobileApp.Views.AbsenScanView">
 
-    <sh:Shadows Style="{StaticResource card}">
-        <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="10">
-            <Grid  Margin="30,10" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition  Height="auto"/>
-                </Grid.RowDefinitions>
-
-                <sh:Shadows Grid.Row="0" Style="{StaticResource card}">
-                    <zxing:ZXingScannerView x:Name="scannerView" ScanResultCommand="{Binding ScanningCommand}" IsScanning="{Binding IsScanning}"></zxing:ZXingScannerView>
-                </sh:Shadows>
-
-                <sh:Shadows Grid.Row="1" HeightRequest="50" Style="{StaticResource card}" >
-                    <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="10" >
-                        <FlexLayout WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center" >
-                            <Button CornerRadius="5" Command="{Binding AbsenCommand}" Style="{StaticResource okButton}" Text="Absen"></Button>
-                            <BoxView BackgroundColor="LightGray" Margin="3" WidthRequest="1"></BoxView>
-                            <Button CornerRadius="5" Command="{Binding LemburCommand}" Style="{StaticResource okButton}" Text="Lembur"></Button>
-                        </FlexLayout>
-                    </Frame>
-                </sh:Shadows>
-
-            </Grid>
+    <Grid  >
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="10*"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+        <Frame  Margin="0" BorderColor="White"  Padding="10"
+                           HeightRequest="35" BackgroundColor="White">
+            <FlexLayout>
+                <Label Text="&#xf029;" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="25" 
+                           Margin="5,0" ></Label>
+                <Label Text="Absen"  FontSize="20" Margin="5,0"></Label>
+            </FlexLayout>
         </Frame>
-    </sh:Shadows>
+
+        <sh:Shadows Style="{StaticResource card}" Grid.Row="1">
+            <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="10">
+                <StackLayout>
+                    <sh:Shadows Grid.Row="0" Style="{StaticResource card}" Padding="40" HeightRequest="400">
+                        <zxing:ZXingScannerView x:Name="scannerView"  ScanResultCommand="{Binding ScanningCommand}" IsScanning="{Binding IsScanning}"></zxing:ZXingScannerView>
+                    </sh:Shadows>
+                    <sh:Shadows Grid.Row="2" HorizontalOptions="CenterAndExpand" Padding="0" Style="{StaticResource card}" >
+                        <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="10"  Padding="0" >
+                            <FlexLayout WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center" >
+                                <Button CornerRadius="5" WidthRequest="100" Command="{Binding AbsenCommand}" Style="{StaticResource okButton}" Text="Absen"></Button>
+                                <BoxView BackgroundColor="LightGray" Margin="3" WidthRequest="1"></BoxView>
+                                <Button CornerRadius="5" WidthRequest="100" Command="{Binding LemburCommand}" Style="{StaticResource okButton}" Text="Lembur"></Button>
+                            </FlexLayout>
+                        </Frame>
+                    </sh:Shadows>
+                </StackLayout>
+            </Frame>
+        </sh:Shadows>
+    </Grid>
 </ContentPage>

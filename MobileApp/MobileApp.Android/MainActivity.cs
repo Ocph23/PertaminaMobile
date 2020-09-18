@@ -45,11 +45,9 @@ namespace MobileApp.Droid
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
             await CrossMedia.Current.Initialize();
 
-
             Firebase.Messaging.FirebaseMessaging.Instance.SubscribeToTopic("all");
+
             CreateNotificationChannel();
-
-
 
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
             gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DefaultSignIn)
@@ -138,15 +136,21 @@ namespace MobileApp.Droid
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-            Toast.MakeText(this, resultCode.ToString(), ToastLength.Long).Show();
+           // Toast.MakeText(this, resultCode.ToString(), ToastLength.Long).Show();
            if (requestCode == 42)
             {
                 GoogleSignInResult result = Auth.GoogleSignInApi.GetSignInResultFromIntent(data);
                 if (result.IsSuccess)
                 {
                     GoogleSignInAccount account = result.SignInAccount;
+                    
                     LoginWithFirebase(account);
                 }
+            }
+            else
+            {
+                MessagingCenter.Send<IAuthService, UserProfile>(this, "UserLogin", null);
+              
             }
         }
 
@@ -157,7 +161,7 @@ namespace MobileApp.Droid
                 .AddOnFailureListener(this);
 
             var datas = new UserProfile
-            {
+            { Provider= AuthProvider.Google,
                 PhotoUrl = new Uri(account.PhotoUrl.ToString()),
                 DisplayName = account.DisplayName,
                 Email = account.Email,
@@ -165,8 +169,7 @@ namespace MobileApp.Droid
                   GivenName=account.GivenName,
                    Id=account.Id, IdToken=account.IdToken, IsExpired=account.IsExpired, ServerAuthCode=account.ServerAuthCode
             };
-
-            MessagingCenter.Send(datas, "UserLogin");
+            MessagingCenter.Send<IAuthService, UserProfile>(this, "UserLogin", datas);
         }
 
         public void OnSuccess(Java.Lang.Object result)
@@ -239,5 +242,23 @@ namespace MobileApp.Droid
 
         }
 
+        public Task SignOut()
+        {
+            try
+            {
+                Auth.GoogleSignInApi.SignOut(MainActivity.MainActivityInstance.googleApiClient);
+                return Task.CompletedTask;
+            }
+            catch (Exception ex)
+            {
+                MessagingCenter.Send<IAuthService, bool>(this,"signout", false);
+                return Task.CompletedTask;
+            }
+        }
+
+        public void ToastShow(string message)
+        {
+            Toast.MakeText(MainActivity.MainActivityInstance, message, ToastLength.Long).Show();
+        }
     }
 }

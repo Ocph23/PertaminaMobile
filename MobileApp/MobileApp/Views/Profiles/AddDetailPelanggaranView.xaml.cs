@@ -20,6 +20,11 @@ namespace MobileApp.Views.Profiles
             InitializeComponent();
             BindingContext = new AddDetailPelanggaranViewModel();
         }
+
+        private void closetap(object sender, EventArgs e)
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
     }
 
     public class AddDetailPelanggaranViewModel : BaseViewModel

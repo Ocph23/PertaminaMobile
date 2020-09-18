@@ -46,7 +46,7 @@ namespace MobileApp.Models.Datas
                 if (Files != null && Files.Count > 0)
                 {
                     var images = Files.FirstOrDefault();
-                    return new Uri($"{Helper.Url}/bukti/profiles/images/{images.Thumb}");
+                    return new Uri($"{Helper.Url}/bukti/thumbs/{images.Thumb}");
                 } else
                     return new Uri($"noimage.png");
             }
