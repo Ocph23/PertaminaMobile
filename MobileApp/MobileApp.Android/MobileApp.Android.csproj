@@ -22,6 +22,11 @@
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidSigningKeyStore>C:\Users\ocph2_wip8h45\AppData\Local\Xamarin\Mono for Android\Keystore\ocs\ocs.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>Sony@77</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>ocs</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>Sony@77</AndroidSigningKeyPass>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
