@@ -82,8 +82,8 @@ namespace MobileApp.Views
     {
         public HomeViewModel()
         {
-            this.Photo = AuthService.Profile.PhotoUrl;
-            this.ProfileName = AuthService.Profile.DisplayName;
+            this.Photo = Helper.Account.PhotoUrl;
+            this.ProfileName = Helper.Account.DisplayName;
 
             NotifCommand = new Command(NotifAction, x => true);
         }

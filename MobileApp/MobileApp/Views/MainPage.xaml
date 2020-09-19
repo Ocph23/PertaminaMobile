@@ -10,27 +10,31 @@
             android:TabbedPage.BarSelectedItemColor="Red"
             BarBackgroundColor="Transparent"
             NavigationPage.HasNavigationBar="False"
-            BarTextColor="Black"
             mc:Ignorable="d"
             x:Class="MobileApp.Views.MainPage">
 
     <TabbedPage.Children>
-        <NavigationPage IconImageSource="logo.png">
+        <NavigationPage IconImageSource="homebaseline.png" >
             <x:Arguments>
                 <views:HomeView/>
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage  IconImageSource="logo.png">
+        <NavigationPage  IconImageSource="pelanggaran.png">
             <x:Arguments>
                 <views:PelanggaranView />
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage  IconImageSource="logo.png">
+        <NavigationPage  IconImageSource="code.png">
             <x:Arguments>
                 <views:AbsenScanView />
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage  IconImageSource="logo.png">
+        <NavigationPage  IconImageSource="Report.png">
+            <x:Arguments>
+                <views:MelaporkanView />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage  IconImageSource="profile.png">
             <x:Arguments>
                 <views:ProfileView />
             </x:Arguments>

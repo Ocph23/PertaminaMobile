@@ -19,7 +19,7 @@
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="0">
-                <Image Source="logo2.png" HorizontalOptions="Center" VerticalOptions="EndAndExpand" WidthRequest="100" >
+                <Image Source="logo2.png" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" WidthRequest="70" >
                 </Image>
             </StackLayout>
             <StackLayout Grid.Row="1"  Margin="40,20">
@@ -27,7 +27,8 @@
                     <Label Margin="5,0,0,0" Text="User Name" Style="{StaticResource dataTitle}"/>
                     <Frame Style="{StaticResource entryFrameStyle}">
                         <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
-                            <controls:EntryCustom Text="{Binding UserName}" Placeholder="User Name" CornerRadius="10" HeightRequest="45" Margin="10" ></controls:EntryCustom>
+                            <controls:EntryCustom Text="{Binding UserName}" Placeholder="User Name" 
+                                                  HeightRequest="45" Margin="10" ></controls:EntryCustom>
                         </sh:Shadows>
                     </Frame>
                     
@@ -37,16 +38,15 @@
                             <controls:EntryCustom TextChanged="passwordChange"  Placeholder="Password" Margin="10" IsPassword="True"  ></controls:EntryCustom>
                         </sh:Shadows>
                     </Frame>
-                    <sh:Shadows Grid.Row="1" Margin="0,20,0,10" CornerRadius="10" 
-                                Shades="{sh:NeumorphismShades}">
+                    <sh:Shadows Grid.Row="1" Margin="0,20,0,0" Style="{StaticResource card}" CornerRadius="5" >
                         <Frame Style="{StaticResource entryFrameStyle}">
-                            <Button Style="{StaticResource okButton}" CornerRadius="10" Text="Login"  Command="{Binding LoginCommand}" />
+                            <Button Style="{StaticResource okButton}" Text="Login"  HeightRequest="50" Command="{Binding LoginCommand}" />
                         </Frame>
                     </sh:Shadows>
-                    <sh:Shadows Grid.Row="1" Margin="0,5,0,10" CornerRadius="10" 
-                                Shades="{sh:NeumorphismShades}">
+                    <sh:Shadows Grid.Row="1" Margin="0,0,0,10" CornerRadius="5" 
+                                Style="{StaticResource card}">
                         <Frame Style="{StaticResource entryFrameStyle}">
-                            <ImageButton HeightRequest="45" CornerRadius="10" Command="{Binding GoogleLoginCommand}" Aspect="AspectFit" Source="google.png" Padding="10" ></ImageButton>
+                            <ImageButton HeightRequest="50" CornerRadius="10" Command="{Binding GoogleLoginCommand}" Aspect="AspectFit" Source="google.png" Padding="10" ></ImageButton>
                         </Frame>
                     </sh:Shadows>
                     <Label Style="{StaticResource dataValue}" HorizontalOptions="Center" Text="Forgot Your Password ?">
@@ -58,7 +58,7 @@
                 </StackLayout>
             </StackLayout>
             <StackLayout Grid.Row="2">
-                <controls:EntryCustom FontSize="8" VerticalOptions="EndAndExpand" HorizontalTextAlignment="Center" Text="URL"/>
+                <controls:EntryCustom FontSize="8" VerticalOptions="EndAndExpand" HorizontalTextAlignment="Center" Text="{Binding URL}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

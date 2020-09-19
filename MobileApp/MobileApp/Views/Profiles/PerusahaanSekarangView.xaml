@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows" xmlns:controls="clr-namespace:MobileApp.Controls"
+             mc:Ignorable="d"
+             x:Class="MobileApp.Views.Profiles.PerusahaanSekarangView">
+    <ContentPage.Content>
+        <sh:Shadows Style="{StaticResource card}" CornerRadius="20" >
+            <Frame Style="{StaticResource  entryFrameStyle }" CornerRadius="20">
+                <StackLayout  Padding="20" Grid.Row="1">
+                    <StackLayout Orientation="Horizontal">
+                        <FlexLayout >
+                            <Label Margin="0,0,0,0" Text="&#xf007;" 
+                               FontFamily="{StaticResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
+                            <Label Margin="5,0,0,20" Text="DATA PERUSAHAAN"  FontSize="Small" FontAttributes="Bold"/>
+                        </FlexLayout>
+                        <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
+                               FontFamily="{StaticResource FontAwesomeSolid}" FontSize="20" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <sh:Shadows Style="{StaticResource card}" CornerRadius="80" HorizontalOptions="Center" >
+                        <Frame  BorderColor="White" HeightRequest="100" WidthRequest="80" Margin="3"  Padding="0" 
+                           CornerRadius="40" Style="{StaticResource entryFrameStyle}" BackgroundColor="{StaticResource MainColor}">
+                            <Image Source="{Binding Data.Perusahaan.LogoView}"  />
+                        </Frame>
+                    </sh:Shadows>
+                    <ScrollView>
+                        <StackLayout>
+                            <Label Margin="5,0,0,0" Text="Nama Perusahaan" Style="{StaticResource dataTitle}"/>
+                            <Frame Style="{StaticResource entryFrameStyle}">
+                                <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
+                                    <controls:EntryCustom IsEnabled="True" Text="{Binding Data.Perusahaan.Nama}" FontSize="Small" CornerRadius="10" HeightRequest="35" Margin="10" ></controls:EntryCustom>
+                                </sh:Shadows>
+                            </Frame>
+
+                            <Label Margin="5,10,0,0" Text="Direktur/Pimpinan" Style="{StaticResource dataTitle}"/>
+                            <Frame Style="{StaticResource entryFrameStyle}">
+                                <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
+                                    <controls:EntryCustom IsEnabled="True" Text="{Binding Data.Perusahaan.Direktur}" FontSize="Small" CornerRadius="10" HeightRequest="35" Margin="10" ></controls:EntryCustom>
+                                </sh:Shadows>
+                            </Frame>
+
+                            <Label Margin="5,10,0,0" Text="Kontak" Style="{StaticResource dataTitle}"/>
+                            <Frame Style="{StaticResource entryFrameStyle}">
+                                <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
+                                    <controls:EntryCustom IsEnabled="True" Text="{Binding Data.Perusahaan.Kontak}" FontSize="Small" CornerRadius="10" HeightRequest="35" Margin="10" ></controls:EntryCustom>
+                                </sh:Shadows>
+                            </Frame>
+                            <Label Margin="5,10,0,0" Text="Email" Style="{StaticResource dataTitle}"/>
+                            <Frame Style="{StaticResource entryFrameStyle}">
+                                <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
+                                    <controls:EntryCustom IsEnabled="True" Text="{Binding Data.Perusahaan.Email}"  FontSize="Small" CornerRadius="10" HeightRequest="35" Margin="10" ></controls:EntryCustom>
+                                </sh:Shadows>
+                            </Frame>
+                            <Label Margin="5,10,0,0" Text="Alamat" Style="{StaticResource dataTitle}"/>
+                            <Frame Style="{StaticResource entryFrameStyle}">
+                                <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
+                                    <controls:EditorCustom   Text="{Binding Data.Perusahaan.Alamat}" HeightRequest="75"  FontSize="Small" CornerRadius="10" Margin="10" ></controls:EditorCustom>
+                                </sh:Shadows>
+                            </Frame>
+
+                            <Label Margin="5,10,0,0" Text="Mulai Bekerja" Style="{StaticResource dataTitle}"/>
+                            <Frame Style="{StaticResource entryFrameStyle}">
+                                <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
+                                    <controls:EntryCustom IsEnabled="True" Text="{Binding Data.MulaiKerja, StringFormat='{0:dd MMMM yyyy}'}"  FontSize="Small" CornerRadius="10" HeightRequest="35" Margin="10" ></controls:EntryCustom>
+                                </sh:Shadows>
+                            </Frame>
+                            <Label Margin="5,10,0,0" Text="Bekerja Hingga" Style="{StaticResource dataTitle}"/>
+                            <Frame Style="{StaticResource entryFrameStyle}">
+                                <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
+                                    <controls:EntryCustom IsEnabled="True" Text="{Binding Data.SelesaiView}"  FontSize="Small" CornerRadius="10" HeightRequest="35" Margin="10" ></controls:EntryCustom>
+                                </sh:Shadows>
+                            </Frame>
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </Frame>
+        </sh:Shadows>
+    </ContentPage.Content>
+</ContentPage>

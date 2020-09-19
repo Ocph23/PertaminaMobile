@@ -21,10 +21,12 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <sh:Shadows Style="{StaticResource inputShadow}" CornerRadius="40">
-                    <Frame  BorderColor="White" HeightRequest="80" WidthRequest="80" Margin="0"  Padding="0"
+                <sh:Shadows Style="{StaticResource card}" CornerRadius="80" Margin="0" Padding="0">
+                    <Frame  BorderColor="LightGray" HeightRequest="80" WidthRequest="80" Margin="0"  Padding="0"
                            CornerRadius="40" Style="{StaticResource entryFrameStyle}" BackgroundColor="{StaticResource MainColor}">
-                        <Image Source="{Binding Photo}"  />
+                        <Frame Margin="2" CornerRadius="80" Padding="0">
+                            <Image Source="{Binding Photo}"  />
+                        </Frame>
                     </Frame>
                 </sh:Shadows>
                 <StackLayout Grid.Column="1" Margin="0,10">
@@ -38,14 +40,17 @@
             </Grid>
             <sh:Shadows Grid.Row="1" Style="{StaticResource card}">
                 <Frame CornerRadius="20"  Style="{StaticResource entryFrameStyle}">
-                    <StackLayout Margin="10"  >
-                        <Label Text="POIN ANDA" Margin="20" FontSize="Large" FontAttributes="Bold"></Label>
+                    <StackLayout Margin="0,20"  >
                         <Grid>
                             <microcharts:ChartView x:Name="chartView" VerticalOptions="StartAndExpand" Margin="20" 
                                                     HeightRequest="250"/>
                             <Label Text="110" FontSize="Large" FontAttributes="Bold" TextColor="#55a3f7"
                                    VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"></Label>
                         </Grid>
+                        <StackLayout HorizontalOptions="CenterAndExpand" Margin="20">
+                            <Label Text="POIN ANDA" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"></Label>
+                            <Label Text="SAAT INI" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"></Label>
+                        </StackLayout>
                     </StackLayout>
                  </Frame>
             </sh:Shadows>

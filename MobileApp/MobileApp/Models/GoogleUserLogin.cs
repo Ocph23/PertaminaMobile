@@ -16,8 +16,7 @@ namespace MobileApp.Models
         public  string FamilyName { get; set;}
         public  string DisplayName { get; set;}
         public  string Email { get; set;}
-
-
+        public AuthProvider Provider { get; set; }
     }
 
     public class Profile
@@ -26,8 +25,7 @@ namespace MobileApp.Models
         public UserIdentity User{ get; set; }
         public List<string> Roles{ get; set; }
         public Karyawan Karyawan { get; set; }
-
-
+        public string Token { get; set; }
     }
 
 

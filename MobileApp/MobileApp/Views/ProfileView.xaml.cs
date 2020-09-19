@@ -25,41 +25,61 @@ namespace MobileApp.Views
     {
         public ProfileViewModel()
         {
-            Photo = AuthService.Profile.PhotoUrl;
-            ProfileName = AuthService.Profile.DisplayName;
+            Photo = Helper.Account.PhotoUrl;
+            ProfileName = Helper.Account.DisplayName;
             ShowDetailCommand = new Command(ShowDetailAction, x => true);
+            SignoutCommand = new Command(SignoutAction, x => true);
         }
 
-        private void ShowDetailAction(object obj)
+        private async void SignoutAction(object obj)
         {
+           var result =  await Application.Current.MainPage.DisplayAlert("Yakin ?", "Anda Ingin Keluar ?", "Ya", "Tidak");
+            if (result)
+            {
+               await AuthService.SignOut();
+            }
+        }
+
+        private async void ShowDetailAction(object obj)
+        {
+
+            IsBusy = true;
+           await Task.Delay(300);
             var param = (TypeProfileView)obj ;
             switch (param)
             {
                 case TypeProfileView.ChangeProfile:
-                    Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.ChangeProfileView());
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.ChangeProfileView());
                     break;
                 case TypeProfileView.ChangePassword:
-                    Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.ChangePasswordView());
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.ChangePasswordView());
                     break;
                 case TypeProfileView.Absen:
-                    Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.AbsenView());
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.AbsenView());
                     break;
                 case TypeProfileView.Pelanggaran:
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new PelanggaranView ());
                     break;
                 case TypeProfileView.Pelaporan:
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new MelaporkanView());
                     break;
                 case TypeProfileView.Perusahaan:
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.PerusahaanSekarangView());
                     break;
                 case TypeProfileView.MutasiPerusahaan:
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.MutasiView());
+
                     break;
                 default:
                     break;
             }
+            IsBusy = false;
         }
 
         public Uri Photo { get; set; }
         public string ProfileName { get; set; }
         public Command ShowDetailCommand { get; }
+        public Command SignoutCommand { get; }
         public Command NotifCommand { get; }
     }
 }

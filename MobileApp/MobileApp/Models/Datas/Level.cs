@@ -6,7 +6,7 @@ namespace MobileApp.Models.Datas
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Nama { get; set; }
 
         public virtual ICollection<DetailLevel> Datas { get; set; }
     }

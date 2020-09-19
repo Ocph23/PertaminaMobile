@@ -33,11 +33,14 @@ namespace MobileApp.Views
             {
                await Navigation.PushModalAsync(new PelaggaranDetailView(senderItem.SelectedItem));
                 senderItem.SelectedItem = null;
-
             }
         }
 
-
+     
+        private  void close_tab(object sender, EventArgs e)
+        {
+          Application.Current.MainPage.Navigation.PopModalAsync();
+        }
     }
 
 

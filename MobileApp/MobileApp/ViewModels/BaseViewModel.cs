@@ -14,8 +14,12 @@ namespace MobileApp.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Periode> Periodes => DependencyService.Get<IDataStore<Periode>>();
+        public IDataStore<Absen> Absens => DependencyService.Get<IDataStore<Absen>>();
+        public IDataStore<Level> LevelPelanggaran => DependencyService.Get<IDataStore<Level>>();
         public IDataStore<Pelanggaran> Pelanggarans => DependencyService.Get<IDataStore<Pelanggaran>>();
+        public IDataStore<Karyawan> Karyawan=> DependencyService.Get<IDataStore<Karyawan>>();
         public IAuthInternalService AuthService => DependencyService.Get<IAuthInternalService>();
+        public IDataStore<Notification> Notifications=> DependencyService.Get<IDataStore<Notification>>();
 
         bool isBusy = false;
         public bool IsBusy

@@ -21,9 +21,33 @@ namespace MobileApp.Services
 
         public async Task<bool> AddItemAsync(Pelanggaran item)
         {
-            items.Add(item);
+            try
+            {
+                using (var client = new RestService())
+                {
+                    var response = await client.PostAsync("api/pelanggaran", client.GenerateHttpContent(item));
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var stringResponse = await response.Content.ReadAsStringAsync();
+                        var pelanggaran = Newtonsoft.Json.JsonConvert.DeserializeObject<Pelanggaran>(stringResponse);
+                        if (pelanggaran != null)
+                        {
+                            items.Add(pelanggaran);
+                        }
+                        return true;
+                    }
+                    else
+                    {
+                        throw new SystemException( await client.Error(response));
+                        
+                    }
 
-            return await Task.FromResult(true);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new SystemException(ex.Message);
+            }
         }
 
         public async Task<bool> UpdateItemAsync(Pelanggaran item)

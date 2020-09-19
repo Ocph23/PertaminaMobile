@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+             mc:Ignorable="d"
+             x:Class="MobileApp.Views.Profiles.MutasiView">
+    <ContentPage.Content>
+        <sh:Shadows Grid.Row="1" Style="{StaticResource card}" CornerRadius="20">
+            <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="20">
+                <Grid  Padding="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout Orientation="Horizontal">
+                        <FlexLayout >
+                            <Label Margin="5,0,0,0" Text="&#xf362;" 
+                               FontFamily="{StaticResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
+                            <Label Margin="5,0,0,0" Text="DATA MUTASI"  FontSize="Small" FontAttributes="Bold"/>
+                        </FlexLayout>
+                        <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
+                               FontFamily="{StaticResource FontAwesomeSolid}" FontSize="20" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <ListView ItemsSource="{Binding Datas}" Grid.Row="1" SeparatorVisibility="None" 
+                              BackgroundColor="Transparent" ItemSelected="ListView_ItemSelected" IsRefreshing="{Binding IsBusy}" RefreshCommand="{Binding LoadCommand}" 
+                              HasUnevenRows="True" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <sh:Shadows Style="{StaticResource card}" CornerRadius="20" >
+                                        <Frame CornerRadius="10" Style="{StaticResource entryFrameStyle}" Padding="10" >
+                                            <Grid Padding="10" >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <sh:Shadows Style="{StaticResource card}" CornerRadius="0" Margin="0" Padding="0">
+                                                    <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="0" Padding="0">
+                                                        <Image Source="{Binding Perusahaan.LogoView}"  HeightRequest="70" WidthRequest="70"  />
+                                                    </Frame>
+                                                </sh:Shadows>
+                                                <StackLayout Grid.Column="1">
+                                                    <StackLayout Padding="0">
+                                                        <Label Text="{Binding Perusahaan.Nama}" FontSize="15"  />
+                                                            <Label Text="{Binding MulaiKerja, StringFormat='Sejak   : {0:dd MMMM yyyy}'}" Style="{StaticResource dataTitle}"/>
+                                                            <Label Text="{Binding SelesaiView, StringFormat='Hingga : {0}'}" Style="{StaticResource dataTitle}"/>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                              
+                                            </Grid>
+                                        </Frame>
+                                    </sh:Shadows>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </Grid>
+            </Frame>
+        </sh:Shadows>
+
+
+    </ContentPage.Content>
+</ContentPage>

@@ -1,4 +1,6 @@
-﻿using MobileApp.ViewModels;
+﻿using MobileApp.Models.Datas;
+using MobileApp.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,18 +38,37 @@ namespace MobileApp.Views
 
         }
 
-     
-
         private void ScanningAction(object obj)
         {
-            var result = obj as Result;
             Device.BeginInvokeOnMainThread(async () =>
             {
-                // await DisplayAlert("Scanned result", result.Text, "OK");
-                IsScanning = false;
-                SanningStatus = SanningStatus.None;
+                try
+                {
+                    var data = obj as Result;
+                    var qrData = JsonConvert.DeserializeObject<QRData>(data.Text.ToString());
+                    if (qrData == null)
+                        return;
+                    if (qrData != null)
+                    {
+                        if (DateTime.Now >= qrData.Mulai && DateTime.Now <= qrData.Selesai)
+                        {
+                            var absen = new Absen { KaryawanId = Helper.Profile.Karyawan.Id, Masuk = DateTime.Now, Pulang = null };
+                            absen.AbsenType = this.SanningStatus == SanningStatus.Absen ? Models.AbsenType.Kerja : Models.AbsenType.Lembur;
+                            IsScanning = false;
+                            var result = await Absens.AddItemAsync(absen);
+                            SanningStatus = SanningStatus.None;
+                        }
+                        else
+                        {
+                            throw new SystemException("QR Code Sudah Tidak Berlaku, Hubungi Petugas");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Helper.ErrorMessage(ex.Message);
+                }
             });
-
         }
 
         private bool LemburValidate(object arg)
@@ -64,12 +85,16 @@ namespace MobileApp.Views
         {
             SanningStatus =  SanningStatus.Absen;
             IsScanning = true;
+            AbsenCommand = new Command(AbsenAction, AbsenValidate);
+            LemburCommand = new Command(LemburAction, LemburValidate);
         }
 
         private void LemburAction(object obj)
         {
             SanningStatus =  SanningStatus.Lembur;
             IsScanning = true;
+            AbsenCommand = new Command(AbsenAction, AbsenValidate);
+            LemburCommand = new Command(LemburAction, LemburValidate);
         }
 
 
@@ -132,6 +157,13 @@ namespace MobileApp.Views
         None, Absen, Lembur
     }
 
+
+
+    public class QRData
+    {
+        public DateTime Mulai { get; set; }
+        public DateTime Selesai { get; set; }
+    }
 
 
 }

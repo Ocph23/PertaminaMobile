@@ -1,11 +1,7 @@
 ﻿using MobileApp.Models;
 using MobileApp.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,7 +9,6 @@ using Xamarin.Forms.Xaml;
 
 namespace MobileApp.Views
 {
-
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginView : ContentPage
@@ -36,7 +31,6 @@ namespace MobileApp.Views
     }
 
 
-
     public class LoginViewModel: MobileApp.ViewModels.BaseViewModel
     {
         public LoginViewModel(INavigation navigation)
@@ -44,17 +38,38 @@ namespace MobileApp.Views
             LoginCommand = new Command(LoginAction, LoginValidate);
             GoogleLoginCommand = new Command(GoogleLoginAction, GoogleLoginValidate);
             _nav = navigation;
+            url = Helper.Url;
 
-            MessagingCenter.Subscribe<IAuthService, UserProfile>(this, "UserLogin", (sender, arg)=> {
-                IsBusy = false;
-                AuthService.Profile = arg;
-                App.Current.MainPage = new MainPage();
+            MessagingCenter.Subscribe<IAuthService, UserProfile>(this, "UserLogin", async (sender, arg) => {
+                try
+                {
+                    await Task.Delay(200);
+                    if (arg != null)
+                    {
+                        Helper.Account = arg;
+
+                        if (arg.Provider == AuthProvider.Google)
+                        {
+                           await AuthService.GetProfileByProviderId(arg);
+                        }
+                        Helper.SetMainPage();
+                    }
+                    else
+                    {
+                        throw new SystemException("Anda Tidak Memiliki Akses !");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Helper.ErrorMessage(ex.Message);
+                    IsBusy = false;
+                }
             });
         }
 
         private bool LoginValidate(object arg)
         {
-            if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
+            if (IsBusy || string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
             {
                 return false;
             }
@@ -72,10 +87,7 @@ namespace MobileApp.Views
 
         private bool GoogleLoginValidate(object arg)
         {
-            return true;
-            if (string.IsNullOrEmpty(UserName) && string.IsNullOrEmpty(Password))
-                return false;
-            return true;
+            return IsBusy ? false: true;
         }
 
         private async void GoogleLoginAction(object obj)
@@ -109,6 +121,16 @@ namespace MobileApp.Views
         private INavigation _nav;
         private string userName;
         private string password;
+
+
+        string url;
+
+        public string URL
+        {
+            get { return url; }
+            set { SetProperty(ref url, value); Helper.Url = value; }
+        }
+
 
     }
 }
