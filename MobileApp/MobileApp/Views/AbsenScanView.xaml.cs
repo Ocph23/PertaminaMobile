@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ZXing;
+using ZXing.Net.Mobile.Forms;
 
 namespace MobileApp.Views
 {
@@ -19,6 +20,7 @@ namespace MobileApp.Views
         public AbsenScanView()
         {
             InitializeComponent();
+            scannerView.Options = new ZXing.Mobile.MobileBarcodeScanningOptions { DelayBetweenContinuousScans = 5 };
             this.BindingContext = new AbsenViewModel();
         }
     }
@@ -30,18 +32,25 @@ namespace MobileApp.Views
     {
         public AbsenViewModel()
         {
-            IsScanning = false;
             SanningStatus =  SanningStatus.None;
+            IsScanning = false;
+            IsAnalyzing = false;
+            SetCommand();
+        }
+
+        private  Task SetCommand()
+        {
             AbsenCommand = new Command(AbsenAction, AbsenValidate);
             LemburCommand = new Command(LemburAction, LemburValidate);
-            ScanningCommand = new Command(ScanningAction,x=>IsScanning);
-
+            ScanningCommand = new Command(ScanningAction, x => IsScanning);
+            return Task.CompletedTask;
         }
 
         private void ScanningAction(object obj)
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
+                IsAnalyzing = false;
                 try
                 {
                     var data = obj as Result;
@@ -54,8 +63,7 @@ namespace MobileApp.Views
                         {
                             var absen = new Absen { KaryawanId = Helper.Profile.Karyawan.Id, Masuk = DateTime.Now, Pulang = null };
                             absen.AbsenType = this.SanningStatus == SanningStatus.Absen ? Models.AbsenType.Kerja : Models.AbsenType.Lembur;
-                            IsScanning = false;
-                            var result = await Absens.AddItemAsync(absen);
+                         var result = await Absens.AddItemAsync(absen);
                             SanningStatus = SanningStatus.None;
                         }
                         else
@@ -63,10 +71,19 @@ namespace MobileApp.Views
                             throw new SystemException("QR Code Sudah Tidak Berlaku, Hubungi Petugas");
                         }
                     }
+                    SetCommand();
                 }
                 catch (Exception ex)
                 {
-                    Helper.ErrorMessage(ex.Message);
+                 
+                    SanningStatus = SanningStatus.None;
+                    if(ex.GetType().Name== "JsonReaderException")
+                    {
+                        Helper.ErrorMessage("Maaf ini bukan QR Code Absen Pertamina - Jayapura");
+
+                    }else
+                        Helper.ErrorMessage(ex.Message);
+                    SetCommand();
                 }
             });
         }
@@ -84,17 +101,17 @@ namespace MobileApp.Views
         private void AbsenAction(object obj)
         {
             SanningStatus =  SanningStatus.Absen;
+            IsAnalyzing = true;
             IsScanning = true;
-            AbsenCommand = new Command(AbsenAction, AbsenValidate);
-            LemburCommand = new Command(LemburAction, LemburValidate);
+            SetCommand();
         }
 
         private void LemburAction(object obj)
         {
             SanningStatus =  SanningStatus.Lembur;
+            IsAnalyzing = true; 
             IsScanning = true;
-            AbsenCommand = new Command(AbsenAction, AbsenValidate);
-            LemburCommand = new Command(LemburAction, LemburValidate);
+            SetCommand();
         }
 
 
@@ -136,11 +153,18 @@ namespace MobileApp.Views
             set { SetProperty(ref isScaning ,value); }
         }
 
+        public bool IsAnalyzing
+        {
+            get { return isAnalyzing; }
+            set { SetProperty(ref isAnalyzing, value); }
+        }
+
 
         private SanningStatus isAbsen;
         private Command _absenCommand;
         private Command _lemburCommand;
         private Command _scanningCommand;
+        private bool isAnalyzing;
 
         public SanningStatus SanningStatus
         {

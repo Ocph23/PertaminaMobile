@@ -20,25 +20,22 @@ namespace MobileApp.Droid
     {
         public override void OnReceive(Context context, Intent intent)
         {
+            
             var message = intent.GetStringExtra("message");
-            var role = intent.GetStringExtra("role");
-            var bigStyle = new NotificationCompat.BigTextStyle().BigText("Telah Terjadi Tsunami");
+            var bigStyle = new NotificationCompat.BigTextStyle().BigText(message);
             // Create a PendingIntent; we're only using one PendingIntent (ID = 0):
             NotificationManager notificationManager = context.GetSystemService(Context.NotificationService) as NotificationManager;
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, MainActivity.CHANNEL_ID)
                 //  .SetContentIntent(pendingIntent)
-                .SetContentTitle(role +" waena-desa.id")
+                .SetContentTitle("Pertamina Jayapura")
                 .SetContentText(message)
                 .SetAutoCancel(true)
                 .SetStyle(bigStyle)
                 .SetPriority(NotificationCompat.PriorityMax)
-                .SetSmallIcon(Resource.Drawable.xamarin_logo);
+                .SetSmallIcon(Resource.Drawable.logo2);
 
-            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop)
-            {
-                builder.SetVisibility(NotificationCompat.VisibilityPublic);
-            }
+            builder.SetVisibility(NotificationCompat.VisibilityPublic);
 
             Intent intents = new Intent(Intent.ActionView, Android.Net.Uri.Parse(Helper.Url));
             PendingIntent pendingIntent = PendingIntent.GetActivity(context, MainActivity.NOTIFICATION_ID, intents, PendingIntentFlags.UpdateCurrent);

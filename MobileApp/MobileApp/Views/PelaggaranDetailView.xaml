@@ -26,6 +26,7 @@
                             <BoxView HeightRequest="1" BackgroundColor="White"/>
                             <StackLayout>
                                 <Label Style="{StaticResource dataTitle}" Text="Pelanggaran"></Label>
+                              
                                 <ListView HeightRequest="200" HasUnevenRows="True" ItemsSource="{Binding Data.ItemPelanggarans}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>

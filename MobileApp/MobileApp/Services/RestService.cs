@@ -45,11 +45,6 @@ namespace MobileApp.Services
             }
         }
 
-        internal Task DeleteAsync(string id, StringContent content)
-        {
-
-            throw new NotImplementedException();
-        }
 
         public StringContent GenerateHttpContent(object data)
         {

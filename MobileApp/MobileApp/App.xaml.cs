@@ -12,7 +12,7 @@ using MobileApp.Models.Datas;
 
 namespace MobileApp
 {
-    public partial class App : Application
+    public partial class App : Application, INotification
     {
 
         public App()

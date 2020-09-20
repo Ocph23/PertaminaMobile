@@ -35,7 +35,7 @@
                     <Label Margin="5,20,0,0" Text="Password" Style="{StaticResource dataTitle}"/>
                     <Frame Style="{StaticResource entryFrameStyle}">
                         <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
-                            <controls:EntryCustom TextChanged="passwordChange"  Placeholder="Password" Margin="10" IsPassword="True"  ></controls:EntryCustom>
+                            <controls:EntryCustom TextChanged="PasswordChange"  Placeholder="Password" Margin="10" IsPassword="True"  ></controls:EntryCustom>
                         </sh:Shadows>
                     </Frame>
                     <sh:Shadows Grid.Row="1" Margin="0,20,0,0" Style="{StaticResource card}" CornerRadius="5" >

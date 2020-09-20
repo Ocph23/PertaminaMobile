@@ -44,12 +44,12 @@
                         <Grid>
                             <microcharts:ChartView x:Name="chartView" VerticalOptions="StartAndExpand" Margin="20" 
                                                     HeightRequest="250"/>
-                            <Label Text="110" FontSize="Large" FontAttributes="Bold" TextColor="#55a3f7"
+                            <Label Text="{Binding ScoreView}" FontSize="Large" FontAttributes="Bold" TextColor="#55a3f7"
                                    VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"></Label>
                         </Grid>
                         <StackLayout HorizontalOptions="CenterAndExpand" Margin="20">
                             <Label Text="POIN ANDA" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"></Label>
-                            <Label Text="SAAT INI" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"></Label>
+                            <Label Text="PERIODE INI" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"></Label>
                         </StackLayout>
                     </StackLayout>
                  </Frame>

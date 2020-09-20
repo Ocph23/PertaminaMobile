@@ -33,7 +33,7 @@ namespace MobileApp.Droid
         public static MainActivity MainActivityInstance { get; private set; }
         public static bool IsBackground { get; private set; }
         public static readonly string CHANNEL_ID = "ChannelId1";
-        public static readonly int NOTIFICATION_ID = 100;
+        public static readonly int NOTIFICATION_ID = 230279;
         public UserProfile Profile { get; set; }
 
         protected override async void OnCreate(Bundle savedInstanceState)
@@ -81,7 +81,7 @@ namespace MobileApp.Droid
                     .SetStorageBucket("pertamina-emloyee-score.appspot.com")
                     .Build();
 
-                app = FirebaseApp.InitializeApp(this, options);
+                FirebaseApp.InitializeApp(this, options);
                 mAuth = FirebaseAuth.Instance;
             }
             else
@@ -184,7 +184,7 @@ namespace MobileApp.Droid
 
         public bool IsPlayServicesAvailable()
         {
-            string text = "";
+            string text;
             int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
             if (resultCode != ConnectionResult.Success)
             {
@@ -249,7 +249,7 @@ namespace MobileApp.Droid
                 Auth.GoogleSignInApi.SignOut(MainActivity.MainActivityInstance.googleApiClient);
                 return Task.CompletedTask;
             }
-            catch (Exception ex)
+            catch 
             {
                 MessagingCenter.Send<IAuthService, bool>(this,"signout", false);
                 return Task.CompletedTask;

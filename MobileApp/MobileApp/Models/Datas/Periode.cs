@@ -19,7 +19,7 @@ namespace MobileApp.Models.Datas
         public bool Status { get; set; }
 
 
-        public string DisplayName => $"{Mulai.ToString("dd/MM/yyyy")} - {Selesai.ToString("dd/MM/yyyy")}";
+        public string DisplayName => $"{Mulai:dd/MM/yyyy} - {Selesai:dd/MM/yyyy}";
 
     }
 }

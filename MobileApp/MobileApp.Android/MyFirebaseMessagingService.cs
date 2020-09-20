@@ -5,6 +5,7 @@ using Android.App;
 using Android.Content;
 using Android.Support.V4.App;
 using Firebase.Messaging;
+using MobileApp.Models;
 using Xamarin.Forms;
 
 namespace MobileApp.Droid
@@ -13,32 +14,43 @@ namespace MobileApp.Droid
     [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
     public class MyFirebaseMessagingService : FirebaseMessagingService, MobileApp.Services.INotification
     {
-        const string TAG = "MyFirebaseMsgService";
 
-      /*  public override void OnCreate()
+        /*  public override void OnCreate()
+          {
+              base.OnCreate();
+              if (MainActivity.IsBacground)
+              {
+                  var powerManager = (PowerManager)GetSystemService(PowerService);
+                  var wakeLock = powerManager.NewWakeLock(WakeLockFlags.ScreenDim | WakeLockFlags.AcquireCausesWakeup, "Info Tsunami");
+                  wakeLock.Acquire();
+                  AlarmManager manager = (AlarmManager)GetSystemService(Context.AlarmService);
+                  Intent myIntent = new Intent(this, typeof(NotifyBroadcastReceived));
+                  PendingIntent pendingIntent = PendingIntent.GetBroadcast(this, 0, myIntent, PendingIntentFlags.OneShot);
+                  myIntent.SetFlags(ActivityFlags.ClearTop);
+                  manager.Set(AlarmType.RtcWakeup, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(), pendingIntent);
+              }
+          }*/
+
+        public override void OnMessageReceived(RemoteMessage remoteMessahe)
         {
-            base.OnCreate();
-            if (MainActivity.IsBacground)
+            var message = remoteMessahe.GetNotification();
+
+            var created = Convert.ToInt64(remoteMessahe.Data.Where(x => x.Key == "Created").FirstOrDefault().Value);
+            var msg = new Models.Datas.Notification()
             {
-                var powerManager = (PowerManager)GetSystemService(PowerService);
-                var wakeLock = powerManager.NewWakeLock(WakeLockFlags.ScreenDim | WakeLockFlags.AcquireCausesWakeup, "Info Tsunami");
-                wakeLock.Acquire();
+                Created = new DateTime(created),
+                Sender = remoteMessahe.Data.Where(x=>x.Key.ToLower()=="sender").FirstOrDefault().Value,
+                Title = message.Title,
+                Body = message.Body,
+                NotificationType=(NotificationType)Enum.Parse(typeof(NotificationType), remoteMessahe.Data.Where(x => x.Key == "NotificationType").FirstOrDefault().Value)
+            };
+
+            if (remoteMessahe.From== "/topics/all")
+            {
                 AlarmManager manager = (AlarmManager)GetSystemService(Context.AlarmService);
                 Intent myIntent = new Intent(this, typeof(NotifyBroadcastReceived));
-                PendingIntent pendingIntent = PendingIntent.GetBroadcast(this, 0, myIntent, PendingIntentFlags.OneShot);
-                myIntent.SetFlags(ActivityFlags.ClearTop);
-                manager.Set(AlarmType.RtcWakeup, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(), pendingIntent);
-            }
-        }*/
-
-        public override void OnMessageReceived(RemoteMessage message)
-        {
-            if(message.From== "/topics/all")
-            {
-                AlarmManager manager = (AlarmManager)GetSystemService(Context.AlarmService);
-                Intent myIntent = new Intent(this, typeof(NotifyBroadcastReceived));
-                myIntent.PutExtra("message", message.Data.Where(x => x.Key == "message").FirstOrDefault().Value);
-                myIntent.PutExtra("role", message.Data.Where(x => x.Key == "role").FirstOrDefault().Value);
+                myIntent.PutExtra("message", remoteMessahe.Data.Where(x => x.Key == "message").FirstOrDefault().Value);
+                myIntent.PutExtra("role", remoteMessahe.Data.Where(x => x.Key == "role").FirstOrDefault().Value);
 
                 PendingIntent pendingIntent = PendingIntent.GetBroadcast(this, 0, myIntent, PendingIntentFlags.OneShot);
                 myIntent.SetFlags(ActivityFlags.ClearTop);
@@ -46,16 +58,14 @@ namespace MobileApp.Droid
             }
             else
             {
-                SendNotification(message.GetNotification().Title, message.GetNotification().Body, message.Data);
+                SendNotification(remoteMessahe.GetNotification().Title, remoteMessahe.GetNotification().Body, remoteMessahe.Data);
             }
 
-            var msg = new Models.Datas.Notification()
-            { 
-                Created=DateTime.Now, Sender="Administrator", Topic="Pengumuman",
-                Message = message.Data.Where(x => x.Key == "message").FirstOrDefault().Value
-            };
+          
+           
+
             MessagingCenter.Send<Services.INotification, Models.Datas.Notification>(this, "notification", msg); 
-            base.OnMessageReceived(message);
+            base.OnMessageReceived(remoteMessahe);
         }
 
         void SendNotification(string title, string messageBody, IDictionary<string, string> data)

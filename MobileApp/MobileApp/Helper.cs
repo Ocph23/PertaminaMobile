@@ -33,8 +33,7 @@ namespace MobileApp
                 return _account;
             } set {
                 _account = value;
-                if (value != null)
-                    Xamarin.Essentials.SecureStorage.SetAsync("account", JsonConvert.SerializeObject(value));
+                Xamarin.Essentials.SecureStorage.SetAsync("account", JsonConvert.SerializeObject(value));
             
             } 
         }
@@ -58,8 +57,7 @@ namespace MobileApp
             set
             {
                 _profile = value;
-                if (value != null)
-                    Xamarin.Essentials.SecureStorage.SetAsync("profile", JsonConvert.SerializeObject(value));
+                Xamarin.Essentials.SecureStorage.SetAsync("profile", JsonConvert.SerializeObject(value));
 
             }
         }

@@ -11,8 +11,8 @@ namespace MobileApp.Services
     {
 
         List<Absen> items;
-        string controller = "/api/datakaryawan";
-        string controllerAbsen = "/api/absen";
+        private readonly string controller = "/api/datakaryawan";
+        private readonly string controllerAbsen = "/api/absen";
 
 
 

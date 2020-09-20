@@ -8,10 +8,17 @@ using MobileApp.Models.Datas;
 
 namespace MobileApp.Services
 {
-    public class PelanggaranDataStore : IDataStore<Pelanggaran>
+    public interface IPelanggaranDataStore<T>:IDataStore<T>
+    {
+        Task<IEnumerable<T>> GetItemsmelaporkanAsync(bool forceRefresh = false);
+    }
+
+
+    public class PelanggaranDataStore : IPelanggaranDataStore<Pelanggaran>
     {
 
         List<Pelanggaran> items;
+        List<Pelanggaran> melaporkan;
         string controller = "/api/datakaryawan";
 
         public PelanggaranDataStore()
@@ -93,6 +100,31 @@ namespace MobileApp.Services
             }else
             {
                 return items;
+            }
+        }
+
+        public async Task<IEnumerable<Pelanggaran>> GetItemsmelaporkanAsync(bool forceRefresh = false)
+        {
+            if (melaporkan == null)
+            {
+                using (var client = new RestService())
+                {
+                    var result = await client.GetAsync(controller + "/pelaporan");
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var resultString = await result.Content.ReadAsStringAsync();
+                        melaporkan= Newtonsoft.Json.JsonConvert.DeserializeObject<List<Pelanggaran>>(resultString);
+                        return melaporkan;
+                    }
+                    else
+                    {
+                        throw new SystemException(await client.Error(result));
+                    }
+                }
+            }
+            else
+            {
+                return melaporkan;
             }
         }
     }

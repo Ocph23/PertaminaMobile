@@ -75,7 +75,7 @@ namespace MobileApp.Services
             {
                 try
                 {
-                    var userLogin = new { UserName = UserName, Password = Password };
+                    var userLogin = new { UserName, Password };
 
                     var result = await client.PostAsync("/api/user/login", client.GenerateHttpContent(userLogin));
                     if (result.IsSuccessStatusCode)
@@ -109,7 +109,7 @@ namespace MobileApp.Services
 
                             Helper.Account = datas;
                             MessagingCenter.Send<IAuthService, UserProfile>(this, "UserLogin", datas);
-                            UpdateDeviceToken(profile.Karyawan);
+                           await UpdateDeviceToken(profile.Karyawan);
                         }
                         else
                         {
@@ -136,6 +136,7 @@ namespace MobileApp.Services
                 await DependencyService.Get<IAuthService>().SignOut();
                 Helper.Account = null;
                 Helper.Profile = null;
+
                 MessagingCenter.Send<IAuthService, bool>(this, "signout", true);
             }
             catch (Exception ex)
@@ -179,7 +180,7 @@ namespace MobileApp.Services
                         }
                         Helper.Account = datas;
 
-                        UpdateDeviceToken(profile.Karyawan);
+                      await  UpdateDeviceToken(profile.Karyawan);
 
                     }
                     else
@@ -198,13 +199,13 @@ namespace MobileApp.Services
 
         private async Task UpdateDeviceToken(Karyawan karyawan)
         {
-            if (string.IsNullOrEmpty(karyawan.DeviceId))
+            var deviceId = await Xamarin.Essentials.SecureStorage.GetAsync("DeviceToken");
+            if (string.IsNullOrEmpty(karyawan.DeviceId) || karyawan.DeviceId!= deviceId)
             {
                 using (var client = new RestService())
                 {
                     try
                     {
-                        var deviceId = await Xamarin.Essentials.SecureStorage.GetAsync("DeviceToken");
                         var resutl = await client.GetAsync($"/api/karyawan/changedevice/{karyawan.Id}/{deviceId}");
                         if (!resutl.IsSuccessStatusCode) { 
                             throw new SystemException(await client.Error(resutl));
@@ -230,7 +231,7 @@ namespace MobileApp.Services
             {
                 try
                 {
-                    var resutl = await client.GetAsync($"/api/user/jointexternalUser?key={key}&provider={provider.ToString()}");
+                    var resutl = await client.GetAsync($"/api/user/jointexternalUser?key={key}&provider={provider}");
                     if (resutl.IsSuccessStatusCode)
                     {
                         var restulString = await resutl.Content.ReadAsStringAsync();

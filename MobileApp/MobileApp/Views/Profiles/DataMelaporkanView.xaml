@@ -2,12 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
-              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="{StaticResource MainColor}"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
              mc:Ignorable="d"
-             x:Class="MobileApp.Views.PelanggaranView">
+             x:Class="MobileApp.Views.Profiles.DataMelaporkanView">
     <ContentPage.Content>
         <Grid >
             <Grid.RowDefinitions>
@@ -17,16 +14,17 @@
             <Frame  Margin="0" BorderColor="White"  Padding="10"
                            HeightRequest="35" BackgroundColor="White">
                 <FlexLayout>
-                    <Label Text="&#xf46d;" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="25" 
+                    <Label Text="&#xf0a1;" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="25" 
                            Margin="5,0" ></Label>
-                    <Label Text="Pelanggaran"  FontSize="20" Margin="5,0"></Label>
+                    <Label Text="Melaporkan"  FontSize="20" Margin="5,0"></Label>
                 </FlexLayout>
             </Frame>
             <sh:Shadows Grid.Row="1" Style="{StaticResource card}" CornerRadius="20">
                 <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="20" Padding="10">
                     <Grid >
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding NotHaveResult}"  Text="Anda Tidak Memiliki Pelanggaran" ></Label>
-                            <ListView BackgroundColor="Transparent" SeparatorVisibility="None" 
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding NotHaveResult}" 
+                               Text="Anda Belum Pernah Melaporkan Pelanggaran" ></Label>
+                        <ListView BackgroundColor="Transparent" SeparatorVisibility="None" 
                               IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsBusy}" 
                               RefreshCommand="{Binding LoadCommand}"  
                               ItemSelected="OnSelected"
@@ -65,6 +63,5 @@
                 </Frame>
             </sh:Shadows>
         </Grid>
-
     </ContentPage.Content>
 </ContentPage>

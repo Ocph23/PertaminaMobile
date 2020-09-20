@@ -36,8 +36,8 @@
                                                 <StackLayout>
                                                     <Label Text="{Binding Created,StringFormat='{0: dd/MM/yyyy HH:mm:ss}'}" FontSize="Micro"/>
                                                     <StackLayout Padding="10">
-                                                        <Label Text="{Binding Topic}" FontSize="Default" FontAttributes="Bold"></Label>
-                                                        <Label Text="{Binding Message}"/>
+                                                        <Label Text="{Binding Title}" FontSize="Default" FontAttributes="Bold"></Label>
+                                                        <Label Text="{Binding Body}"/>
                                                     </StackLayout>
                                                 </StackLayout>
                                                 <Label Text="&#xf0f3;" Style="{StaticResource Icons}" VerticalOptions="Start" HorizontalOptions="End" />

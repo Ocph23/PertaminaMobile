@@ -14,12 +14,11 @@ namespace MobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MelaporkanView : ContentPage
     {
-        private MelaporkanViewModel vm;
 
         public MelaporkanView()
         {
             InitializeComponent();
-            BindingContext = vm = new MelaporkanViewModel();
+            BindingContext = new MelaporkanViewModel();
         }
 
         private void onSelect(object sender, SelectedItemChangedEventArgs e)
@@ -38,7 +37,7 @@ namespace MobileApp.Views
       
         private ObservableCollection<Karyawan> _Items;
         private ObservableCollection<Karyawan> _ItemsFiltered;
-        private ObservableCollection<Karyawan> _ItemsUnfiltered = new ObservableCollection<Karyawan>();
+        private readonly ObservableCollection<Karyawan> _ItemsUnfiltered = new ObservableCollection<Karyawan>();
         private string _searchText;
 
 

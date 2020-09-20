@@ -9,10 +9,18 @@ using Newtonsoft.Json;
 
 namespace MobileApp.Services
 {
-    public class KaryawanDataStore : IDataStore<Karyawan>
+
+    public interface IKaraywanDataStore<T> : IDataStore<T>
+    {
+        Task<DataScore> GetDataScore(int karyawanId);
+    }
+
+
+    public class KaryawanDataStore : IKaraywanDataStore<Karyawan>
     {
 
        private List<Karyawan> items;
+        private DataScore _score;
 
         public KaryawanDataStore()
         {
@@ -82,5 +90,36 @@ namespace MobileApp.Services
                 return items;
             }
         }
+
+        public async Task<DataScore> GetDataScore(int karyawanId)
+        {
+            if (_score == null)
+            {
+                using (var client = new RestService())
+                {
+                    var result = await client.GetAsync($"/api/karyawan/pointbykaryawanid/{karyawanId}");
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var resultString = await result.Content.ReadAsStringAsync();
+                        _score = JsonConvert.DeserializeObject<DataScore>(resultString);
+                        return _score;
+                    }
+                    else
+                    {
+                        throw new SystemException(await client.Error(result));
+                    }
+                }
+            }
+            else
+                return _score;
+        }
+    }
+
+
+    public class DataScore
+    {
+        public double Score { get; set; }
+        public double Potongan { get; set; }
+        public double Pengaduan{ get; set; }
     }
 }

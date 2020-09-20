@@ -32,5 +32,11 @@ namespace MobileApp.Models
     }
 
 
+    public enum NotificationType
+    {
+        Public, Private
+    }
+
+
 
 }

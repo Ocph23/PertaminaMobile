@@ -13,17 +13,15 @@ namespace MobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginView : ContentPage
     {
-        private LoginViewModel vm;
+        private readonly LoginViewModel vm;
 
         public LoginView()
         {
             InitializeComponent();
-            this.BindingContext =vm = new LoginViewModel(Navigation);
-
-
+            this.BindingContext =vm = new LoginViewModel();
         }
 
-        private void passwordChange(object sender, TextChangedEventArgs e)
+        private void PasswordChange(object sender, TextChangedEventArgs e)
         {
             var pwd = (Entry)sender;
             vm.Password = pwd.Text;
@@ -33,11 +31,10 @@ namespace MobileApp.Views
 
     public class LoginViewModel: MobileApp.ViewModels.BaseViewModel
     {
-        public LoginViewModel(INavigation navigation)
+        public LoginViewModel()
         {
             LoginCommand = new Command(LoginAction, LoginValidate);
             GoogleLoginCommand = new Command(GoogleLoginAction, GoogleLoginValidate);
-            _nav = navigation;
             url = Helper.Url;
 
             MessagingCenter.Subscribe<IAuthService, UserProfile>(this, "UserLogin", async (sender, arg) => {
@@ -118,7 +115,6 @@ namespace MobileApp.Views
 
         public Command GoogleLoginCommand { get; private set; }
 
-        private INavigation _nav;
         private string userName;
         private string password;
 

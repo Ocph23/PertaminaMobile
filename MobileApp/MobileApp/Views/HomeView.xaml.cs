@@ -1,4 +1,5 @@
 ﻿using Microcharts;
+using Microcharts.Forms;
 using MobileApp.ViewModels;
 using SkiaSharp;
 using System;
@@ -18,30 +19,17 @@ namespace MobileApp.Views
         public HomeView()
         {
             InitializeComponent();
-            this.BindingContext = new HomeViewModel();
+            this.BindingContext = new HomeViewModel(chartView);
         }
 
         protected override void OnAppearing()
         {
+            var vm = (HomeViewModel)this.BindingContext;
+            Task.Run(() => vm.LoadChart());
+
             base.OnAppearing();
-
-            var entries = new List<ChartEntry>
-          {
-                new ChartEntry(115)
-                {
-                    Color = SKColor.Parse("#55a3f7"),
-                    
-                },
-                new ChartEntry(5)
-                {
-                    Color = SKColors.Transparent
-                },
-              
-            };
-
-            var chart = new DonutChart { Entries = entries, BackgroundColor = SKColor.Parse("#f1f1f1")};
-            chartView.Chart = chart;
         }
+
 
         private void ChartView1_PaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
         {
@@ -72,20 +60,52 @@ namespace MobileApp.Views
             path.CubicTo(120.020241f, 57.5737917f, 117.323748f, 56.0054182f, 114.568946f, 56f);
             path.LineTo(71.4311121f, 56f);
             path.Close();
-
-            // draw the Xamagon path
             canvas.DrawPath(path, paint);
         }
     }
 
     public class HomeViewModel : BaseViewModel
     {
-        public HomeViewModel()
+        public HomeViewModel(Microcharts.Forms.ChartView chartView)
         {
+            _chartView = chartView;
             this.Photo = Helper.Account.PhotoUrl;
             this.ProfileName = Helper.Account.DisplayName;
-
             NotifCommand = new Command(NotifAction, x => true);
+        }
+
+        public async Task LoadChart()
+        {
+            try
+            {
+               var score = await Karyawan.GetDataScore(Helper.Profile.Karyawan.Id);
+                if (score != null)
+                {
+                    var entries = new List<ChartEntry>{
+                                    new ChartEntry((float)score.Score)
+                                    {
+                                        Color = SKColor.Parse("#55a3f7"),
+
+                                    },
+                                    new ChartEntry((float)score.Pengaduan)
+                                    {
+                                        Color = SKColors.GreenYellow
+                                    },
+                                    new ChartEntry((float)score.Potongan)
+                                    {
+                                        Color = SKColors.OrangeRed
+                                    },
+
+                                };
+
+                    var chart = new DonutChart { Entries = entries, BackgroundColor = SKColor.Parse("#f1f1f1") };
+                    _chartView.Chart = chart;
+                    ScoreView = score.Score+score.Pengaduan;
+                }
+            }
+            catch 
+            {
+            }
         }
 
         private void NotifAction(object obj)
@@ -93,8 +113,19 @@ namespace MobileApp.Views
             Application.Current.MainPage.Navigation.PushModalAsync(new NotificationView());
         }
 
+        private ChartView _chartView;
+
         public Uri Photo { get;  set; }
         public string ProfileName { get; set; }
         public Command NotifCommand { get; }
+
+        private double scoreView;
+
+        public double ScoreView
+        {
+            get { return scoreView; }
+            set { SetProperty(ref scoreView , value); }
+        }
+
     }
 }

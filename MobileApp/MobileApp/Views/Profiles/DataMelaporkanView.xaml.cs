@@ -1,5 +1,4 @@
-﻿using MobileApp.Models;
-using MobileApp.Models.Datas;
+﻿using MobileApp.Models.Datas;
 using MobileApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,39 +10,31 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MobileApp.Views
+namespace MobileApp.Views.Profiles
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PelanggaranView : ContentPage
+    public partial class DataMelaporkanView : ContentPage
     {
-
-        public PelanggaranView()
+        public DataMelaporkanView()
         {
             InitializeComponent();
-            BindingContext = new PelanggaranViewModel();
         }
+
         private async void OnSelected(object sender, SelectedItemChangedEventArgs e)
         {
             await Task.Delay(200);
             var senderItem = sender as ListView;
-            if(senderItem.SelectedItem != null)
+            if (senderItem.SelectedItem != null)
             {
-               await Navigation.PushModalAsync(new PelaggaranDetailView(senderItem.SelectedItem));
+                await Navigation.PushModalAsync(new PelaggaranDetailView(senderItem.SelectedItem));
                 senderItem.SelectedItem = null;
             }
         }
-
-     
-        //private  void Close_tab(object sender, EventArgs e)
-        //{
-        //  Application.Current.MainPage.Navigation.PopModalAsync();
-        //}
     }
 
 
-    public class PelanggaranViewModel : BaseViewModel
+    public class DataMelaporkanViewModel : BaseViewModel
     {
-
         public ObservableCollection<Pelanggaran> SourceView { get; set; } = new ObservableCollection<Pelanggaran>();
 
         private object selected;
@@ -58,16 +49,15 @@ namespace MobileApp.Views
         public bool NotHaveResult
         {
             get { return notHaveResult; }
-            set { SetProperty(ref notHaveResult , value); }
+            set { SetProperty(ref notHaveResult, value); }
         }
 
 
         public Command LoadCommand { get; }
 
-        public PelanggaranViewModel()
+        public DataMelaporkanViewModel()
         {
-            LoadCommand = new Command(Load);
-            LoadCommand.Execute(null);
+            LoadCommand = new Command(()=> { IsBusy = true; Load();  });
         }
 
         private async void Load()

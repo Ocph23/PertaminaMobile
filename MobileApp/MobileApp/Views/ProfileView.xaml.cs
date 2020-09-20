@@ -1,11 +1,7 @@
 ﻿using MobileApp.Models;
 using MobileApp.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -58,10 +54,10 @@ namespace MobileApp.Views
                    await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.AbsenView());
                     break;
                 case TypeProfileView.Pelanggaran:
-                   await Application.Current.MainPage.Navigation.PushModalAsync(new PelanggaranView ());
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new Views.PelanggaranView());
                     break;
                 case TypeProfileView.Pelaporan:
-                   await Application.Current.MainPage.Navigation.PushModalAsync(new MelaporkanView());
+                   await Application.Current.MainPage.Navigation.PushModalAsync(new MobileApp.Views.Profiles.DataMelaporkanView());
                     break;
                 case TypeProfileView.Perusahaan:
                    await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.PerusahaanSekarangView());

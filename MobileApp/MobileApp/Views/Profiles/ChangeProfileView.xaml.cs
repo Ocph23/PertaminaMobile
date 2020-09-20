@@ -14,7 +14,7 @@ namespace MobileApp.Views.Profiles
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChangeProfileView : ContentPage
     {
-        private ChangeProfileViewModel vm;
+        private readonly ChangeProfileViewModel vm;
 
         public ChangeProfileView()
         {
@@ -89,7 +89,7 @@ namespace MobileApp.Views.Profiles
                 else
                 throw new SystemException("Data tidak berhasil diubah !");
             }
-            catch (Exception ex)
+            catch 
             {
                 Helper.ErrorMessage("Data Berhasil Diubah !");
             }finally
@@ -143,6 +143,6 @@ namespace MobileApp.Views.Profiles
 
         public Command SaveCommand { get; }
 
-        private Karyawan karyawan;
+        private readonly Karyawan karyawan;
     }
 }
