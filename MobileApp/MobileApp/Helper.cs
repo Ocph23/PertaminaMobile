@@ -9,16 +9,34 @@ namespace MobileApp
 {
     public class Helper
     {
-        private static string url= "http://192.168.1.5";
         private static UserProfile _account;
         private static Profile _profile;
 
-        // private static string url= "http://36.94.6.214:8080";
+        //private static string urlDefault= "http://192.168.1.5";
+        private static string urlDefault= "http://36.94.6.214:8080";
+        private static string url ;
 
         public static string Url
         {
-            get { return url; }
-            set { url = value; }
+            get
+            {
+                if (string.IsNullOrEmpty(url))
+                {
+                    url= Xamarin.Essentials.SecureStorage.GetAsync("url").Result;
+                    if (string.IsNullOrEmpty(url))
+                    {
+                        url = urlDefault;
+                        Xamarin.Essentials.SecureStorage.SetAsync("url", url);
+                    }
+                }
+                return url;
+            }
+            set
+            {
+                url = value;
+                Xamarin.Essentials.SecureStorage.SetAsync("url", value);
+
+            }
         }
 
         public static UserProfile Account { get {

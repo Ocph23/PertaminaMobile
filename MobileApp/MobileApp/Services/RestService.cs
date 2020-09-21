@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;   
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MobileApp.Services
 {
@@ -15,12 +15,14 @@ namespace MobileApp.Services
 
         public RestService()
         {
-            this.MaxResponseContentBufferSize = 256000;
+            this.MaxResponseContentBufferSize = 52428800;
             this.BaseAddress = new Uri(Helper.Url);
             this.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
             if (Helper.Account != null)
             {
-                SetToken(Helper.Account.IdToken);
+                var token = Xamarin.Essentials.SecureStorage.GetAsync("token").Result;
+                if(!string.IsNullOrEmpty(token))
+                    SetToken(Helper.Account.IdToken);
             }
         }
 
@@ -39,8 +41,7 @@ namespace MobileApp.Services
         {
             if (token != null)
             {
-                this.DefaultRequestHeaders.TryAddWithoutValidation("Authorization",
-                    token);
+                //this.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token);
                 this.DefaultRequestHeaders.Authorization =new AuthenticationHeaderValue("Bearer", token);
             }
         }
@@ -60,8 +61,12 @@ namespace MobileApp.Services
             {
                 if(response.StatusCode== System.Net.HttpStatusCode.Unauthorized)
                 {
-                    Helper.ErrorMessage("Silahkan Login Terlebih Dahulu !");
-                    Xamarin.Forms.Application.Current.MainPage = new MobileApp.Views.LoginView();
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        Xamarin.Forms.Application.Current.MainPage = new MobileApp.Views.LoginView();
+                    });
+                   throw new SystemException("Silahkan Login Terlebih Dahulu !");
+                  
                 }
 
                 var content = await response.Content.ReadAsStringAsync();
@@ -72,12 +77,12 @@ namespace MobileApp.Services
                 }
                 else
                 {
-                    throw new SystemException();
+                    throw new SystemException(content);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return "Maaf Terjadi Kesalahan, Silahkan Ulangi Lagi Nanti";
+                return ex.Message;
             }
         }
     }

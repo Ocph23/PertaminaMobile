@@ -18,6 +18,13 @@
                 <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
                 <On Platform="iOS" Value="fa-solid-900" />
             </OnPlatform>
+            <OnPlatform x:Key="FontAwesomeBrand" x:TypeArguments="x:String">
+                <On Platform="Android" Value="Awesome5Brand.otf#Font Awesome 5 Brands Regular" />
+                <On Platform="iOS" Value="fa-solid-900" />
+            </OnPlatform>
+
+
+
             <OnPlatform x:Key="Material" x:TypeArguments="x:String">
                 <On Platform="Android" Value="MaterialIcons-Regular.ttf#Material Icons" />
                 <On Platform="iOS" Value="MaterialIcons-Regular" />
@@ -25,6 +32,13 @@
 
             <Style x:Key="Icons" TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid }" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="WidthRequest" Value="18" />
+                <Setter Property="Margin" Value="0,0,5,0" />
+            </Style>
+            <Style x:Key="BrandIcons" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeBrand }" />
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="TextColor" Value="Gray" />
                 <Setter Property="WidthRequest" Value="18" />

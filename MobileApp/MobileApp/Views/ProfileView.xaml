@@ -48,6 +48,15 @@
                                         </Label>
                                     </FlexLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
+                                    <FlexLayout>
+                                        <Label Text="&#xf1a0;" Style="{StaticResource BrandIcons}"/>
+                                        <Label Text="{Binding GoogleAccount}" FontSize="Small">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding GoogleCommand}" CommandParameter="{x:Static model:TypeProfileView.ChangePassword}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </FlexLayout>
+                                    <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                 </StackLayout>
                             </Frame>
                         </sh:Shadows>

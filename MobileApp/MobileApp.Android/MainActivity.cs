@@ -137,14 +137,14 @@ namespace MobileApp.Droid
         {
             base.OnActivityResult(requestCode, resultCode, data);
            // Toast.MakeText(this, resultCode.ToString(), ToastLength.Long).Show();
-           if (requestCode == 42)
+           if (requestCode == 42 || requestCode == 52)
             {
                 GoogleSignInResult result = Auth.GoogleSignInApi.GetSignInResultFromIntent(data);
                 if (result.IsSuccess)
                 {
                     GoogleSignInAccount account = result.SignInAccount;
                     
-                    LoginWithFirebase(account);
+                    LoginWithFirebase(account, requestCode);
                 }
             }
             else
@@ -154,7 +154,7 @@ namespace MobileApp.Droid
             }
         }
 
-        private void LoginWithFirebase(GoogleSignInAccount account)
+        private void LoginWithFirebase(GoogleSignInAccount account, int intentId)
         {
             var credentials = GoogleAuthProvider.GetCredential(account.IdToken, null);
             firebaseAuth.SignInWithCredential(credentials).AddOnSuccessListener(this)
@@ -169,7 +169,13 @@ namespace MobileApp.Droid
                   GivenName=account.GivenName,
                    Id=account.Id, IdToken=account.IdToken, IsExpired=account.IsExpired, ServerAuthCode=account.ServerAuthCode
             };
-            MessagingCenter.Send<IAuthService, UserProfile>(this, "UserLogin", datas);
+
+
+            if(intentId==42)
+                MessagingCenter.Send<IAuthService, UserProfile>(this, "UserLogin", datas);
+
+            if(intentId==52)
+                MessagingCenter.Send<IAuthService, UserProfile>(this, "UserLink", datas);
         }
 
         public void OnSuccess(Java.Lang.Object result)
@@ -259,6 +265,33 @@ namespace MobileApp.Droid
         public void ToastShow(string message)
         {
             Toast.MakeText(MainActivity.MainActivityInstance, message, ToastLength.Long).Show();
+        }
+
+        [Obsolete]
+        public Task LinkAccount(AuthProvider provider)
+        {
+            if (MainActivityInstance.firebaseAuth.CurrentUser != null)
+            {
+                MainActivityInstance.firebaseAuth.SignOut();
+            }
+
+            switch (provider)
+            {
+                case AuthProvider.UserAndPassword:
+                    break;
+                case AuthProvider.Google:
+                    var intent = Auth.GoogleSignInApi.GetSignInIntent(MainActivityInstance.googleApiClient);
+                    ((Activity)Forms.Context).StartActivityForResult(intent, 52);
+                    break;
+                case AuthProvider.Facebook:
+                    break;
+                case AuthProvider.Windows:
+                    break;
+                default:
+                    break;
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

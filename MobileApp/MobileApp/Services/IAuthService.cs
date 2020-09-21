@@ -9,6 +9,8 @@ namespace MobileApp.Services
 {
     public interface IAuthService
     {
+
+        Task LinkAccount(AuthProvider provider);
         Task Login(AuthProvider provider);
         Task SignOut();
         void ToastShow(string message);
@@ -84,6 +86,9 @@ namespace MobileApp.Services
                         var token = JsonConvert.DeserializeObject<AuthToken>(tokenString);
                         client.SetToken(token.Token);
 
+                        await  Xamarin.Essentials.SecureStorage.SetAsync("token", token.Token);
+
+
                         var profileResult = await client.GetAsync("/api/user/profile");
                         if (profileResult.IsSuccessStatusCode)
                         {
@@ -98,7 +103,7 @@ namespace MobileApp.Services
                             Helper.Profile = profile;
                             var datas = new UserProfile
                             {
-                                PhotoUrl = new Uri($"{Helper.Url}/Images/profiles/{profile.Karyawan.Photo}"),
+                                PhotoUrl = new Uri($"{Helper.Url}/images/profiles/{profile.Karyawan.Photo}"),
                                 DisplayName = profile.Karyawan.NamaKaryawan,
                                 Email = profile.Karyawan.Email,
                                 Id = profile.User.Id,
@@ -136,7 +141,7 @@ namespace MobileApp.Services
                 await DependencyService.Get<IAuthService>().SignOut();
                 Helper.Account = null;
                 Helper.Profile = null;
-
+              await  Xamarin.Essentials.SecureStorage.SetAsync("GoogleAccount", "");
                 MessagingCenter.Send<IAuthService, bool>(this, "signout", true);
             }
             catch (Exception ex)
@@ -167,12 +172,15 @@ namespace MobileApp.Services
                         Helper.Profile = profile;
                         var datas = new UserProfile
                         {
-                            PhotoUrl = new Uri($"{Helper.Url}/Images/profiles/{profile.Karyawan.Photo}"),
+                            PhotoUrl = new Uri($"{Helper.Url}/images/profiles/{profile.Karyawan.Photo}"),
                             DisplayName = profile.Karyawan.NamaKaryawan,
                             Email = profile.Karyawan.Email,
                             Id = profile.User.Id,
                             IdToken = profile.Token,
                         };
+
+
+                        await  Xamarin.Essentials.SecureStorage.SetAsync("token", profile.Token);
 
                         if (string.IsNullOrEmpty(profile.Karyawan.Photo))
                         {
@@ -222,7 +230,7 @@ namespace MobileApp.Services
 
         public void ToastShow(string message)
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         public async Task JoinExternalUSer(string key, AuthProvider provider)
@@ -231,7 +239,7 @@ namespace MobileApp.Services
             {
                 try
                 {
-                    var resutl = await client.GetAsync($"/api/user/jointexternalUser?key={key}&provider={provider}");
+                    var resutl = await client.GetAsync($"/api/user/jointexternalUser?key={key}&provider={provider.ToString()}");
                     if (resutl.IsSuccessStatusCode)
                     {
                         var restulString = await resutl.Content.ReadAsStringAsync();
@@ -246,9 +254,9 @@ namespace MobileApp.Services
                         throw new SystemException(await client.Error(resutl));
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
-                    Helper.ErrorMessage("Tidak Berhasil, Coba Ulangi lagi  !");
+                    throw new SystemException(ex.Message);
                 }
             }
         }
@@ -279,6 +287,11 @@ namespace MobileApp.Services
                     throw new SystemException("Tidak Berhasil, Diubah !");
                 }
             }
+        }
+
+        public Task LinkAccount(AuthProvider provider)
+        {
+           throw new NotImplementedException();
         }
     }
 

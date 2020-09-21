@@ -61,9 +61,6 @@ namespace MobileApp.Droid
                 SendNotification(remoteMessahe.GetNotification().Title, remoteMessahe.GetNotification().Body, remoteMessahe.Data);
             }
 
-          
-           
-
             MessagingCenter.Send<Services.INotification, Models.Datas.Notification>(this, "notification", msg); 
             base.OnMessageReceived(remoteMessahe);
         }

@@ -58,7 +58,7 @@ namespace MobileApp.Models.Datas
             get
             {
                 if(!string.IsNullOrEmpty(Photo))
-                    return new System.Uri($"{Helper.Url}/images/Profiles/{Photo}");
+                    return new System.Uri($"{Helper.Url}/images/profiles/{Photo}");
                 return null;
             }
         }

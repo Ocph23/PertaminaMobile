@@ -26,6 +26,8 @@ namespace MobileApp.Services
                     if (result.IsSuccessStatusCode)
                     {
                         Helper.InfoMessage("Anda Berhasil Absen");
+                        if(items==null)
+                            items = new List<Absen>();
                         items.Add(item);
                         return await Task.FromResult(true);
                     }
