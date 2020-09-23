@@ -53,13 +53,13 @@ namespace MobileApp.Models.Datas
 
         private PerusahaanKaryawan _perusahaan;
 
-        public System.Uri PhotoView
+        public string PhotoView
         {
             get
             {
                 if(!string.IsNullOrEmpty(Photo))
-                    return new System.Uri($"{Helper.Url}/images/profiles/{Photo}");
-                return null;
+                    return $"{Helper.Url}/images/profiles/{Photo}";
+                return "noimage.png";
             }
         }
     }

@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
-             xmlns:controls="clr-namespace:MobileApp.Controls"
+             xmlns:controls="clr-namespace:MobileApp.Controls" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
              x:Class="MobileApp.Views.MelaporkanView">
     <ContentPage.Content>
@@ -16,7 +16,7 @@
             <Frame  Margin="0" BorderColor="White"  Padding="10"
                            HeightRequest="35" BackgroundColor="White">
                 <FlexLayout>
-                    <Label Text="&#xf46d;" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="25" 
+                    <Label Text="&#xf0a1;" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="25" 
                            Margin="5,0" ></Label>
                     <Label Text="Melaporkan"  FontSize="20" Margin="5,0"></Label>
                 </FlexLayout>
@@ -52,8 +52,16 @@
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="auto"/>
                                                         <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Image Source="{Binding PhotoView}" HeightRequest="100" Margin="10,0,0,0" WidthRequest="65"  />
+                                                    </Grid.ColumnDefinitions> 
+                                                    <ffimageloading:CachedImage  HeightRequest="75" WidthRequest="75"
+                                                          Source="{Binding PhotoView}"
+                                                          LoadingPlaceholder = "LoaderImage" 
+                                                          ErrorPlaceholder = "ErrorImage"
+                                                          CacheDuration = "50"
+                                                          RetryCount= "3"
+                                                          RetryDelay= "600"
+                                                          DownsampleToViewSize = "true">        
+                                                    </ffimageloading:CachedImage>
                                                     <StackLayout Grid.Column="1" Margin="10" VerticalOptions="CenterAndExpand">
                                                         <StackLayout Padding="0">
                                                             <Label  Text="{Binding NamaKaryawan}" Style="{StaticResource  dataValue}"/>

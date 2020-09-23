@@ -25,10 +25,32 @@ namespace MobileApp.Services
                    var result =await client.PostAsync(controllerAbsen,client.GenerateHttpContent(item));
                     if (result.IsSuccessStatusCode)
                     {
+                        var resultString = await result.Content.ReadAsStringAsync();
+                        var absen = Newtonsoft.Json.JsonConvert.DeserializeObject<Absen>(resultString);
+
                         Helper.InfoMessage("Anda Berhasil Absen");
                         if(items==null)
+                        {
                             items = new List<Absen>();
-                        items.Add(item);
+                            items.Add(absen);
+                        }
+                        else
+                        {
+                            var existItem = items.Where(x => x.Id==absen.Id).FirstOrDefault();
+                            if (existItem != null)
+                            {
+                                existItem.Masuk = absen.Masuk;
+                                existItem.Pulang = absen.Pulang;
+                            }
+                            else
+                            {
+                                items.Add(absen);
+                            }
+
+                        }
+
+
+
                         return await Task.FromResult(true);
                     }
                     else
@@ -67,7 +89,7 @@ namespace MobileApp.Services
 
         public async Task<IEnumerable<Absen>> GetItemsAsync(bool forceRefresh = false)
         {
-            if (items == null)
+            if (items == null || forceRefresh)
             {
                 using (var client = new RestService())
                 {

@@ -29,11 +29,11 @@ namespace MobileApp.Models.Datas
 
         public virtual ICollection<Pelanggaran> Pelanggarans { get; set; }
 
-        public System.Uri LogoView
+        public string LogoView
         {
             get
             {
-                return new System.Uri($"{Helper.Url}/images/logo/{Logo}");
+                return $"{Helper.Url}/images/logo/{Logo}";
             }
         }
 

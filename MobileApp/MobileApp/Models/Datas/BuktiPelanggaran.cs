@@ -20,20 +20,20 @@ namespace MobileApp.Models.Datas
         public byte[] Data { get; set; }
 
         [Newtonsoft.Json.JsonIgnore]
-        public System.Uri ThumbView
+        public string ThumbView
         {
             get
             {
-                return new System.Uri($"{Helper.Url}/bukti/thumbs/{Thumb}");
+                return $"{Helper.Url}/bukti/thumbs/{Thumb}";
             }
         }
 
         [Newtonsoft.Json.JsonIgnore]
-        public System.Uri FileView
+        public string FileView
         {
             get
             {
-                return new System.Uri($"{Helper.Url}/bukti/images/{FileName}");
+                return $"{Helper.Url}/bukti/images/{FileName}";
             }
         }
 

@@ -103,7 +103,7 @@ namespace MobileApp.Views
                     ScoreView = score.Score+score.Pengaduan;
                 }
             }
-            catch 
+            catch (Exception ex)
             {
             }
         }
@@ -115,7 +115,7 @@ namespace MobileApp.Views
 
         private ChartView _chartView;
 
-        public Uri Photo { get;  set; }
+        public string Photo { get;  set; }
         public string ProfileName { get; set; }
         public Command NotifCommand { get; }
 

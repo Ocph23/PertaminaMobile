@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
-             xmlns:model="clr-namespace:MobileApp.Models"
+             xmlns:model="clr-namespace:MobileApp.Models" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{StaticResource MainColor}"
              mc:Ignorable="d"
@@ -17,7 +17,15 @@
                       <sh:Shadows Style="{StaticResource card}" CornerRadius="80" WidthRequest="80" HeightRequest="80" HorizontalOptions="Center" >
                             <Frame  BorderColor="White" HeightRequest="80" WidthRequest="80" Margin="3"  Padding="0" 
                            CornerRadius="40" Style="{StaticResource entryFrameStyle}" BackgroundColor="{StaticResource MainColor}">
-                                <Image Source="{Binding Photo}"  />
+                                <ffimageloading:CachedImage  HeightRequest="75" WidthRequest="75"
+                              Source="{Binding Photo}"
+                              LoadingPlaceholder = "LoaderImage" 
+                              ErrorPlaceholder = "ErrorImage"
+                              CacheDuration = "50"
+                              RetryCount= "3"
+                              RetryDelay= "600"
+                              DownsampleToViewSize = "true">
+                                </ffimageloading:CachedImage>
                             </Frame>
                         </sh:Shadows>
                         <StackLayout HorizontalOptions="CenterAndExpand">

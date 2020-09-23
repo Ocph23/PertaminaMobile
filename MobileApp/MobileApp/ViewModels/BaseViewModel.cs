@@ -16,7 +16,7 @@ namespace MobileApp.ViewModels
         public IDataStore<Periode> Periodes => DependencyService.Get<IDataStore<Periode>>();
         public IDataStore<Absen> Absens => DependencyService.Get<IDataStore<Absen>>();
         public IDataStore<Level> LevelPelanggaran => DependencyService.Get<IDataStore<Level>>();
-        public IDataStore<Pelanggaran> Pelanggarans => DependencyService.Get<IDataStore<Pelanggaran>>();
+        public IPelanggaranDataStore<Pelanggaran> Pelanggarans => DependencyService.Get<IPelanggaranDataStore<Pelanggaran>>();
         public IKaraywanDataStore<Karyawan> Karyawan=> DependencyService.Get<IKaraywanDataStore<Karyawan>>();
         public IAuthInternalService AuthService => DependencyService.Get<IAuthInternalService>();
         public IDataStore<Notification> Notifications=> DependencyService.Get<IDataStore<Notification>>();

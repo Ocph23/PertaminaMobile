@@ -18,6 +18,7 @@ namespace MobileApp.Views.Profiles
         public DataMelaporkanView()
         {
             InitializeComponent();
+            BindingContext = new DataMelaporkanViewModel();
         }
 
         private async void OnSelected(object sender, SelectedItemChangedEventArgs e)
@@ -57,14 +58,15 @@ namespace MobileApp.Views.Profiles
 
         public DataMelaporkanViewModel()
         {
-            LoadCommand = new Command(()=> { IsBusy = true; Load();  });
+            LoadCommand = new Command(LoadAction);
+            LoadCommand.Execute(null);
         }
 
-        private async void Load()
+        private async void LoadAction(object obj)
         {
             try
             {
-                var source = await Pelanggarans.GetItemsAsync();
+                var source = await Pelanggarans.GetItemsmelaporkanAsync(true);
                 if (source == null || source.Count() <= 0)
                     NotHaveResult = true;
                 else
@@ -85,6 +87,11 @@ namespace MobileApp.Views.Profiles
             {
                 Helper.ErrorMessage(ex.Message);
             }
+            finally
+            {
+                IsBusy = false;
+            }
         }
+
     }
 }

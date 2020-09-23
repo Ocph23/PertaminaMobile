@@ -20,7 +20,7 @@ namespace MobileApp.Views
         public AbsenScanView()
         {
             InitializeComponent();
-            scannerView.Options = new ZXing.Mobile.MobileBarcodeScanningOptions { DelayBetweenContinuousScans = 5 };
+            scannerView.Options = new ZXing.Mobile.MobileBarcodeScanningOptions { DelayBetweenContinuousScans = 100, AutoRotate = true  };
             this.BindingContext = new AbsenViewModel();
         }
     }
@@ -48,9 +48,11 @@ namespace MobileApp.Views
 
         private void ScanningAction(object obj)
         {
+            IsAnalyzing = false;
+            IsScanning = false;
             Device.BeginInvokeOnMainThread(async () =>
             {
-                IsAnalyzing = false;
+               
                 try
                 {
                     var data = obj as Result;
@@ -63,7 +65,7 @@ namespace MobileApp.Views
                         {
                             var absen = new Absen { KaryawanId = Helper.Profile.Karyawan.Id, Masuk = DateTime.Now, Pulang = null };
                             absen.AbsenType = this.SanningStatus == SanningStatus.Absen ? Models.AbsenType.Kerja : Models.AbsenType.Lembur;
-                         var result = await Absens.AddItemAsync(absen);
+                            var result = await Absens.AddItemAsync(absen);
                             SanningStatus = SanningStatus.None;
                         }
                         else

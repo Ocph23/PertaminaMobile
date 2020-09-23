@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage  xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -33,11 +33,12 @@
                         <Label Margin="5,0,0,0" Text="Periode" Style="{StaticResource dataTitle}"/>
                         <Frame Style="{StaticResource entryFrameStyle}">
                             <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
-                                <Picker ItemsSource="{Binding DataPeriode}" ItemDisplayBinding="{Binding  DisplayName}" />
+                                <Picker ItemsSource="{Binding DataPeriode}" SelectedItem="{Binding SelectedPeriode}" ItemDisplayBinding="{Binding  DisplayName}" />
                             </sh:Shadows>
                         </Frame>
                     </StackLayout>
-                    <ListView ItemsSource="{Binding Datas}" Grid.Row="2" SeparatorVisibility="None" BackgroundColor="Transparent" IsRefreshing="{Binding IsBusy}" RefreshCommand="{Binding LoadCommand}" HasUnevenRows="True" SelectionMode="None" >
+                    <ListView ItemsSource="{Binding Datas}" Grid.Row="2" SeparatorVisibility="None" BackgroundColor="Transparent" 
+                              IsRefreshing="{Binding IsBusy}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding LoadCommand}" HasUnevenRows="True" SelectionMode="None" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -49,7 +50,7 @@
                                                         <Label Text="{Binding AbsenType, StringFormat='Jam {0}'}" FontSize="Small" FontAttributes="Bold"></Label>
                                                         <Label Text="&#xf783;" Style="{StaticResource Icons}" VerticalOptions="Start" HorizontalOptions="EndAndExpand" />
                                                     </StackLayout>
-                                                    <Label Text="Senin, 10/10/2020" FontSize="Micro"/>
+                                                    <Label Text="{Binding Masuk, StringFormat='{0: dd MMM yyyy ID}'}" FontSize="Micro"/>
                                                     <FlexLayout Padding="10,0">
                                                         <Label Text="{Binding Masuk, StringFormat='Masuk : {0:HH:mm}'}" FontSize="Small" Margin="0,0,50,0" ></Label>
                                                         <Label Text="{Binding Pulang,StringFormat='Pulang : {0:HH:mm}'}" FontSize="Small" HorizontalOptions="EndAndExpand"></Label>

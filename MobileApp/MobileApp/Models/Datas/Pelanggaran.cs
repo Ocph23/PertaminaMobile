@@ -39,21 +39,20 @@ namespace MobileApp.Models.Datas
 
 
         [Newtonsoft.Json.JsonIgnore]
-        public Uri Photo
+        public string Photo
         {
             get
             {
                 if (Files != null && Files.Count > 0)
                 {
                     var images = Files.FirstOrDefault();
-                    return new Uri($"{Helper.Url}/bukti/thumbs/{images.Thumb}");
+                    return $"{Helper.Url}/bukti/thumbs/{images.Thumb}";
                 } else
-                    return new Uri($"noimage.png");
+                    return $"noimage.png";
             }
         }
 
         [Newtonsoft.Json.JsonIgnore]
-
         public double TotalPengurangan
         {
             get

@@ -22,7 +22,7 @@ namespace MobileApp.Services
             {
                 var token = Xamarin.Essentials.SecureStorage.GetAsync("token").Result;
                 if(!string.IsNullOrEmpty(token))
-                    SetToken(Helper.Account.IdToken);
+                    SetToken(token);
             }
         }
 

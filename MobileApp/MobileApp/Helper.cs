@@ -1,5 +1,6 @@
 ﻿using MobileApp.Models;
 using Newtonsoft.Json;
+using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -83,12 +84,14 @@ namespace MobileApp
 
         public static void ErrorMessage(string message)
         {
-            MessagingCenter.Send(new MessagingCenterAlert { Cancel = "OK", Message = message, Title = "Error" }, "message");
+            //MessagingCenter.Send(new MessagingCenterAlert { Cancel = "OK", Message = message, Title = "Error" }, "message");
+            Application.Current.MainPage.Navigation.PushPopupAsync(new Controls.ErrorAlert(message));
         }
 
         public static void InfoMessage(string message)
         {
-            MessagingCenter.Send(new MessagingCenterAlert { Cancel = "OK", Message = message, Title = "Info" }, "message");
+            Application.Current.MainPage.Navigation.PushPopupAsync(new Controls.SuccessAlert(message));
+
         }
 
 

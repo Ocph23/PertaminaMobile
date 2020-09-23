@@ -36,20 +36,22 @@ namespace MobileApp.Droid
         public static readonly int NOTIFICATION_ID = 230279;
         public UserProfile Profile { get; set; }
 
-        protected override async void OnCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+            
             base.OnCreate(savedInstanceState);
+            Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            
+            
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
-            await CrossMedia.Current.Initialize();
-
+            CrossMedia.Current.Initialize();
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             Firebase.Messaging.FirebaseMessaging.Instance.SubscribeToTopic("all");
-
             CreateNotificationChannel();
-
-            Xamarin.Forms.Forms.Init(this, savedInstanceState);
             gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DefaultSignIn)
              .RequestIdToken("505524341439-7uau390b9vq18qb11r0lcuh3h9cdeiup.apps.googleusercontent.com")
              //.RequestId()
@@ -59,9 +61,9 @@ namespace MobileApp.Droid
 
             googleApiClient = new GoogleApiClient.Builder(this)
                            .AddApi(Auth.GOOGLE_SIGN_IN_API, gso).Build();
+            
             googleApiClient.Connect();
             firebaseAuth = GetFirebaseAuth();
-
             MainActivityInstance = this;
             LoadApplication(new App());
         }
@@ -77,7 +79,7 @@ namespace MobileApp.Droid
                     .SetProjectId("pertamina-emloyee-score")
                     .SetApplicationId("pertamina-emloyee-score")
                     .SetApiKey("AIzaSyCSteRJZJTHMUe3hVG3ORXH-BLVO_F_jeY")
-                   .SetDatabaseUrl("https://pertamina-emloyee-score.firebaseio.com")
+                    .SetDatabaseUrl("https://pertamina-emloyee-score.firebaseio.com")
                     .SetStorageBucket("pertamina-emloyee-score.appspot.com")
                     .Build();
 
@@ -89,6 +91,19 @@ namespace MobileApp.Droid
                 mAuth = FirebaseAuth.Instance;
             }
             return mAuth;
+        }
+
+
+        public override void OnBackPressed()
+        {
+            if (Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed))
+            {
+                // Do something if there are some pages in the `PopupStack`
+            }
+            else
+            {
+                // Do something if there are not any pages in the `PopupStack`
+            }
         }
 
 
@@ -162,7 +177,7 @@ namespace MobileApp.Droid
 
             var datas = new UserProfile
             { Provider= AuthProvider.Google,
-                PhotoUrl = new Uri(account.PhotoUrl.ToString()),
+                PhotoUrl = account.PhotoUrl.ToString(),
                 DisplayName = account.DisplayName,
                 Email = account.Email,
                  FamilyName=account.FamilyName,
@@ -180,12 +195,12 @@ namespace MobileApp.Droid
 
         public void OnSuccess(Java.Lang.Object result)
         {
-            Toast.MakeText(this, "Login successful", ToastLength.Short).Show();
+           // Toast.MakeText(this, "Login successful", ToastLength.Short).Show();
         }
 
         public void OnFailure(Java.Lang.Exception e)
         {
-            Toast.MakeText(this, "Login Failed", ToastLength.Short).Show();
+           // Toast.MakeText(this, "Login Failed", ToastLength.Short).Show();
         }
 
         public bool IsPlayServicesAvailable()

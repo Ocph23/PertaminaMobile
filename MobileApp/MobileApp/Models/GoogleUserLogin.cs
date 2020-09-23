@@ -8,7 +8,7 @@ namespace MobileApp.Models
     public class UserProfile
     {
         public  string ServerAuthCode { get; set; }
-        public  Uri PhotoUrl { get; set;}
+        public string PhotoUrl { get; set;}
         public  bool IsExpired { get; set;}
         public  string IdToken { get; set;}
         public  string Id { get; set;}

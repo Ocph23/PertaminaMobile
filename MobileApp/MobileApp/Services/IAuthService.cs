@@ -103,7 +103,7 @@ namespace MobileApp.Services
                             Helper.Profile = profile;
                             var datas = new UserProfile
                             {
-                                PhotoUrl = new Uri($"{Helper.Url}/images/profiles/{profile.Karyawan.Photo}"),
+                                PhotoUrl = $"{Helper.Url}/images/profiles/{profile.Karyawan.Photo}",
                                 DisplayName = profile.Karyawan.NamaKaryawan,
                                 Email = profile.Karyawan.Email,
                                 Id = profile.User.Id,
@@ -142,6 +142,7 @@ namespace MobileApp.Services
                 Helper.Account = null;
                 Helper.Profile = null;
               await  Xamarin.Essentials.SecureStorage.SetAsync("GoogleAccount", "");
+              await  Xamarin.Essentials.SecureStorage.SetAsync("token", "");
                 MessagingCenter.Send<IAuthService, bool>(this, "signout", true);
             }
             catch (Exception ex)
@@ -172,7 +173,7 @@ namespace MobileApp.Services
                         Helper.Profile = profile;
                         var datas = new UserProfile
                         {
-                            PhotoUrl = new Uri($"{Helper.Url}/images/profiles/{profile.Karyawan.Photo}"),
+                            PhotoUrl = $"{Helper.Url}/images/profiles/{profile.Karyawan.Photo}",
                             DisplayName = profile.Karyawan.NamaKaryawan,
                             Email = profile.Karyawan.Email,
                             Id = profile.User.Id,
@@ -184,7 +185,7 @@ namespace MobileApp.Services
 
                         if (string.IsNullOrEmpty(profile.Karyawan.Photo))
                         {
-                            datas.PhotoUrl = new Uri($"{userProfile.PhotoUrl}");
+                            datas.PhotoUrl = $"{ Helper.Url}/ images / profiles /{ userProfile.PhotoUrl}";
                         }
                         Helper.Account = datas;
 
@@ -198,7 +199,7 @@ namespace MobileApp.Services
                 }
                 catch 
                 {
-                    Helper.ErrorMessage("Anda Tidak Memiliki Akses !");
+                   throw new SystemException("Anda Tidak Memiliki Akses !");
                 }
 
 
@@ -239,7 +240,8 @@ namespace MobileApp.Services
             {
                 try
                 {
-                    var resutl = await client.GetAsync($"/api/user/jointexternalUser?key={key}&provider={provider.ToString()}");
+                    string dataprovider = provider.ToString();
+                    var resutl = await client.GetAsync($"/api/user/jointexternalUser?key={key}&provider={dataprovider}");
                     if (resutl.IsSuccessStatusCode)
                     {
                         var restulString = await resutl.Content.ReadAsStringAsync();

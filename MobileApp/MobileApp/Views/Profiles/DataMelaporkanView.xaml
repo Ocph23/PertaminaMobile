@@ -25,7 +25,8 @@
                         <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding NotHaveResult}" 
                                Text="Anda Belum Pernah Melaporkan Pelanggaran" ></Label>
                         <ListView BackgroundColor="Transparent" SeparatorVisibility="None" 
-                              IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsBusy}" 
+                              IsPullToRefreshEnabled="True" 
+                                  IsRefreshing="{Binding IsBusy}" 
                               RefreshCommand="{Binding LoadCommand}"  
                               ItemSelected="OnSelected"
                               ItemsSource="{Binding SourceView}"

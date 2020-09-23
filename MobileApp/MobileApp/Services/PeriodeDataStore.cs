@@ -10,16 +10,8 @@ namespace MobileApp.Services
 {
     public class PeriodeDataStore : IDataStore<Periode>
     {
-
-        readonly List<Periode> items;
-
-        public PeriodeDataStore()
-        {
-            items = new List<Periode>()
-            {
-                new Periode{ Id = 1, Mulai=DateTime.Now, Selesai=DateTime.Now, Status = true, Undian=DateTime.Now}
-            };
-        }
+        private readonly string controller= "/api/periode";
+        private List<Periode> items;
 
         public async Task<bool> AddItemAsync(Periode item)
         {
@@ -52,7 +44,27 @@ namespace MobileApp.Services
 
         public async Task<IEnumerable<Periode>> GetItemsAsync(bool forceRefresh = false)
         {
-            return await Task.FromResult(items);
+            if (items == null || forceRefresh)
+            {
+                using (var client = new RestService())
+                {
+                    var result = await client.GetAsync(controller);
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var resultString = await result.Content.ReadAsStringAsync();
+                        items = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Periode>>(resultString);
+                        return items;
+                    }
+                    else
+                    {
+                        throw new SystemException(await client.Error(result));
+                    }
+                }
+            }
+            else
+            {
+                return items;
+            }
         }
     }
 }

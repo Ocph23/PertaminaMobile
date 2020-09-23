@@ -110,7 +110,7 @@ namespace MobileApp.Views
             IsBusy = false;
         }
 
-        public Uri Photo { get; set; }
+        public string Photo { get; set; }
         public string ProfileName { get; set; }
         public Command ShowDetailCommand { get; }
         public Command SignoutCommand { get; }
