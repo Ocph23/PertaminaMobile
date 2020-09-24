@@ -29,6 +29,20 @@ namespace MobileApp.Views.Profiles
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
+
+        private void deleteImage(object sender, EventArgs e)
+        {
+            var selected = TheCarousel.CurrentItem as BuktiPelanggaran;
+            vm.Files.Remove(selected);
+
+        }
+        private void showImage(object sender, EventArgs e)
+        {
+            var image = (Image)sender;
+            var page = new MobileApp.Views.Profiles.ImageView();
+            page.BackgroundImageSource = image.Source;
+            Navigation.PushModalAsync(page);
+        }
     }
 
 
@@ -111,9 +125,7 @@ namespace MobileApp.Views.Profiles
             }
         }
 
-        private async 
-        Task
-SetDetails(List<DetailLevel> arg)
+        private async Task SetDetails(List<DetailLevel> arg)
         {
             await Task.Delay(500);
             if (arg != null)
@@ -166,8 +178,12 @@ SetDetails(List<DetailLevel> arg)
 
             file.Dispose();
 
-
+            if (Files.Count <= 0)
+            {
+                Files.Clear();
+            }
             Files.Add(bukti);
+
         }
 
         private async void CameraAction(object obj)

@@ -15,17 +15,29 @@ namespace MobileApp.Views
     public partial class PelaggaranDetailView : ContentPage
     {
         private PelaggaranDetailViewModel viewModels;
+        private Pelanggaran dataModel;
 
         public PelaggaranDetailView(object data)
         {
             InitializeComponent();
-            var dataModel = data as Pelanggaran;
+            dataModel = data as Pelanggaran;
             BindingContext = viewModels = new PelaggaranDetailViewModel(dataModel);
         }
 
         private void closetap(object sender, EventArgs e)
         {
             Navigation.PopModalAsync();
+        }
+
+        private void showImage(object sender, EventArgs e)
+        {
+            var image = (Image)sender;
+            var fn = image.Source.ToString().Split(' ')[1];
+            var imageData = dataModel.Files.Where(x => x.ThumbView == fn).FirstOrDefault();
+
+            var page = new MobileApp.Views.Profiles.ImageView();
+            page.BackgroundImageSource = imageData==null?image.Source: new Uri(imageData.FileView);
+            Navigation.PushModalAsync(page);
         }
     }
 

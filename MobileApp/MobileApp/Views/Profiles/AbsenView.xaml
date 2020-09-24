@@ -3,13 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
              xmlns:controls="clr-namespace:MobileApp.Controls"
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Profiles.AbsenView">
     <ContentPage.Content>
-            <sh:Shadows Grid.Row="1" Style="{StaticResource card}" CornerRadius="20">
-                <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="20">
+                <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="30">
                 <Grid  Padding="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
@@ -19,38 +17,37 @@
                     <StackLayout Orientation="Horizontal">
                         <FlexLayout >
                             <Label Margin="5,0,0,0" Text="&#xf783;" 
-                               FontFamily="{StaticResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
+                               FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
                             <Label Margin="5,0,0,0" Text="ABSENSI"  FontSize="Small" FontAttributes="Bold"/>
                         </FlexLayout>
                         <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{StaticResource FontAwesomeSolid}" FontSize="20" >
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="OrangeRed" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
                     <StackLayout Margin="10" Grid.Row="1" VerticalOptions="StartAndExpand">
-                        <Label Margin="5,0,0,0" Text="Periode" Style="{StaticResource dataTitle}"/>
-                        <Frame Style="{StaticResource entryFrameStyle}">
-                            <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
-                                <Picker ItemsSource="{Binding DataPeriode}" SelectedItem="{Binding SelectedPeriode}" ItemDisplayBinding="{Binding  DisplayName}" />
-                            </sh:Shadows>
-                        </Frame>
+                        <Label Margin="5,0,0,0" Text="Periode" Style="{DynamicResource dataTitle}"/>
+                        <Frame Style="{DynamicResource frameInputOut}">
+                            <Frame Style="{DynamicResource  frameInputIn}">
+                                <controls:PickerCustom ItemsSource="{Binding DataPeriode}"  SelectedItem="{Binding SelectedPeriode}" ItemDisplayBinding="{Binding  DisplayName}" />
+                            </Frame>
+                    </Frame>
                     </StackLayout>
-                    <ListView ItemsSource="{Binding Datas}" Grid.Row="2" SeparatorVisibility="None" BackgroundColor="Transparent" 
+                    <ListView ItemsSource="{Binding Datas}" Grid.Row="2" SeparatorVisibility="None" BackgroundColor="Transparent" Margin="0,10" 
                               IsRefreshing="{Binding IsBusy}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding LoadCommand}" HasUnevenRows="True" SelectionMode="None" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <sh:Shadows Style="{StaticResource card}" Margin="-6">
-                                        <Frame CornerRadius="10" Style="{StaticResource entryFrameStyle}" Margin="0" Padding="0" >
+                                        <Frame CornerRadius="10" Style="{DynamicResource entryFrameStyle}" Margin="3" Padding="0" >
                                             <Grid >
                                                 <StackLayout Padding="10">
                                                     <StackLayout Orientation="Horizontal">
                                                         <Label Text="{Binding AbsenType, StringFormat='Jam {0}'}" FontSize="Small" FontAttributes="Bold"></Label>
-                                                        <Label Text="&#xf783;" Style="{StaticResource Icons}" VerticalOptions="Start" HorizontalOptions="EndAndExpand" />
+                                                        <Label Text="&#xf783;" Style="{DynamicResource Icons}" VerticalOptions="Start" HorizontalOptions="EndAndExpand" />
                                                     </StackLayout>
-                                                    <Label Text="{Binding Masuk, StringFormat='{0: dd MMM yyyy ID}'}" FontSize="Micro"/>
+                                                    <Label Text="{Binding Masuk, StringFormat='{0: dd MMM yyyy}'}" FontSize="Micro"/>
                                                     <FlexLayout Padding="10,0">
                                                         <Label Text="{Binding Masuk, StringFormat='Masuk : {0:HH:mm}'}" FontSize="Small" Margin="0,0,50,0" ></Label>
                                                         <Label Text="{Binding Pulang,StringFormat='Pulang : {0:HH:mm}'}" FontSize="Small" HorizontalOptions="EndAndExpand"></Label>
@@ -59,7 +56,6 @@
                                                
                                             </Grid>
                                         </Frame>
-                                    </sh:Shadows>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -67,8 +63,5 @@
 
                 </Grid>
             </Frame>
-            </sh:Shadows>
-     
-
     </ContentPage.Content>
 </ContentPage>

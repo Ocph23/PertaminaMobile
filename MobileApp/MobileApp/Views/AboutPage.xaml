@@ -5,13 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="MobileApp.Views.AboutPage"
-             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="Red"
              Title="{Binding Title}">
 
     <Grid>
-        <microcharts:ChartView x:Name="chartView" HeightRequest="200" BackgroundColor="Blue" WidthRequest="300" />
+        <Label Text="About"/>
     </Grid>
 
 </ContentPage>

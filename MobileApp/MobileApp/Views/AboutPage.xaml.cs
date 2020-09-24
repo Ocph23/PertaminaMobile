@@ -1,6 +1,4 @@
 ﻿
-using Microcharts;
-using SkiaSharp;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;

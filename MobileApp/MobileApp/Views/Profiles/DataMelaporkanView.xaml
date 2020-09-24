@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Profiles.DataMelaporkanView">
     <ContentPage.Content>
@@ -14,55 +14,52 @@
             <Frame  Margin="0" BorderColor="White"  Padding="10"
                            HeightRequest="35" BackgroundColor="White">
                 <FlexLayout>
-                    <Label Text="&#xf0a1;" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="25" 
+                    <Label Text="&#xf0a1;" FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" 
                            Margin="5,0" ></Label>
-                    <Label Text="Melaporkan"  FontSize="20" Margin="5,0"></Label>
+                    <Label Text="Riwayat Melaporkan"  FontSize="20" Margin="5,0"></Label>
+                    
                 </FlexLayout>
             </Frame>
-            <sh:Shadows Grid.Row="1" Style="{StaticResource card}" CornerRadius="20">
-                <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="20" Padding="10">
-                    <Grid >
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding NotHaveResult}" 
+            <Grid Grid.Row="1" Margin="10,0" >
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding NotHaveResult}" 
                                Text="Anda Belum Pernah Melaporkan Pelanggaran" ></Label>
-                        <ListView BackgroundColor="Transparent" SeparatorVisibility="None" 
+                <ListView BackgroundColor="Transparent" SeparatorVisibility="None" 
                               IsPullToRefreshEnabled="True" 
                                   IsRefreshing="{Binding IsBusy}" 
                               RefreshCommand="{Binding LoadCommand}"  
                               ItemSelected="OnSelected"
                               ItemsSource="{Binding SourceView}"
                               HasUnevenRows="True" SelectionMode="Single" >
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell>
-                                        <sh:Shadows Style="{StaticResource card}" >
-                                            <Frame CornerRadius="10" Style="{StaticResource entryFrameStyle}" Padding="10" >
-                                                <Grid >
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="auto"/>
-                                                    </Grid.ColumnDefinitions>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame CornerRadius="10" Style="{DynamicResource entryFrameStyle}" BackgroundColor="{StaticResource PrimaryColor}" Padding="10" >
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
 
-                                                    <Image Source="{Binding Photo}" HeightRequest="75" WidthRequest="75"  />
-                                                    <StackLayout Grid.Column="1">
-                                                        <StackLayout Padding="10">
-                                                            <Label Text="{Binding Jenis}" Margin="0,10,0,0"/>
-                                                            <Label Text="{Binding Status}"/>
-                                                        </StackLayout>
-                                                    </StackLayout>
-                                                    <StackLayout Grid.Column="2">
-                                                        <Label Text="{Binding Tanggal, StringFormat='{0:dd-MM-yyyy HH:mm:ss}'}" FontSize="Small"/>
-                                                    </StackLayout>
-                                                </Grid>
-                                            </Frame>
-                                        </sh:Shadows>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </Grid>
-                </Frame>
-            </sh:Shadows>
+                                        <Image Source="{Binding Photo}" />
+                                        <StackLayout Grid.Column="1">
+                                            <StackLayout Padding="10">
+                                                <Label Text="{Binding Terlapor.Nama}" Margin="0,10,0,0"/>
+                                                <Label Text="{Binding Jenis}" Margin="0,10,0,0"/>
+                                                <BoxView HeightRequest="1"/>
+                                                <Label Text="{Binding Status}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="2">
+                                            <Label Text="{Binding Tanggal, StringFormat='{0:dd-MM-yyyy HH:mm:ss}'}" FontSize="Small"/>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

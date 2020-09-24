@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+              xmlns:controls="clr-namespace:MobileApp.Controls"
              mc:Ignorable="d"
              x:Class="MobileApp.App">
 
     <Application.Resources>
         <ResourceDictionary>
-            <!--Global Styles-->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/WhiteTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-            <Color x:Key="NavigationPrimary">#2196F3</Color>
-            <Color x:Key="MainColor">#F0F0F3</Color>
 
             <OnPlatform x:Key="FontAwesomeSolid" x:TypeArguments="x:String">
                 <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
@@ -23,17 +23,19 @@
                 <On Platform="iOS" Value="fa-solid-900" />
             </OnPlatform>
 
-
-
             <OnPlatform x:Key="Material" x:TypeArguments="x:String">
                 <On Platform="Android" Value="MaterialIcons-Regular.ttf#Material Icons" />
                 <On Platform="iOS" Value="MaterialIcons-Regular" />
             </OnPlatform>
 
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource  NavigationPrimary}" />
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
             <Style x:Key="Icons" TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid }" />
                 <Setter Property="FontSize" Value="16" />
-                <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
                 <Setter Property="WidthRequest" Value="18" />
                 <Setter Property="Margin" Value="0,0,5,0" />
             </Style>
@@ -45,16 +47,59 @@
                 <Setter Property="Margin" Value="0,0,5,0" />
             </Style>
 
-            <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="BarTextColor" Value="White" />
+
+
+            <Style TargetType="{x:Type controls:EntryCustom}">
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="Padding" Value="15,0"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="TextColor" Value="{StaticResource  PrimaryTextColor}"/>
+            </Style>
+            <Style TargetType="{x:Type controls:SearchBarCustom}">
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="Padding" Value="15,0"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="TextColor" Value="{StaticResource  PrimaryTextColor}"/>
+            </Style>
+            <Style TargetType="{x:Type controls:EditorCustom}">
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="Padding" Value="15,0"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="TextColor" Value="{StaticResource  PrimaryTextColor}"/>
+            </Style>
+            <Style TargetType="{x:Type controls:PickerCustom}">
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="Padding" Value="15,0"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="TextColor" Value="{StaticResource  PrimaryTextColor}"/>
             </Style>
 
+            <Style x:Key="MainBackground" TargetType="Frame">
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Padding" Value="20"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="Background" >
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Color="{StaticResource MainColor}"
+                          Offset="0.1" />
+                            <GradientStop Color="{StaticResource PrimaryColor}"
+                          Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
             <Style TargetType="FlexLayout">
                 <Setter Property="Padding" Value="5" />
             </Style>
-            
+
+
+
             <Style x:Key="dataTitle" TargetType="Label">
                 <Setter Property="FontSize" Value="Micro"/>
                 <Setter Property="TextColor" Value="Black"/>
@@ -63,60 +108,49 @@
                 <Setter Property="TextColor" Value="Gray"/>
                 <Setter Property="FontSize" Value="Small"/>
             </Style>
-        
-            <Style x:Key="entryFrameStyle" TargetType="Frame">
-                <Setter Property="Padding" Value="2"/>
-                <Setter Property="HasShadow" Value="False"/>
-                <Setter Property="BackgroundColor" Value="#F2F2F2"/>
-            </Style>
-            
-            
+
+
+
+
             <Style x:Key="okButton" TargetType="Button">
                 <Setter Property="TextColor" Value="Black"/>
-                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource MainColor}"/>
                 <Setter Property="HeightRequest" Value="45"/>
                 <Setter Property="Margin" Value="0"/>
             </Style>
-           
+
             <Style TargetType="ImageButton">
-                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource MainColor}"/>
                 <Setter Property="HeightRequest" Value="45"/>
                 <Setter Property="Margin" Value="0"/>
             </Style>
 
-            <Style x:Key="inputShadow" ApplyToDerivedTypes="True" TargetType="sh:Shadows">
-                <Setter Property="CornerRadius" Value="10" />
-                <Setter Property="Shades">
-                    <sh:ImmutableShades>
-                        <sh:Shade BlurRadius="10"
-                      Opacity="1"
-                      Offset="-6,-6"
-                      Color="#d9d9d9" />
-                        <sh:Shade BlurRadius="10"
-                      Opacity="1"
-                      Offset="6,6"
-                      Color="White" />
-                    </sh:ImmutableShades>
-                </Setter>
+            <Style x:Key="frameInputOut" TargetType="Frame">
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}"/>
+                <Setter Property="CornerRadius" Value="30"/>
+            </Style>
+            <Style x:Key="frameInputIn" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="30"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="BackgroundColor" Value="Blue"/>
             </Style>
 
-            <Style x:Key="card" ApplyToDerivedTypes="True" TargetType="sh:Shadows">
-                <Setter Property="CornerRadius" Value="20" />
-                <Setter Property="Padding" Value="10" />
-                <Setter Property="Shades">
-                    <sh:ImmutableShades>
-                        <sh:Shade BlurRadius="10"
-                          Opacity="1"
-                          Offset="-3,-3"
-                         Color="White" />
-                        <sh:Shade BlurRadius="5"
-                          Opacity="1"
-                          Offset="3,3"
-                          Color="#d9d9d9" />
-                    </sh:ImmutableShades>
-                </Setter>
+         
+            <Style x:Key="entryFrameStyle" TargetType="{x:Type Frame}">
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Padding" Value="2"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource MainColor}"/>
             </Style>
+
+
         </ResourceDictionary>
+      
     </Application.Resources>
     
 </Application>

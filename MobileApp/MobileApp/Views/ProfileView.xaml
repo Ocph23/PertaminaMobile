@@ -3,21 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
-             xmlns:model="clr-namespace:MobileApp.Models" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:model="clr-namespace:MobileApp.Models" 
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="{StaticResource MainColor}"
+             BackgroundColor="{DynamicResource MainColor}"
              mc:Ignorable="d"
              x:Class="MobileApp.Views.ProfileView">
     <ContentPage.Content>
-        <sh:Shadows Style="{StaticResource card}" >
-            <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="20"  Padding="20">
-                <ScrollView Padding="0,10">
-                    <StackLayout>
-                      <sh:Shadows Style="{StaticResource card}" CornerRadius="80" WidthRequest="80" HeightRequest="80" HorizontalOptions="Center" >
-                            <Frame  BorderColor="White" HeightRequest="80" WidthRequest="80" Margin="3"  Padding="0" 
-                           CornerRadius="40" Style="{StaticResource entryFrameStyle}" BackgroundColor="{StaticResource MainColor}">
-                                <ffimageloading:CachedImage  HeightRequest="75" WidthRequest="75"
+        <Grid>
+            <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="30" Padding="10">
+                <StackLayout >
+                    <StackLayout  HeightRequest="200" HorizontalOptions="CenterAndExpand" >
+                        <Frame  BorderColor="White" HorizontalOptions="Center" HeightRequest="80" WidthRequest="80" Margin="3"  Padding="0" 
+                           CornerRadius="40" Style="{DynamicResource entryFrameStyle}" BackgroundColor="{DynamicResource MainColor}">
+                            <ffimageloading:CachedImage   Aspect="Fill" HeightRequest="80" WidthRequest="80"
                               Source="{Binding Photo}"
                               LoadingPlaceholder = "LoaderImage" 
                               ErrorPlaceholder = "ErrorImage"
@@ -25,16 +24,17 @@
                               RetryCount= "3"
                               RetryDelay= "600"
                               DownsampleToViewSize = "true">
-                                </ffimageloading:CachedImage>
-                            </Frame>
-                        </sh:Shadows>
+                            </ffimageloading:CachedImage>
+                        </Frame>
                         <StackLayout HorizontalOptions="CenterAndExpand">
                             <Label Text="{Binding ProfileName}" TextColor="Black" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold"></Label>
                             <Label Text="{Binding Perusahaan.Perusahaan.Nama}" FontSize="Small" HorizontalOptions="Center"></Label>
                         </StackLayout>
+                    </StackLayout>
+                    <ScrollView >
+                        <StackLayout >
                         <ActivityIndicator Margin="5" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="OrangeRed" HorizontalOptions="CenterAndExpand"/>
-                        <sh:Shadows Style="{StaticResource card}" CornerRadius="5">
-                            <Frame Style="{StaticResource entryFrameStyle}"  CornerRadius="10" Padding="20">
+                            <Frame Style="{DynamicResource entryFrameStyle}" HasShadow="True"  CornerRadius="10" Padding="20">
                                 <StackLayout>
                                     <Label Text="Akun" FontSize="Medium" TextColor="Black"/>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
@@ -42,13 +42,13 @@
                                         <FlexLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.ChangeProfile}" />
                                         </FlexLayout.GestureRecognizers>
-                                        <Label Text="&#xf007;" Style="{StaticResource Icons}"/>
+                                        <Label Text="&#xf007;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Ubah Profile" FontSize="Small">
                                         </Label>
                                     </FlexLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                     <FlexLayout>
-                                        <Label Text="&#xf084;" Style="{StaticResource Icons}"/>
+                                        <Label Text="&#xf084;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Ubah Password" FontSize="Small">
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.ChangePassword}" />
@@ -57,7 +57,7 @@
                                     </FlexLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                     <FlexLayout>
-                                        <Label Text="&#xf1a0;" Style="{StaticResource BrandIcons}"/>
+                                        <Label Text="&#xf1a0;" Style="{DynamicResource BrandIcons}"/>
                                         <Label Text="{Binding GoogleAccount}" FontSize="Small">
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding GoogleCommand}" CommandParameter="{x:Static model:TypeProfileView.ChangePassword}" />
@@ -67,14 +67,12 @@
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                 </StackLayout>
                             </Frame>
-                        </sh:Shadows>
-                        <sh:Shadows Style="{StaticResource card}">
-                            <Frame Style="{StaticResource entryFrameStyle}" Padding="20">
+                            <Frame Style="{DynamicResource entryFrameStyle}"  CornerRadius="10"  Padding="20">
                                 <StackLayout>
                                     <Label Text="Kehadiran" FontSize="Medium" TextColor="Black"/>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                     <FlexLayout>
-                                        <Label Text="&#xf783;" Style="{StaticResource Icons}"/>
+                                        <Label Text="&#xf783;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Absen Kehadiran" FontSize="Small">
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Absen}" />
@@ -84,14 +82,12 @@
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                 </StackLayout>
                             </Frame>
-                        </sh:Shadows>
-                        <sh:Shadows Style="{StaticResource card}">
-                            <Frame Style="{StaticResource entryFrameStyle}" Padding="20">
+                            <Frame Style="{DynamicResource entryFrameStyle}" Padding="20" CornerRadius="10" >
                                 <StackLayout>
                                     <Label Text="Pelanggaran" FontSize="Medium" TextColor="Black"/>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                     <FlexLayout>
-                                        <Label Text="&#xf46d;" Style="{StaticResource Icons}"/>
+                                        <Label Text="&#xf46d;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Riwayat Pelanggaran" FontSize="Small">
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Pelanggaran}" />
@@ -100,7 +96,7 @@
                                     </FlexLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                     <FlexLayout>
-                                        <Label Text="&#xf0a1;" Style="{StaticResource Icons}"/>
+                                        <Label Text="&#xf0a1;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Riwayat Melaporkan" FontSize="Small">
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Pelaporan}" />
@@ -110,9 +106,7 @@
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                 </StackLayout>
                             </Frame>
-                        </sh:Shadows>
-                        <sh:Shadows Style="{StaticResource card}">
-                            <Frame Style="{StaticResource entryFrameStyle}" Padding="20">
+                            <Frame Style="{DynamicResource entryFrameStyle}" Padding="20" CornerRadius="10" >
                                 <StackLayout>
                                     <Label Text="Perusahaan" FontSize="Medium" TextColor="Black"/>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
@@ -120,31 +114,28 @@
                                         <FlexLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Perusahaan}" />
                                         </FlexLayout.GestureRecognizers>
-                                        <Label Text="&#xf1ad;" Style="{StaticResource Icons}"/>
+                                        <Label Text="&#xf1ad;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Perusahaan Sekarang" FontSize="Small"/>
-                                        
+
                                     </FlexLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                     <FlexLayout>
                                         <FlexLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.MutasiPerusahaan}" />
                                         </FlexLayout.GestureRecognizers>
-                                        <Label Text="&#xf362;" Style="{StaticResource Icons}"/>
+                                        <Label Text="&#xf362;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Mutasi Perusahaan ?" FontSize="Small"/>
                                     </FlexLayout>
                                     <BoxView HeightRequest="1" BackgroundColor="LightGray"></BoxView>
                                 </StackLayout>
                             </Frame>
-                        </sh:Shadows>
-                        <sh:Shadows Style="{StaticResource inputShadow}">
-                            <Frame Style="{StaticResource entryFrameStyle}" Padding="20">
-                                <Button Style="{StaticResource okButton}" Text="Sign Out" Command="{Binding SignoutCommand}"></Button>
+                            <Frame Style="{DynamicResource entryFrameStyle}" Padding="10" CornerRadius="10"  >
+                                <Button Style="{DynamicResource okButton}" HeightRequest="50" Text="Sign Out" CornerRadius="10" BackgroundColor="OrangeRed" TextColor="White" Command="{Binding SignoutCommand}"></Button>
                             </Frame>
-                        </sh:Shadows>
-                    </StackLayout>
-
-                </ScrollView>
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
             </Frame>
-        </sh:Shadows>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

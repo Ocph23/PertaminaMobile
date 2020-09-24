@@ -4,9 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" 
-             xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
              NavigationPage.HasNavigationBar="False"
-             mc:Ignorable="d" BackgroundColor="{StaticResource MainColor}"
+             mc:Ignorable="d" BackgroundColor="{DynamicResource MainColor}"
              x:Class="MobileApp.Views.AbsenScanView">
 
     <Grid  >
@@ -17,29 +16,22 @@
         <Frame  Margin="0" BorderColor="White"  Padding="10"
                            HeightRequest="35" BackgroundColor="White">
             <FlexLayout>
-                <Label Text="&#xf029;" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="25" 
+                <Label Text="&#xf029;" FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" 
                            Margin="5,0" ></Label>
                 <Label Text="Absen"  FontSize="20" Margin="5,0"></Label>
             </FlexLayout>
         </Frame>
-
-        <sh:Shadows Style="{StaticResource card}" Grid.Row="1">
-            <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="10">
-                <StackLayout>
-                    <sh:Shadows Grid.Row="0" Style="{StaticResource card}" Padding="40" HeightRequest="400">
-                        <zxing:ZXingScannerView x:Name="scannerView" ScanResultCommand="{Binding ScanningCommand}" IsAnalyzing="{Binding IsAnalyzing}" IsScanning="{Binding IsScanning}"></zxing:ZXingScannerView>
-                    </sh:Shadows>
-                    <sh:Shadows Grid.Row="2" HorizontalOptions="CenterAndExpand" Padding="0" Style="{StaticResource card}" >
-                        <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="10"  Padding="0" >
-                            <FlexLayout WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center" >
-                                <Button CornerRadius="5" WidthRequest="100" Command="{Binding AbsenCommand}" Style="{StaticResource okButton}" Text="Absen"></Button>
-                                <BoxView BackgroundColor="LightGray" Margin="3" WidthRequest="1"></BoxView>
-                                <Button CornerRadius="5" WidthRequest="100" Command="{Binding LemburCommand}" Style="{StaticResource okButton}" Text="Lembur"></Button>
-                            </FlexLayout>
-                        </Frame>
-                    </sh:Shadows>
-                </StackLayout>
-            </Frame>
-        </sh:Shadows>
+        <Frame Grid.Row="1" Style="{DynamicResource entryFrameStyle}" CornerRadius="20">
+            <StackLayout Padding="40">
+                <zxing:ZXingScannerView x:Name="scannerView" ScanResultCommand="{Binding ScanningCommand}" IsAnalyzing="{Binding IsAnalyzing}" IsScanning="{Binding IsScanning}"></zxing:ZXingScannerView>
+                <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="10"  Padding="0" >
+                    <FlexLayout WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center" >
+                        <Button CornerRadius="5" WidthRequest="100" Command="{Binding AbsenCommand}" Style="{DynamicResource okButton}" Text="Absen"></Button>
+                        <BoxView BackgroundColor="LightGray" Margin="3" WidthRequest="1"></BoxView>
+                        <Button CornerRadius="5" WidthRequest="100" Command="{Binding LemburCommand}" Style="{DynamicResource okButton}" Text="Lembur"></Button>
+                    </FlexLayout>
+                </Frame>
+            </StackLayout>
+        </Frame>
     </Grid>
 </ContentPage>

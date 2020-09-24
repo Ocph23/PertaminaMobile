@@ -9,6 +9,9 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using System.Threading.Tasks;
 using MobileApp.Models.Datas;
+using System.Collections.Generic;
+using MobileApp.Themes;
+using System.Globalization;
 
 namespace MobileApp
 {
@@ -18,12 +21,43 @@ namespace MobileApp
         public App()
         {
             InitializeComponent();
+            CultureInfo requestCulture;
+            try
+            {
+                requestCulture = CultureInfo.CreateSpecificCulture("id-ID");
+            }
+            catch
+            {
+                requestCulture = CultureInfo.CurrentCulture;
+            }
+            System.Threading.Thread.CurrentThread.CurrentCulture = requestCulture;
+            //ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+            //var theme = Theme.White;
+            //if (mergedDictionaries != null)
+            //{
+            //    mergedDictionaries.Clear();
+
+            //    switch (theme)
+            //    {
+            //        case Theme.White:
+            //            mergedDictionaries.Add(new WhiteTheme());
+            //            break;
+            //        case Theme.RedOrange:
+            //            mergedDictionaries.Add(new OrangeRed());
+            //            break;
+            //        default:
+            //            mergedDictionaries.Add(new WhiteTheme());
+            //            break;
+            //    }
+            //}
+
+
             MessagingCenter.Subscribe<MessagingCenterAlert>(this, "message", async (message) =>
             {
                 await Current.MainPage.DisplayAlert(message.Title, message.Message, message.Cancel);
             });
 
-
+           
             //Auth 
             MessagingCenter.Subscribe<IAuthService, bool>(this, "signout", async (sender, result) =>
             {

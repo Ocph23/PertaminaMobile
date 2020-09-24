@@ -42,6 +42,8 @@ namespace MobileApp.Droid
             ToolbarResource = Resource.Layout.Toolbar;
             
             base.OnCreate(savedInstanceState);
+            Forms.SetFlags(new string[] { "Expander_Experimental", "Brush_Experimental" });
+
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
             
             

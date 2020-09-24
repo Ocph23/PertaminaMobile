@@ -3,10 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-            xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
              xmlns:controls="clr-namespace:MobileApp.Controls"
              NavigationPage.HasNavigationBar="False"
-             mc:Ignorable="d" BackgroundColor="#F0F0F3"
+             mc:Ignorable="d" BackgroundColor="{DynamicResource MainColor}"
              x:Class="MobileApp.Views.LoginView">
     <ContentPage.Resources>
        
@@ -14,8 +13,8 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="75*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="65*"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="0">
@@ -24,32 +23,25 @@
             </StackLayout>
             <StackLayout Grid.Row="1"  Margin="40,20">
                 <StackLayout>
-                    <Label Margin="5,0,0,0" Text="User Name" Style="{StaticResource dataTitle}"/>
-                    <Frame Style="{StaticResource entryFrameStyle}">
-                        <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
-                            <controls:EntryCustom Text="{Binding UserName}" Placeholder="User Name" 
-                                                  HeightRequest="45" Margin="10" ></controls:EntryCustom>
-                        </sh:Shadows>
-                    </Frame>
-                    
-                    <Label Margin="5,20,0,0" Text="Password" Style="{StaticResource dataTitle}"/>
-                    <Frame Style="{StaticResource entryFrameStyle}">
-                        <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
-                            <controls:EntryCustom TextChanged="PasswordChange"  Placeholder="Password" Margin="10" IsPassword="True"  ></controls:EntryCustom>
-                        </sh:Shadows>
-                    </Frame>
-                    <sh:Shadows Grid.Row="1" Margin="0,20,0,0" Style="{StaticResource card}" CornerRadius="5" >
-                        <Frame Style="{StaticResource entryFrameStyle}">
-                            <Button Style="{StaticResource okButton}" Text="Login"  HeightRequest="50" Command="{Binding LoginCommand}" />
+                    <Frame Style="{DynamicResource frameInputOut}" >
+                        <Frame Style="{DynamicResource  frameInputIn}" >
+                            <controls:EntryCustom  Text="{Binding UserName}" Placeholder="User Name"  ></controls:EntryCustom>
                         </Frame>
-                    </sh:Shadows>
-                    <sh:Shadows Grid.Row="1" Margin="0,0,0,10" CornerRadius="5" 
-                                Style="{StaticResource card}">
-                        <Frame Style="{StaticResource entryFrameStyle}">
-                            <ImageButton HeightRequest="50" CornerRadius="10" Command="{Binding GoogleLoginCommand}" Aspect="AspectFit" Source="google.png" Padding="10" ></ImageButton>
+                    </Frame>
+
+                    <Frame Style="{DynamicResource  frameInputOut}" >
+                        <Frame Style="{DynamicResource  frameInputIn}" >
+                            <controls:EntryCustom TextChanged="PasswordChange"  Placeholder="Password" IsPassword="True"  ></controls:EntryCustom>
                         </Frame>
-                    </sh:Shadows>
-                    <Label Style="{StaticResource dataValue}" HorizontalOptions="Center" Text="Forgot Your Password ?">
+                    </Frame>
+
+                    <Frame Style="{DynamicResource entryFrameStyle}" Padding="0" Margin="0,20,0,0" CornerRadius="30">
+                        <Button Style="{DynamicResource okButton}" Text="Login" TextColor="White"  HeightRequest="50" BackgroundColor="YellowGreen"  Margin="0" Padding="0" Command="{Binding LoginCommand}" />
+                    </Frame>
+                    <Frame Style="{DynamicResource entryFrameStyle}" Padding="0" Margin="0,0,0,0" CornerRadius="30">
+                        <ImageButton CornerRadius="10" Command="{Binding GoogleLoginCommand}" Aspect="AspectFit" Source="google.png" Padding="10" ></ImageButton>
+                    </Frame>
+                    <Label Style="{DynamicResource dataValue}" Margin="20" HorizontalOptions="Center" Text="Forgot Your Password ?">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
                         </Label.GestureRecognizers>
@@ -58,7 +50,7 @@
                 </StackLayout>
             </StackLayout>
             <StackLayout Grid.Row="2">
-                <controls:EntryCustom FontSize="8" VerticalOptions="EndAndExpand" HorizontalTextAlignment="Center" Text="{Binding URL}"/>
+                <controls:EntryCustom FontSize="12" VerticalOptions="EndAndExpand" BackgroundColor="Transparent" HorizontalTextAlignment="Center" Text="{Binding URL}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

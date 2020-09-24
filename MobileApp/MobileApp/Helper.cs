@@ -101,4 +101,10 @@ namespace MobileApp
             app.SetMainPage();
         }
     }
+
+
+    public enum Theme
+    {
+        White, RedOrange
+    }
 }

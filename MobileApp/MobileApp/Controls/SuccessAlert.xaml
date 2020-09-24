@@ -2,7 +2,7 @@
 <pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup" xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
                  x:Class="MobileApp.Controls.SuccessAlert"
              x:Name="ThisPage"
              BackgroundColor="Transparent" Opacity="0.1"
@@ -21,25 +21,24 @@
       EasingOut="SinIn"
       HasBackgroundAnimation="True"/>
     </pages:PopupPage.Animation>
-    <sh:Shadows CornerRadius="20" VerticalOptions="Center"  HorizontalOptions="FillAndExpand" Padding="20, 20, 20, 20">
-        <Frame CornerRadius="20" BackgroundColor="LightGray"  HasShadow="True">
+    <StackLayout >
+        <Frame CornerRadius="20" BackgroundColor="White" HasShadow="True" Margin="20" VerticalOptions="CenterAndExpand">
             <ScrollView>
-                <StackLayout >
+                <StackLayout HeightRequest="200" >
                     <StackLayout >
                         <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{StaticResource FontAwesomeSolid}" FontSize="30" TextColor="GreenYellow" >
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="30" TextColor="GreenYellow" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnClose"></TapGestureRecognizer>
                             </Label.GestureRecognizers>
                         </Label>
-                        <Image HorizontalOptions="CenterAndExpand" Margin="0,-20,0,0" HeightRequest="50" WidthRequest="50" Source="logo2.png"/>
+                        <Image HorizontalOptions="CenterAndExpand" Margin="0,-20,0,0" HeightRequest="75" WidthRequest="75" Source="logo2.png"/>
                     </StackLayout>
                     <StackLayout Margin="10">
-                        <Label x:Name="message"  
-                               HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="Black"/>
+                        <Label x:Name="message"  HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="Black"/>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
         </Frame>
-    </sh:Shadows>
+    </StackLayout>
 </pages:PopupPage>

@@ -3,69 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
              xmlns:controls="clr-namespace:MobileApp.Controls"
-             BackgroundColor="{StaticResource MainColor}"
+             BackgroundColor="{DynamicResource MainColor}"
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Profiles.ChangeProfileView">
     <ContentPage.Content>
-        <sh:Shadows Style="{StaticResource card}" Grid.Row="1" CornerRadius="20" >
-            <Frame Style="{StaticResource  entryFrameStyle }" CornerRadius="20">
-                <StackLayout  Padding="20" Grid.Row="1">
-                    <StackLayout Orientation="Horizontal">
-                        <FlexLayout >
-                            <Label Margin="0,0,0,0" Text="&#xf007;" 
-                               FontFamily="{StaticResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
-                            <Label Margin="5,0,0,20" Text="UBAH PROFILE"  FontSize="Small" FontAttributes="Bold"/>
-                        </FlexLayout>
-                        <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{StaticResource FontAwesomeSolid}" FontSize="20" >
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </StackLayout>
-                    <Label Margin="5,0,0,0" Text="ID KARYAWAN" Style="{StaticResource dataTitle}"/>
-                    <Frame Style="{StaticResource entryFrameStyle}">
-                        <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
-                            <controls:EntryCustom Text="{Binding KodeKaryawan }" IsEnabled="False" FontSize="Small" CornerRadius="10" HeightRequest="35" Margin="10" ></controls:EntryCustom>
-                        </sh:Shadows>
-                    </Frame>
-
-                    <Label Margin="5,10,0,0" Text="Nama" Style="{StaticResource dataTitle}"/>
-                    <Frame Style="{StaticResource entryFrameStyle}">
-                        <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
-                            <controls:EntryCustom Text="{Binding NamaKaryawan}" FontSize="Small" CornerRadius="10" HeightRequest="35" Margin="10" ></controls:EntryCustom>
-                        </sh:Shadows>
-                    </Frame>
-
-                    <Label Margin="5,10,0,0" Text="Kontak" Style="{StaticResource dataTitle}"/>
-                    <Frame Style="{StaticResource entryFrameStyle}">
-                        <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
-                            <controls:EntryCustom Text="{Binding Kontak}" FontSize="Small" CornerRadius="10" HeightRequest="35" Margin="10" ></controls:EntryCustom>
-                        </sh:Shadows>
-                    </Frame>
-                    <Label Margin="5,10,0,0" Text="Email" Style="{StaticResource dataTitle}"/>
-                    <Frame Style="{StaticResource entryFrameStyle}">
-                        <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
-                            <controls:EntryCustom Text="{Binding Email}"  FontSize="Small" CornerRadius="10" HeightRequest="35" Margin="10" ></controls:EntryCustom>
-                        </sh:Shadows>
-                    </Frame>
-                    <Label Margin="5,10,0,0" Text="Alamat" Style="{StaticResource dataTitle}"/>
-                    <Frame Style="{StaticResource entryFrameStyle}">
-                        <sh:Shadows Style="{StaticResource inputShadow}"  BackgroundColor="{StaticResource MainColor}">
-                            <controls:EditorCustom   Text="{Binding Alamat}" MinimumHeightRequest="200"  HeightRequest="100" FontSize="Small" CornerRadius="10" Margin="10" ></controls:EditorCustom>
-                        </sh:Shadows>
-                    </Frame>
-                    <ActivityIndicator  Margin="10" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="OrangeRed" HorizontalOptions="CenterAndExpand"/>
-                    <sh:Shadows Grid.Row="1" Margin="0,20,0,10" CornerRadius="10" 
-                                Shades="{sh:NeumorphismShades}">
-                        <Frame Style="{StaticResource entryFrameStyle}">
-                            <Button Style="{StaticResource okButton}" CornerRadius="10" Text="Simpan"  Command="{Binding SaveCommand}" />
-                        </Frame>
-                    </sh:Shadows>
+        <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="30">
+            <StackLayout  Padding="20" Grid.Row="1">
+                <StackLayout Orientation="Horizontal">
+                    <FlexLayout >
+                        <Label Margin="0,0,0,0" Text="&#xf007;" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
+                        <Label Margin="5,0,0,20" Text="UBAH PROFILE"  FontSize="Small" FontAttributes="Bold"/>
+                    </FlexLayout>
+                    <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="OrangeRed"  >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
                 </StackLayout>
-            </Frame>
-        </sh:Shadows>
+                <Label Margin="5,0,0,0" Text="ID KARYAWAN" Style="{DynamicResource dataTitle}"/>
+
+                <Frame Style="{DynamicResource frameInputOut}" >
+                    <Frame Style="{DynamicResource  frameInputIn}" >
+                        <controls:EntryCustom  Text="{Binding KodeKaryawan}" IsEnabled="False" ></controls:EntryCustom>
+                    </Frame>
+                </Frame>
+
+                <Label Margin="5,10,0,0" Text="Nama" Style="{DynamicResource dataTitle}"/>
+                <Frame Style="{DynamicResource frameInputOut}">
+                    <Frame Style="{DynamicResource frameInputIn}">
+                        <controls:EntryCustom Text="{Binding NamaKaryawan}" ></controls:EntryCustom>
+                    </Frame>
+                </Frame>
+
+                <Label Margin="5,10,0,0" Text="Kontak" Style="{DynamicResource dataTitle}"/>
+                <Frame Style="{DynamicResource frameInputOut}">
+                    <Frame Style="{DynamicResource frameInputIn}">
+                        <controls:EntryCustom Text="{Binding Kontak}" ></controls:EntryCustom>
+                    </Frame>
+                </Frame>
+
+                <Label Margin="5,10,0,0" Text="Email" Style="{DynamicResource dataTitle}"/>
+                <Frame Style="{DynamicResource frameInputOut}">
+                    <Frame Style="{DynamicResource frameInputIn}">
+                        <controls:EntryCustom Text="{Binding Email}" ></controls:EntryCustom>
+                    </Frame>
+                </Frame>
+                <Label Margin="5,10,0,0" Text="Alamat" Style="{DynamicResource dataTitle}"/>
+                <Frame Style="{DynamicResource frameInputOut}">
+                    <Frame Style="{DynamicResource frameInputIn}" CornerRadius="25">
+                        <controls:EditorCustom Text="{Binding Alamat}" HeightRequest="100" Padding="15,15" ></controls:EditorCustom>
+                    </Frame>
+                </Frame>
+
+
+                <ActivityIndicator  Margin="10" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="OrangeRed" HorizontalOptions="CenterAndExpand"/>
+                <Frame Style="{DynamicResource entryFrameStyle}" Padding="0" Margin="0,20,0,0" CornerRadius="30">
+                    <Button Style="{DynamicResource okButton}" Text="Simpan" TextColor="White"  HeightRequest="50" BackgroundColor="YellowGreen"  Margin="0" Padding="0" Command="{Binding SaveCommand}" />
+                </Frame>
+            </StackLayout>
+        </Frame>
     </ContentPage.Content>
 </ContentPage>

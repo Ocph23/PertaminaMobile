@@ -2,54 +2,49 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="{StaticResource MainColor}"
+             BackgroundColor="{DynamicResource MainColor}"
              x:Class="MobileApp.Views.NotificationView">
     <ContentPage.Content>
-        <sh:Shadows Grid.Row="1" Style="{StaticResource card}" CornerRadius="20">
-            <Frame Style="{StaticResource entryFrameStyle}" CornerRadius="20">
+            <Frame Style="{DynamicResource entryFrameStyle}" Padding="10" CornerRadius="30">
                 <StackLayout Padding="10">
                     <StackLayout Orientation="Horizontal">
                         <FlexLayout >
                             <Label Margin="5,0,0,0" Text="&#xf0f3;" 
-                               FontFamily="{StaticResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
+                               FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
                             <Label Margin="5,0,0,0" Text="NOTIFICATION"  FontSize="Small" FontAttributes="Bold"/>
                         </FlexLayout>
                         <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{StaticResource FontAwesomeSolid}" FontSize="20" >
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="OrangeRed" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
-                    <ListView Grid.Row="1" BackgroundColor="Transparent" HasUnevenRows="True" Margin="0,20" 
-                              ItemsSource="{Binding SourceView}" IsRefreshing="{Binding IsBusy}" RefreshCommand="{Binding LoadCommand}"
-                              SelectionMode="None" SeparatorVisibility="None" >
-                        <ListView.ItemTemplate>
+                    <CollectionView Grid.Row="1" BackgroundColor="Transparent" Margin="0,20" 
+                              ItemsSource="{Binding SourceView}" >
+                        <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <ViewCell>
-                                    <sh:Shadows Style="{StaticResource card}" CornerRadius="20">
-                                        <Frame CornerRadius="20" Style="{StaticResource entryFrameStyle}" Margin="0,-3" Padding="10" >
-                                            <Grid >
-                                                <StackLayout>
-                                                    <Label Text="{Binding Created,StringFormat='{0: dd/MM/yyyy HH:mm:ss}'}" FontSize="Micro"/>
-                                                    <StackLayout Padding="10">
-                                                        <Label Text="{Binding Title}" FontSize="Default" FontAttributes="Bold"></Label>
-                                                        <Label Text="{Binding Body}"/>
-                                                    </StackLayout>
-                                                </StackLayout>
-                                                <Label Text="&#xf0f3;" Style="{StaticResource Icons}" VerticalOptions="Start" HorizontalOptions="End" />
-                                            </Grid>
-                                        </Frame>
-                                    </sh:Shadows>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                            <StackLayout>
+                                <Frame CornerRadius="20" Margin="3" Style="{DynamicResource entryFrameStyle}"  Padding="10" >
+                                    <Grid Padding="5" >
+                                        <StackLayout>
+                                            <Label Text="{Binding Created,StringFormat='{0: dd/MM/yyyy HH:mm:ss}'}" FontSize="Micro"/>
+                                            <StackLayout Padding="10">
+                                                <Label Text="{Binding Title}" FontSize="Default" FontAttributes="Bold"></Label>
+                                                <Label Text="{Binding Body}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <Label Text="&#xf0f3;" Style="{DynamicResource Icons}" VerticalOptions="Start" HorizontalOptions="End" />
+                                    </Grid>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </StackLayout>
             </Frame>
-        </sh:Shadows>
     </ContentPage.Content>
 </ContentPage>
