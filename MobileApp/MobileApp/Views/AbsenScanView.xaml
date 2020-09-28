@@ -5,33 +5,36 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" 
              NavigationPage.HasNavigationBar="False"
-             mc:Ignorable="d" BackgroundColor="{DynamicResource MainColor}"
+             mc:Ignorable="d"
              x:Class="MobileApp.Views.AbsenScanView">
 
-    <Grid  >
-        <Grid.RowDefinitions>
-            <RowDefinition  Height="10*"/>
-            <RowDefinition Height="90*"/>
-        </Grid.RowDefinitions>
-        <Frame  Margin="0" BorderColor="White"  Padding="10"
-                           HeightRequest="35" BackgroundColor="White">
-            <FlexLayout>
-                <Label Text="&#xf029;" FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" 
-                           Margin="5,0" ></Label>
-                <Label Text="Absen"  FontSize="20" Margin="5,0"></Label>
-            </FlexLayout>
-        </Frame>
-        <Frame Grid.Row="1" Style="{DynamicResource entryFrameStyle}" CornerRadius="20">
-            <StackLayout Padding="40">
-                <zxing:ZXingScannerView x:Name="scannerView" ScanResultCommand="{Binding ScanningCommand}" IsAnalyzing="{Binding IsAnalyzing}" IsScanning="{Binding IsScanning}"></zxing:ZXingScannerView>
-                <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="10"  Padding="0" >
-                    <FlexLayout WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center" >
-                        <Button CornerRadius="5" WidthRequest="100" Command="{Binding AbsenCommand}" Style="{DynamicResource okButton}" Text="Absen"></Button>
-                        <BoxView BackgroundColor="LightGray" Margin="3" WidthRequest="1"></BoxView>
-                        <Button CornerRadius="5" WidthRequest="100" Command="{Binding LemburCommand}" Style="{DynamicResource okButton}" Text="Lembur"></Button>
-                    </FlexLayout>
-                </Frame>
+    <Frame Style="{DynamicResource MainBackground}">
+        <Grid Padding="20"  >
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="10*"/>
+                <RowDefinition Height="80*"/>
+                <RowDefinition  Height="10*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal">
+                <FlexLayout >
+                    <Label Margin="0,0,0,0" Text="&#xf029;" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
+                    <Label Margin="5,0,0,0" Text="ABSEN"  FontSize="Medium" FontAttributes="Bold"/>
+                </FlexLayout>
             </StackLayout>
-        </Frame>
-    </Grid>
+            <Grid Grid.Row="1" Padding="10">
+                <Label Margin="0,0,0,0" Text="&#xf029;" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="200" FontAttributes="Bold"/>
+                <zxing:ZXingScannerView x:Name="scannerView" ScanResultCommand="{Binding ScanningCommand}" IsVisible="{Binding IsScanning}" IsAnalyzing="{Binding IsAnalyzing}" 
+                                        IsScanning="{Binding IsScanning}"></zxing:ZXingScannerView>
+            </Grid>
+            <Frame Grid.Row="2" Style="{DynamicResource entryFrameStyle}" CornerRadius="10"  Padding="0" >
+                <FlexLayout WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center" >
+                    <Button CornerRadius="5" WidthRequest="100" Command="{Binding AbsenCommand}" Style="{DynamicResource okButton}" Text="Absen"></Button>
+                    <BoxView BackgroundColor="LightGray" Margin="3" WidthRequest="1"></BoxView>
+                    <Button CornerRadius="5" WidthRequest="100" Command="{Binding LemburCommand}" Style="{DynamicResource okButton}" Text="Lembur"></Button>
+                </FlexLayout>
+            </Frame>
+        </Grid>
+    </Frame>
 </ContentPage>

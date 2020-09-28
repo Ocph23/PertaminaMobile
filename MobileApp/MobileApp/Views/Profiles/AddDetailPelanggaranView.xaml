@@ -6,8 +6,9 @@
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Profiles.AddDetailPelanggaranView">
     <ContentPage.Content>
-            <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="30" Padding="20">
-                <Grid>
+            <Frame Style="{DynamicResource MainBackground}" Padding="20">
+         
+            <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="*"/>
@@ -26,7 +27,7 @@
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
-                    <CollectionView Margin="20" Grid.Row="1" x:Name="GroupedView" ItemsSource="{Binding Items}"
+                    <CollectionView Margin="10,0" Grid.Row="1" x:Name="GroupedView" ItemsSource="{Binding Items}"
                                  IsGrouped="True">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="MobileApp.Views.MelaporkanMenu">
+    <ContentPage.Content>
+        <Frame Style="{DynamicResource MainBackground}">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+                    <FlexLayout >
+                        <Label Margin="5,0,0,0" Text="&#xf0a1;" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
+                        <Label Margin="5,0,0,0" Text="MELAPORKAN"  FontSize="Small" FontAttributes="Bold"/>
+                    </FlexLayout>
+                   
+                </StackLayout>
+                <StackLayout VerticalOptions="CenterAndExpand" >
+                    <Frame Style="{DynamicResource entryFrameStyle}" Padding="0" Margin="0,20,0,0" CornerRadius="30">
+                        <Button Style="{DynamicResource okButton}" Text="KEJADIAN" HeightRequest="50"   Margin="0" Padding="0" Clicked="kejadian" />
+                    </Frame>
+                    <Frame Style="{DynamicResource entryFrameStyle}" Padding="0" Margin="0,20,0,0" CornerRadius="30">
+                        <Button Style="{DynamicResource okButton}" Text="PELANGGARAN" HeightRequest="50"   Margin="0" Padding="0" Clicked="pelanggaran" />
+                    </Frame>
+
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

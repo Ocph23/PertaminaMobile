@@ -4,26 +4,16 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:local="clr-namespace:MobileApp.Controls"
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Profiles.ImageView">
     <ContentPage.Content>
-        <Grid>
-            
-            <ffimageloading:CachedImage   Aspect="Fill"
-                              Source="{Binding Photo}"
-                              LoadingPlaceholder = "LoaderImage" 
-                              ErrorPlaceholder = "ErrorImage"
-                              CacheDuration = "50"
-                              RetryCount= "3"
-                              RetryDelay= "600"
-                              DownsampleToViewSize = "true">
-            </ffimageloading:CachedImage>
-            <Label Margin="20" HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="OrangeRed" >
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
-                </Label.GestureRecognizers>
-            </Label>
-        </Grid>
+        <Frame Style="{DynamicResource MainBackground}" Padding="0">
+            <local:PinchToZoomContainer >
+                <local:PinchToZoomContainer.Content>
+                    <Image Source="{Binding Photo}" Aspect="Fill" />
+                </local:PinchToZoomContainer.Content>
+            </local:PinchToZoomContainer>
+        </Frame>
     </ContentPage.Content>
 </ContentPage>

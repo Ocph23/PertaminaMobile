@@ -1,4 +1,5 @@
-﻿using MobileApp.Models;
+﻿using MobileApp.Controls;
+using MobileApp.Models;
 using MobileApp.Services;
 using MobileApp.ViewModels;
 using System;
@@ -14,7 +15,30 @@ namespace MobileApp.Views
         public ProfileView()
         {
             InitializeComponent();
+            string themeString = Xamarin.Essentials.SecureStorage.GetAsync("Theme").Result;
+            if(!string.IsNullOrEmpty(themeString))
+                themeLabel.Text = $"Theme ({themeString.ToString()})";
             this.BindingContext = new ProfileViewModel();
+        }
+
+        private void showTheme(object sender, EventArgs e)
+        {
+            var source = Enum.GetValues(typeof(Theme));
+            themePicker.ItemsSource=source;
+            themePicker.Focus();
+        }
+
+        private void themePicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var picker = sender as PickerCustom;
+            if (picker.SelectedItem != null)
+            {
+                var theme = (Theme)picker.SelectedItem;
+                 Xamarin.Essentials.SecureStorage.SetAsync("Theme", theme.ToString());
+                Helper.InfoMessage("Silahkan Logout Untuk Mengubah Thema");
+                themeLabel.Text = $"Theme ({theme.ToString()})";
+            }
+               
         }
     }
 
@@ -70,6 +94,9 @@ namespace MobileApp.Views
            var result =  await Application.Current.MainPage.DisplayAlert("Yakin ?", "Anda Ingin Keluar ?", "Ya", "Tidak");
             if (result)
             {
+                string themeString = Xamarin.Essentials.SecureStorage.GetAsync("Theme").Result;
+                Theme theme = (Theme)Enum.Parse(typeof(Theme), themeString);
+               await Helper.SetTheme(theme);
                await AuthService.SignOut();
             }
         }
@@ -91,8 +118,9 @@ namespace MobileApp.Views
                 case TypeProfileView.Absen:
                    await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.AbsenView());
                     break;
-                case TypeProfileView.Pelanggaran:
-                   await Application.Current.MainPage.Navigation.PushModalAsync(new Views.PelanggaranView());
+                case TypeProfileView.Kejadian:
+                    var pelanggaranPage = new Views.Profiles.DataKejadianView();
+                   await Application.Current.MainPage.Navigation.PushModalAsync(pelanggaranPage);
                     break;
                 case TypeProfileView.Pelaporan:
                    await Application.Current.MainPage.Navigation.PushModalAsync(new MobileApp.Views.Profiles.DataMelaporkanView());
@@ -102,7 +130,10 @@ namespace MobileApp.Views
                     break;
                 case TypeProfileView.MutasiPerusahaan:
                    await Application.Current.MainPage.Navigation.PushModalAsync(new Profiles.MutasiView());
+                    break;
 
+                case TypeProfileView.About:
+                    await Application.Current.MainPage.Navigation.PushModalAsync(new AboutPage());
                     break;
                 default:
                     break;

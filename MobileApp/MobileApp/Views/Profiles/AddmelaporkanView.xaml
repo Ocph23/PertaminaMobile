@@ -4,10 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Profiles.AddmelaporkanView">
     <ContentPage.Content>
-        <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="30">
+        <Frame Style="{DynamicResource  MainBackground}">
+            <Frame.Background>
+            </Frame.Background>
             <Grid Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -22,14 +25,14 @@
                             <Label Margin="5,0,0,0" Text="MELAPORKAN PELANGGARAN"  FontSize="Small" FontAttributes="Bold"/>
                         </FlexLayout>
                         <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="OrangeRed" >
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="Red" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
-                    <Frame HorizontalOptions="Center" BorderColor="White" HeightRequest="80" WidthRequest="80" Margin="3"  Padding="0" CornerRadius="40"
-                                    Style="{DynamicResource entryFrameStyle}" BackgroundColor="{DynamicResource MainColor}">
+                    <Frame HorizontalOptions="Center" BorderColor="White" HeightRequest="80" WidthRequest="80" Margin="0,10"  Padding="0" CornerRadius="40"
+                                    Style="{DynamicResource entryFrameStyle}" BackgroundColor="{DynamicResource PageBackgroundColor}">
                         <ffimageloading:CachedImage  Aspect="Fill"
                               Source="{Binding Karyawan.PhotoView}"
                               LoadingPlaceholder = "LoaderImage" 
@@ -41,9 +44,10 @@
                         </ffimageloading:CachedImage>
                     </Frame>
                     <StackLayout HorizontalOptions="CenterAndExpand">
-                        <Label Text="{Binding Karyawan.NamaKaryawan}" TextColor="Black" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold"></Label>
+                        <Label Text="{Binding Karyawan.NamaKaryawan}" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold"></Label>
                         <Label Text="{Binding Karyawan.Perusahaan.Perusahaan.Nama}" FontSize="Small" HorizontalOptions="Center"></Label>
                     </StackLayout>
+                    <BoxView HeightRequest="1" BackgroundColor="{DynamicResource TertiaryTextColor}"/>
                     <ActivityIndicator Margin="5" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="OrangeRed" HorizontalOptions="CenterAndExpand"/>
                 </StackLayout>
                 <ScrollView Grid.Row="1">
@@ -54,11 +58,12 @@
                                     <Label Text="&#xf46d;" Style="{DynamicResource Icons}"/>
                                     <Label Text="Pelanggaran" VerticalOptions="CenterAndExpand"/>
                                 </FlexLayout>
-                                <Button HorizontalOptions="EndAndExpand" VerticalOptions="Center" Text="&#xf46c;" FontFamily="{DynamicResource FontAwesomeSolid}"
+                                <Button HorizontalOptions="EndAndExpand" VerticalOptions="Center" Text="&#xf46c;" 
+                                        FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" 
                                        Margin="0" HeightRequest="40" WidthRequest="40" Padding="0" CornerRadius="5" Style="{DynamicResource okButton}"
                                     Command="{Binding AddDetailPelanggaranCommand}"></Button>
                             </StackLayout>
-                            <ListView ItemsSource="{Binding Details}" HeightRequest="150" SelectionMode="None" VerticalOptions="StartAndExpand"  
+                            <ListView ItemsSource="{Binding Details}" HeightRequest="150" SeparatorColor="{DynamicResource TertiaryTextColor}" SelectionMode="None" VerticalOptions="StartAndExpand"  
                                           Margin="20,10">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -78,10 +83,11 @@
                                     <Label Text="&#xf46d;" Style="{DynamicResource Icons}"/>
                                     <Label Text="Bukti" VerticalOptions="CenterAndExpand"/>
                                 </FlexLayout>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
-                                    <Button HeightRequest="40" CornerRadius="5" WidthRequest="40" Padding="0" FontFamily="{DynamicResource FontAwesomeSolid}"
-                                            Style="{DynamicResource okButton}" Text="&#xf07c;" Command="{Binding FolderCommand}" ></Button>
-                                    <Button HeightRequest="40" CornerRadius="5" WidthRequest="40" Padding="0" FontFamily="{DynamicResource FontAwesomeSolid}" 
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Padding="0" Margin="0">
+                                    <Button HeightRequest="25" WidthRequest="25" Padding="0" FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25"
+                                            Style="{DynamicResource okButton}" Margin="0" Text="&#xf07c;" Command="{Binding FolderCommand}" ></Button>
+                                    <Button HeightRequest="25" CornerRadius="5" WidthRequest="25" Margin="0" Padding="0" FontFamily="{DynamicResource FontAwesomeSolid}" 
+                                             FontSize="25"
                                             Style="{DynamicResource okButton}" Text="&#xf030;" Command="{Binding CameraCommand}" ></Button>
                                 </StackLayout>
                             </StackLayout>
@@ -124,7 +130,8 @@
                 <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="5" >
                     <Frame HeightRequest="60" CornerRadius="30" WidthRequest="60" Margin="0" Padding="0">
                         <Button HeightRequest="60" CornerRadius="30" WidthRequest="60"  FontFamily="{DynamicResource FontAwesomeSolid}" 
-                                            Style="{DynamicResource okButton}" Text="&#xf093;" TextColor="GreenYellow" Padding="0"  FontSize="30" Command="{Binding SaveCommand}" ></Button>
+                                            Style="{DynamicResource okButton}" Text="&#xf093;" Padding="0"  FontSize="30"
+                                Command="{Binding SaveCommand}" ></Button>
                     </Frame>
                 </StackLayout>
             </Grid>

@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using System.ComponentModel;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace MobileApp.Views
@@ -13,10 +14,12 @@ namespace MobileApp.Views
         public AboutPage()
         {
             InitializeComponent();
+            version.Text = $"Version {VersionTracking.CurrentVersion} ({VersionTracking.CurrentBuild})";
         }
 
-
-        
-
+        private void closetap(object sender, System.EventArgs e)
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MobileApp.Models.Datas;
+﻿using MobileApp.Controls;
+using MobileApp.Models.Datas;
 using MobileApp.ViewModels;
 using Newtonsoft.Json;
 using System;
@@ -17,11 +18,25 @@ namespace MobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AbsenScanView : ContentPage
     {
+        private AbsenViewModel vm;
+
         public AbsenScanView()
         {
             InitializeComponent();
             scannerView.Options = new ZXing.Mobile.MobileBarcodeScanningOptions { DelayBetweenContinuousScans = 100, AutoRotate = true  };
-            this.BindingContext = new AbsenViewModel();
+            this.BindingContext=vm = new AbsenViewModel();
+        }
+
+
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            vm.IsScanning = false;
+            vm.IsAnalyzing= false;
+            vm.SanningStatus = SanningStatus.None;
+            vm.SetCommand();
+
         }
     }
 
@@ -38,11 +53,12 @@ namespace MobileApp.Views
             SetCommand();
         }
 
-        private  Task SetCommand()
+        public  Task SetCommand()
         {
             AbsenCommand = new Command(AbsenAction, AbsenValidate);
             LemburCommand = new Command(LemburAction, LemburValidate);
             ScanningCommand = new Command(ScanningAction, x => IsScanning);
+          
             return Task.CompletedTask;
         }
 
@@ -59,13 +75,23 @@ namespace MobileApp.Views
                     var qrData = JsonConvert.DeserializeObject<QRData>(data.Text.ToString());
                     if (qrData == null)
                         return;
+
+
                     if (qrData != null)
                     {
                         if (DateTime.Now >= qrData.Mulai && DateTime.Now <= qrData.Selesai)
                         {
                             var absen = new Absen { KaryawanId = Helper.Profile.Karyawan.Id, Masuk = DateTime.Now, Pulang = null };
                             absen.AbsenType = this.SanningStatus == SanningStatus.Absen ? Models.AbsenType.Kerja : Models.AbsenType.Lembur;
-                            var result = await Absens.AddItemAsync(absen);
+                            if(absen.AbsenType== Models.AbsenType.Kerja)
+                            {
+                                var result = await Absens.AddItemAsync(absen);
+                            }
+                            else
+                            {
+                                var page = new InputLembur(absen);
+                                Helper.ShowLemburInput(page);
+                            }
                             SanningStatus = SanningStatus.None;
                         }
                         else
@@ -174,6 +200,13 @@ namespace MobileApp.Views
             set { SetProperty(ref isAbsen , value); }
         }
 
+
+        private bool showDescription;
+        public bool IsShowDescription
+        {
+            get { return showDescription; }
+            set { SetProperty(ref showDescription ,value); }
+        }
 
     }
 

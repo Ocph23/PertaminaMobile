@@ -2,6 +2,7 @@
 using MobileApp.Services;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,6 +19,7 @@ namespace MobileApp.Views
         public LoginView()
         {
             InitializeComponent();
+            version.Text =$"Version {VersionTracking.CurrentVersion} ({VersionTracking.CurrentBuild})";
             this.BindingContext =vm = new LoginViewModel();
         }
 
@@ -25,6 +27,18 @@ namespace MobileApp.Views
         {
             var pwd = (Entry)sender;
             vm.Password = pwd.Text;
+        }
+        private void tapOldPassword(object sender, EventArgs e)
+        {
+            var label = sender as Label;
+
+            label.Text = password.IsPassword ? "\xf06e" : "\xf070";
+            password.IsPassword = !password.IsPassword;
+        }
+
+        private void showIPAddress(object sender, EventArgs e)
+        {
+            ipaddress.IsVisible = !ipaddress.IsVisible;
         }
     }
 

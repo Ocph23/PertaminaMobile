@@ -31,6 +31,11 @@ namespace MobileApp.Views.Profiles
                 senderItem.SelectedItem = null;
             }
         }
+
+        private void closetap(object sender, EventArgs e)
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
     }
 
 

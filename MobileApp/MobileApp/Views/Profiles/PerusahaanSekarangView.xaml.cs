@@ -20,6 +20,7 @@ namespace MobileApp.Views.Profiles
         {
             InitializeComponent();
             BindingContext = vm = new PerusahaanSekarangViewModel(data);
+            title.Text = "DATA PERUSAHAAN";
         }
 
         public PerusahaanSekarangView()

@@ -7,10 +7,9 @@ using Com.Airbnb.Lottie;
 
 namespace MobileApp.Droid
 {
-    [Activity(Label = "SplashScreen", MainLauncher =true, Theme = "@style/Theme.Splash") ]
+    [Activity(Label = "SplashScreen", MainLauncher =true, Theme = "@style/Theme.Splash", NoHistory =true) ]
     public class SplashScreen : Activity, Animator.IAnimatorListener
     {
-        private int loop;
 
         public void OnAnimationCancel(Animator animation)
         {

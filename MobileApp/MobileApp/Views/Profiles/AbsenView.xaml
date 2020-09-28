@@ -7,61 +7,61 @@
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Profiles.AbsenView">
     <ContentPage.Content>
-                <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="30">
-                <Grid  Padding="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="80"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <StackLayout Orientation="Horizontal">
-                        <FlexLayout >
-                            <Label Margin="5,0,0,0" Text="&#xf783;" 
+        <Frame Style="{DynamicResource MainBackground}" >
+            <Grid  Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackLayout Orientation="Horizontal">
+                    <FlexLayout >
+                        <Label Margin="5,0,0,0" Text="&#xf783;" 
                                FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
-                            <Label Margin="5,0,0,0" Text="ABSENSI"  FontSize="Small" FontAttributes="Bold"/>
-                        </FlexLayout>
-                        <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="OrangeRed" >
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </StackLayout>
-                    <StackLayout Margin="10" Grid.Row="1" VerticalOptions="StartAndExpand">
-                        <Label Margin="5,0,0,0" Text="Periode" Style="{DynamicResource dataTitle}"/>
-                        <Frame Style="{DynamicResource frameInputOut}">
-                            <Frame Style="{DynamicResource  frameInputIn}">
-                                <controls:PickerCustom ItemsSource="{Binding DataPeriode}"  SelectedItem="{Binding SelectedPeriode}" ItemDisplayBinding="{Binding  DisplayName}" />
-                            </Frame>
+                        <Label Margin="5,0,0,0" Text="ABSENSI"  FontSize="Small" FontAttributes="Bold"/>
+                    </FlexLayout>
+                    <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="Red" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <StackLayout Margin="10" Grid.Row="1" VerticalOptions="StartAndExpand">
+                    <Label Margin="5,0,0,0" Text="Periode" Style="{DynamicResource dataTitle}"/>
+                    <Frame Style="{DynamicResource frameInputOut}">
+                        <Frame Style="{DynamicResource  frameInputIn}">
+                            <controls:PickerCustom ItemsSource="{Binding DataPeriode}" BackgroundColor="{DynamicResource EntryColor}" 
+                                                   SelectedItem="{Binding SelectedPeriode}" ItemDisplayBinding="{Binding  DisplayName}" />
+                        </Frame>
                     </Frame>
-                    </StackLayout>
-                    <ListView ItemsSource="{Binding Datas}" Grid.Row="2" SeparatorVisibility="None" BackgroundColor="Transparent" Margin="0,10" 
+                </StackLayout>
+                <ListView ItemsSource="{Binding Datas}" Grid.Row="2" SeparatorVisibility="None" BackgroundColor="Transparent" Margin="0,10" 
                               IsRefreshing="{Binding IsBusy}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding LoadCommand}" HasUnevenRows="True" SelectionMode="None" >
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                        <Frame CornerRadius="10" Style="{DynamicResource entryFrameStyle}" Margin="3" Padding="0" >
-                                            <Grid >
-                                                <StackLayout Padding="10">
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="{Binding AbsenType, StringFormat='Jam {0}'}" FontSize="Small" FontAttributes="Bold"></Label>
-                                                        <Label Text="&#xf783;" Style="{DynamicResource Icons}" VerticalOptions="Start" HorizontalOptions="EndAndExpand" />
-                                                    </StackLayout>
-                                                    <Label Text="{Binding Masuk, StringFormat='{0: dd MMM yyyy}'}" FontSize="Micro"/>
-                                                    <FlexLayout Padding="10,0">
-                                                        <Label Text="{Binding Masuk, StringFormat='Masuk : {0:HH:mm}'}" FontSize="Small" Margin="0,0,50,0" ></Label>
-                                                        <Label Text="{Binding Pulang,StringFormat='Pulang : {0:HH:mm}'}" FontSize="Small" HorizontalOptions="EndAndExpand"></Label>
-                                                    </FlexLayout>
-                                                </StackLayout>
-                                               
-                                            </Grid>
-                                        </Frame>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame CornerRadius="10" Style="{DynamicResource entryFrameStyle}" Margin="3" Padding="0" >
+                                    <Grid >
+                                        <StackLayout Padding="10">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{Binding AbsenType, StringFormat='Jam {0}'}" FontSize="Small" FontAttributes="Bold"></Label>
+                                                <Label Text="&#xf783;" Style="{DynamicResource Icons}" VerticalOptions="Start" HorizontalOptions="EndAndExpand" />
+                                            </StackLayout>
+                                            <Label Text="{Binding Masuk, StringFormat='{0: dd MMM yyyy}'}" FontSize="Micro"/>
+                                            <FlexLayout Padding="10,0">
+                                                <Label Text="{Binding Masuk, StringFormat='Masuk : {0:HH:mm}'}" FontSize="Small" Margin="0,0,50,0" ></Label>
+                                                <Label Text="{Binding Pulang,StringFormat='Pulang : {0:HH:mm}'}" FontSize="Small" HorizontalOptions="EndAndExpand"></Label>
+                                            </FlexLayout>
+                                        </StackLayout>
 
-                </Grid>
-            </Frame>
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Frame>
     </ContentPage.Content>
 </ContentPage>

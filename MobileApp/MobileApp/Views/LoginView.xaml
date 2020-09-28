@@ -5,53 +5,79 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:MobileApp.Controls"
              NavigationPage.HasNavigationBar="False"
-             mc:Ignorable="d" BackgroundColor="{DynamicResource MainColor}"
+             mc:Ignorable="d" 
              x:Class="MobileApp.Views.LoginView">
     <ContentPage.Resources>
        
     </ContentPage.Resources>
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30*"/>
-                <RowDefinition Height="65*"/>
-                <RowDefinition Height="5*"/>
-            </Grid.RowDefinitions>
-            <StackLayout Grid.Row="0">
-                <Image Source="logo2.png" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" WidthRequest="70" >
-                </Image>
-            </StackLayout>
-            <StackLayout Grid.Row="1"  Margin="40,20">
-                <StackLayout>
-                    <Frame Style="{DynamicResource frameInputOut}" >
-                        <Frame Style="{DynamicResource  frameInputIn}" >
-                            <controls:EntryCustom  Text="{Binding UserName}" Placeholder="User Name"  ></controls:EntryCustom>
-                        </Frame>
-                    </Frame>
-
-                    <Frame Style="{DynamicResource  frameInputOut}" >
-                        <Frame Style="{DynamicResource  frameInputIn}" >
-                            <controls:EntryCustom TextChanged="PasswordChange"  Placeholder="Password" IsPassword="True"  ></controls:EntryCustom>
-                        </Frame>
-                    </Frame>
-
-                    <Frame Style="{DynamicResource entryFrameStyle}" Padding="0" Margin="0,20,0,0" CornerRadius="30">
-                        <Button Style="{DynamicResource okButton}" Text="Login" TextColor="White"  HeightRequest="50" BackgroundColor="YellowGreen"  Margin="0" Padding="0" Command="{Binding LoginCommand}" />
-                    </Frame>
-                    <Frame Style="{DynamicResource entryFrameStyle}" Padding="0" Margin="0,0,0,0" CornerRadius="30">
-                        <ImageButton CornerRadius="10" Command="{Binding GoogleLoginCommand}" Aspect="AspectFit" Source="google.png" Padding="10" ></ImageButton>
-                    </Frame>
-                    <Label Style="{DynamicResource dataValue}" Margin="20" HorizontalOptions="Center" Text="Forgot Your Password ?">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <ActivityIndicator Margin="50" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="OrangeRed" HorizontalOptions="CenterAndExpand"/>
+        <Frame  Style="{DynamicResource MainBackground}" >
+          
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="65*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0">
+                    <Image Source="logo2.png" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" WidthRequest="70" >
+                    </Image>
                 </StackLayout>
-            </StackLayout>
-            <StackLayout Grid.Row="2">
-                <controls:EntryCustom FontSize="12" VerticalOptions="EndAndExpand" BackgroundColor="Transparent" HorizontalTextAlignment="Center" Text="{Binding URL}"/>
-            </StackLayout>
-        </Grid>
+                <StackLayout Grid.Row="1"  Margin="20,20">
+                    <StackLayout>
+                        <Frame Style="{DynamicResource frameInputOut}" >
+                            <Frame Style="{DynamicResource  frameInputIn}" >
+                                <controls:EntryCustom  Text="{Binding UserName}" Placeholder="User Name"  ></controls:EntryCustom>
+                            </Frame>
+                        </Frame>
+
+                        <Frame Style="{DynamicResource  frameInputOut}" >
+                            <Frame Style="{DynamicResource  frameInputIn}" >
+                                <Grid>
+                                <controls:EntryCustom x:Name="password" TextChanged="PasswordChange"  Placeholder="Password" IsPassword="True"  ></controls:EntryCustom>
+                                    <Label HorizontalOptions="End" Text="&#xf070;" VerticalOptions="CenterAndExpand" Margin="10" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="18"  TextColor="{DynamicResource TertiaryTextColor}" >
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="tapOldPassword"></TapGestureRecognizer>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Grid>
+                            </Frame>
+                        </Frame>
+
+                        <Frame Style="{DynamicResource entryFrameStyle}" Padding="0" Margin="0,20,0,0" CornerRadius="30">
+                            <Button Style="{DynamicResource okButton}" Text="Login"  HeightRequest="50"   Margin="0" Padding="0" Command="{Binding LoginCommand}" />
+                        </Frame>
+                        <Frame Style="{DynamicResource entryFrameStyle}" Padding="0" Margin="0,0,0,0" CornerRadius="30">
+                            <ImageButton CornerRadius="10" Command="{Binding GoogleLoginCommand}"  Aspect="AspectFit" 
+                                         Source="google.png" Padding="10" ></ImageButton>
+                        </Frame>
+                        <Label Style="{DynamicResource dataValue}" Margin="20" HorizontalOptions="Center" Text="Forgot Your Password ?">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <ActivityIndicator Margin="10" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="OrangeRed" 
+                                          VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Grid.Row="2">
+                    <Frame Style="{DynamicResource frameInputOut}" x:Name="ipaddress" IsVisible="False" >
+                        <Frame Style="{DynamicResource  frameInputIn}" >
+                            <controls:EntryCustom  Text="{Binding URL}" Placeholder="IP ADDRESS"  HorizontalTextAlignment="Center" ></controls:EntryCustom>
+
+                        </Frame>
+                    </Frame>
+                    <StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer  Tapped="showIPAddress"/>
+                        </StackLayout.GestureRecognizers>
+                        <Label x:Name="version" Margin="0,-5,0,0" Text="Version" FontSize="7" HorizontalOptions="CenterAndExpand"/>
+                        <Label x:Name="powerBy" Margin="0,-5,0,0" Text="Power By Octagon Cendrawasih  Solution" FontSize="7" HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </Frame>
+    
     </ContentPage.Content>
 </ContentPage>

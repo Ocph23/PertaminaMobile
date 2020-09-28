@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:controls="clr-namespace:MobileApp.Controls"
+             NavigationPage.HasNavigationBar="False"
+             mc:Ignorable="d"
+             x:Class="MobileApp.Views.MelaporkanKejadian">
+    <Frame Style="{DynamicResource  MainBackground}">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0">
+                <StackLayout Orientation="Horizontal">
+                    <FlexLayout >
+                        <Label Margin="5,0,0,0" Text="&#xf0a1;" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
+                        <Label Margin="5,0,0,0" Text="MELAPORKAN KEJADIAN"  FontSize="Small" FontAttributes="Bold"/>
+                    </FlexLayout>
+                    <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="Red" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <ActivityIndicator Margin="5" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="OrangeRed" HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+            <ScrollView Grid.Row="1">
+                <StackLayout>
+                    <StackLayout VerticalOptions="StartAndExpand">
+                        <Label Margin="5,10,0,0" Text="Deskripsi Kejadian" Style="{DynamicResource dataTitle}"/>
+                        <Frame Style="{DynamicResource frameInputOut}">
+                            <Frame Style="{DynamicResource frameInputIn}" CornerRadius="25">
+                                <controls:EditorCustom Text="{Binding Model.Deskripsi}" BackgroundColor="{DynamicResource EntryColor}" 
+                                                       HeightRequest="200" Padding="15,15" ></controls:EditorCustom>
+                            </Frame>
+                        </Frame>
+                    </StackLayout>
+                    <StackLayout VerticalOptions="StartAndExpand" >
+                        <StackLayout Orientation="Horizontal">
+                            <FlexLayout>
+                                <Label Text="&#xf46d;" Style="{DynamicResource Icons}"/>
+                                <Label Text="Bukti" VerticalOptions="CenterAndExpand"/>
+                            </FlexLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Padding="0" Margin="0">
+                                <Button HeightRequest="25" WidthRequest="25" Padding="0" FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25"
+                                            Style="{DynamicResource okButton}" Margin="0" Text="&#xf07c;" Command="{Binding FolderCommand}" ></Button>
+                                <Button HeightRequest="25" CornerRadius="5" WidthRequest="25" Margin="0" Padding="0" FontFamily="{DynamicResource FontAwesomeSolid}" 
+                                             FontSize="25"
+                                            Style="{DynamicResource okButton}" Text="&#xf030;" Command="{Binding CameraCommand}" ></Button>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout  >
+                            <CarouselView x:Name="TheCarousel" ItemsSource="{Binding Model.Files}"  HeightRequest="150" WidthRequest="150" IndicatorView="indicatorview">
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid HorizontalOptions="CenterAndExpand">
+                                                <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="5" Padding="10" MinimumHeightRequest="140">
+                                                    <Image Source="{Binding DataView}" Aspect="AspectFill" WidthRequest="140" HeightRequest="140" >
+                                                        <Image.GestureRecognizers>
+                                                            <TapGestureRecognizer Tapped="showImage"></TapGestureRecognizer>
+                                                        </Image.GestureRecognizers>
+                                                    </Image>
+                                                </Frame>
+                                                <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
+                                                    FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="20" TextColor="OrangeRed" >
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="deleteImage"></TapGestureRecognizer>
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView
+                                x:Name="indicatorview"
+                                AbsoluteLayout.LayoutBounds="0.5,0.95,100,100"
+                                AbsoluteLayout.LayoutFlags="PositionProportional"
+                                IndicatorColor="LightGray"
+                                IndicatorSize="10"   
+                                SelectedIndicatorColor="Black" />
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="5" >
+                <Frame HeightRequest="60" CornerRadius="30" WidthRequest="60" Margin="0" Padding="0">
+                    <Button HeightRequest="60" CornerRadius="30" WidthRequest="60"  FontFamily="{DynamicResource FontAwesomeSolid}" 
+                                            Style="{DynamicResource okButton}" Text="&#xf093;" Padding="0"  FontSize="30"
+                                Command="{Binding SaveCommand}" ></Button>
+                </Frame>
+            </StackLayout>
+        </Grid>
+
+    </Frame>
+</ContentPage>

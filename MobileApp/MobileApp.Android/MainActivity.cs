@@ -43,9 +43,7 @@ namespace MobileApp.Droid
             
             base.OnCreate(savedInstanceState);
             Forms.SetFlags(new string[] { "Expander_Experimental", "Brush_Experimental" });
-
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            
             
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
@@ -54,20 +52,28 @@ namespace MobileApp.Droid
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             Firebase.Messaging.FirebaseMessaging.Instance.SubscribeToTopic("all");
             CreateNotificationChannel();
+            GoogleSettup();
+            MainActivityInstance = this;
+            
+            
+            LoadApplication(new App());
+        }
+
+        private Task GoogleSettup()
+        {
             gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DefaultSignIn)
-             .RequestIdToken("505524341439-7uau390b9vq18qb11r0lcuh3h9cdeiup.apps.googleusercontent.com")
-             //.RequestId()
-             .RequestEmail()
-             //.RequestProfile()
-             .Build();
+            .RequestIdToken("505524341439-7uau390b9vq18qb11r0lcuh3h9cdeiup.apps.googleusercontent.com")
+            //.RequestId()
+            .RequestEmail()
+            //.RequestProfile()
+            .Build();
 
             googleApiClient = new GoogleApiClient.Builder(this)
                            .AddApi(Auth.GOOGLE_SIGN_IN_API, gso).Build();
-            
+
             googleApiClient.Connect();
             firebaseAuth = GetFirebaseAuth();
-            MainActivityInstance = this;
-            LoadApplication(new App());
+            return Task.CompletedTask;
         }
 
         private FirebaseAuth GetFirebaseAuth()

@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -39,8 +37,7 @@ namespace MobileApp.Views.Profiles
         private void showImage(object sender, EventArgs e)
         {
             var image = (Image)sender;
-            var page = new MobileApp.Views.Profiles.ImageView();
-            page.BackgroundImageSource = image.Source;
+            var page = new MobileApp.Views.Profiles.ImageView(image.Source);
             Navigation.PushModalAsync(page);
         }
     }
@@ -104,6 +101,10 @@ namespace MobileApp.Views.Profiles
                     Status = Models.StatusPelanggaran.Baru
                 };
 
+
+                if (Helper.Profile.Roles.Contains("admin")|| Helper.Profile.Roles.Contains("manager"))
+                    pelangagran.Jenis = Models.PelanggaranType.Pelanggaran;
+
                 pelangagran.ItemPelanggarans = new List<DetailPelanggaran>();
                 foreach (var item in Details)
                 {
@@ -122,6 +123,10 @@ namespace MobileApp.Views.Profiles
 
                 IsBusy = false;
                 Helper.ErrorMessage(ex.Message);
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
@@ -204,7 +209,7 @@ namespace MobileApp.Views.Profiles
             if (file == null)
                 return;
 
-            var bukti = new BuktiPelanggaran();
+            var bukti = new BuktiPelanggaran() { FileType = "Image" };
 
 
             var stream = file.GetStream();

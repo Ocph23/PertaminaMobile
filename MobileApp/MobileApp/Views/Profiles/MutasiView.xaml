@@ -6,55 +6,56 @@
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Profiles.MutasiView">
     <ContentPage.Content>
-            <Frame Style="{DynamicResource entryFrameStyle}" Padding="20" CornerRadius="30">
-                <Grid >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <StackLayout Orientation="Horizontal">
-                        <FlexLayout >
-                            <Label Margin="5,0,0,0" Text="&#xf362;" 
+            <Frame Style="{DynamicResource MainBackground}" Padding="20" >
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackLayout Orientation="Horizontal">
+                    <FlexLayout >
+                        <Label Margin="5,0,0,0" Text="&#xf362;" 
                                FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
-                            <Label Margin="5,0,0,0" Text="DATA MUTASI"  FontSize="Small" FontAttributes="Bold"/>
-                        </FlexLayout>
-                        <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="OrangeRed" >
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </StackLayout>
-                    <ListView ItemsSource="{Binding Datas}" Grid.Row="1" SeparatorVisibility="None" Margin="0,20"
+                        <Label Margin="5,0,0,0" Text="DATA MUTASI"  FontSize="Small" FontAttributes="Bold"/>
+                    </FlexLayout>
+                    <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="Red" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <ListView ItemsSource="{Binding Datas}" Grid.Row="1" SeparatorVisibility="None" Margin="0,20"
                               BackgroundColor="Transparent" ItemSelected="ListView_ItemSelected" IsRefreshing="{Binding IsBusy}" RefreshCommand="{Binding LoadCommand}" 
                               HasUnevenRows="True" >
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                        <Frame CornerRadius="10" Style="{DynamicResource entryFrameStyle}" Padding="10" >
-                                            <Grid >
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="auto"/>
-                                                    <ColumnDefinition Width="auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                    <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="0" Padding="0">
-                                                        <Image Source="{Binding Perusahaan.LogoView}"  HeightRequest="70" WidthRequest="70"  />
-                                                    </Frame>
-                                                <StackLayout Grid.Column="1">
-                                                    <StackLayout Padding="0">
-                                                        <Label Text="{Binding Perusahaan.Nama}" FontSize="15"  />
-                                                            <Label Text="{Binding MulaiKerja, StringFormat='Sejak   : {0:dd MMMM yyyy}'}" Style="{DynamicResource dataTitle}"/>
-                                                            <Label Text="{Binding SelesaiView, StringFormat='Hingga : {0}'}" Style="{DynamicResource dataTitle}"/>
-                                                    </StackLayout>
-                                                </StackLayout>
-                                            </Grid>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame CornerRadius="10" Style="{DynamicResource entryFrameStyle}" Padding="15" >
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="0" Padding="0">
+                                            <Image Source="{Binding Perusahaan.LogoView}"  HeightRequest="70" WidthRequest="70"  />
                                         </Frame>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                        <StackLayout Grid.Column="1" Grid.ColumnSpan="2">
+                                            <StackLayout Padding="0">
+                                                <Label Text="{Binding Perusahaan.Nama}" FontSize="18"  />
+                                                <BoxView Style="{DynamicResource hr}"/>
+                                                <Label Text="{Binding MulaiKerja, StringFormat='Sejak   : {0:dd MMMM yyyy}'}" Style="{DynamicResource dataTitle}"/>
+                                                <Label Text="{Binding SelesaiView, StringFormat='Hingga : {0}'}" Style="{DynamicResource dataTitle}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
-                </Grid>
-            </Frame>
+            </Grid>
+        </Frame>
     </ContentPage.Content>
 </ContentPage>

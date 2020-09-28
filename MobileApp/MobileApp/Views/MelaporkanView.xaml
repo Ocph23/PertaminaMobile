@@ -8,51 +8,59 @@
              mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
              x:Class="MobileApp.Views.MelaporkanView">
     <ContentPage.Content>
-        <Grid BackgroundColor="{StaticResource MainColor}" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Frame Padding="10">
-                <FlexLayout Padding="0" Style="{DynamicResource entryFrameStyle}">
-                    <Label Text="&#xf0a1;" FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" 
-                           Margin="5,0" ></Label>
-                    <Label Text="Melaporkan"  FontSize="20" Margin="0"></Label>
-                </FlexLayout>
-            </Frame>
-            <Grid Grid.Row="1" Margin="10">
+        <Frame Style="{DynamicResource MainBackground}">
+            <Grid >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <StackLayout Margin="0,0,0,10">
-                    <Frame Style="{DynamicResource frameInputOut}" >
-                        <Frame Style="{DynamicResource frameInputIn}">
-                            <controls:SearchBarCustom IsVisible="{Binding SearchMode}" BackgroundColor="#F2F2F2" Placeholder="Search items.." Text="{Binding SearchText}">
-                                <SearchBar.Behaviors>
-                                    <controls:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand}"/>
-                                </SearchBar.Behaviors>
-                            </controls:SearchBarCustom>
-                        </Frame>
-                    </Frame>
+
+                <StackLayout Orientation="Horizontal">
+                    <FlexLayout >
+                        <Label Margin="0,0,0,0" Text="&#xf0a1;" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
+                        <Label Margin="5,0,0,0" Text="MELAPORKAN PELANGGARAN"  FontSize="Medium" FontAttributes="Bold"/>
+                    </FlexLayout>
+                    <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="Red" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
                 </StackLayout>
-                <ListView Grid.Row="1" BackgroundColor="Transparent" 
+                <Grid Grid.Row="1" Margin="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackLayout Margin="0,0,0,10">
+                        <Frame Style="{DynamicResource frameInputOut}" >
+                            <Frame Style="{DynamicResource frameInputIn}" BackgroundColor="{DynamicResource EntryColor}">
+                                <controls:SearchBarCustom IsVisible="{Binding SearchMode}"  BackgroundColor="Transparent" Placeholder="Cari Karyawan .." Text="{Binding SearchText}">
+                                    <SearchBar.Behaviors>
+                                        <controls:EventToCommandBehavior EventName="TextChanged"  Command="{Binding SearchCommand}"/>
+                                    </SearchBar.Behaviors>
+                                </controls:SearchBarCustom>
+                            </Frame>
+                        </Frame>
+                    </StackLayout>
+                    <ListView Grid.Row="1" BackgroundColor="Transparent" 
                                 SeparatorVisibility="None"
                                 IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsBusy}" 
                                 RefreshCommand="{Binding LoadCommand}"  
                                 ItemsSource="{Binding SourceView}" ItemSelected="onSelect"
                               HasUnevenRows="True" SelectionMode="Single" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Frame CornerRadius="10" Style="{DynamicResource entryFrameStyle}" BackgroundColor="{StaticResource PrimaryColor}" 
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame CornerRadius="10" Style="{DynamicResource entryFrameStyle}" BackgroundColor="{StaticResource PrimaryColor}" 
                                        Margin="3" Padding="10" >
-                                    <Grid >
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <ffimageloading:CachedImage  HeightRequest="75" WidthRequest="75"
+                                        <Grid >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <ffimageloading:CachedImage  HeightRequest="75" WidthRequest="75"
                                                           Source="{Binding PhotoView}" Aspect="Fill"
                                                           LoadingPlaceholder = "LoaderImage" 
                                                           ErrorPlaceholder = "ErrorImage"
@@ -60,25 +68,26 @@
                                                           RetryCount= "3"
                                                           RetryDelay= "600" 
                                                           DownsampleToViewSize = "true">
-                                        </ffimageloading:CachedImage>
-                                        <StackLayout Grid.Column="1" Margin="10" VerticalOptions="CenterAndExpand">
-                                            <StackLayout Padding="0">
-                                                <Label  Text="{Binding NamaKaryawan}" Style="{DynamicResource  dataValue}"/>
-                                                <Label Text="{Binding KodeKaryawan}" Style="{DynamicResource  dataTitle}"/>
-                                                <BoxView HeightRequest="1" Margin="0,0,10,0" BackgroundColor="White" />
+                                            </ffimageloading:CachedImage>
+                                            <StackLayout Grid.Column="1" Margin="10" VerticalOptions="CenterAndExpand">
+                                                <StackLayout Padding="0">
+                                                    <Label  Text="{Binding NamaKaryawan}" Style="{DynamicResource  dataValue}"/>
+                                                    <Label Text="{Binding KodeKaryawan}" Style="{DynamicResource  dataTitle}"/>
+                                                    <BoxView HeightRequest="1" Margin="0,0,10,0" BackgroundColor="White" />
+                                                </StackLayout>
+                                                <StackLayout Padding="0">
+                                                    <Label  Text="{Binding Perusahaan.Perusahaan.Nama}" Style="{DynamicResource  dataTitle}"/>
+                                                </StackLayout>
                                             </StackLayout>
-                                            <StackLayout Padding="0">
-                                                <Label  Text="{Binding Perusahaan.Perusahaan.Nama}" Style="{DynamicResource  dataTitle}"/>
-                                            </StackLayout>
-                                        </StackLayout>
-                                    </Grid>
-                                </Frame>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                        </Grid>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
             </Grid>
-        </Grid>
 
+        </Frame>
     </ContentPage.Content>
 </ContentPage>

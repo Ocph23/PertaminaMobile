@@ -1,5 +1,4 @@
-﻿using MobileApp.Models;
-using MobileApp.Models.Datas;
+﻿using MobileApp.Models.Datas;
 using MobileApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,36 +10,24 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MobileApp.Views
+namespace MobileApp.Views.Profiles
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PelanggaranView : ContentPage
+    public partial class DataKejadianView : ContentPage
     {
-        public bool HasCloseTap { get; set; }
-        public PelanggaranView()
+        public DataKejadianView()
         {
             InitializeComponent();
-          
-            BindingContext = new PelanggaranViewModel();
-            Task.Run(() => Load());
-        }
-
-        private async Task Load()
-        {
-            await Task.Delay(200);
-            if (HasCloseTap)
-            {
-                this.tapClose.IsVisible = true;
-            }
+            BindingContext = new DataKejadianViewModel();
         }
 
         private async void OnSelected(object sender, SelectedItemChangedEventArgs e)
         {
             await Task.Delay(200);
             var senderItem = sender as ListView;
-            if(senderItem.SelectedItem != null)
+            if (senderItem.SelectedItem != null)
             {
-               await Navigation.PushModalAsync(new PelaggaranDetailView(senderItem.SelectedItem));
+                await Navigation.PushModalAsync(new PelaggaranDetailView(senderItem.SelectedItem));
                 senderItem.SelectedItem = null;
             }
         }
@@ -49,19 +36,12 @@ namespace MobileApp.Views
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
-
-
-        //private  void Close_tab(object sender, EventArgs e)
-        //{
-        //  Application.Current.MainPage.Navigation.PopModalAsync();
-        //}
     }
 
 
-    public class PelanggaranViewModel : BaseViewModel
+    public class DataKejadianViewModel : BaseViewModel
     {
-
-        public ObservableCollection<Pelanggaran> SourceView { get; set; } = new ObservableCollection<Pelanggaran>();
+        public ObservableCollection<Kejadian> SourceView { get; set; } = new ObservableCollection<Kejadian>();
 
         private object selected;
 
@@ -75,23 +55,23 @@ namespace MobileApp.Views
         public bool NotHaveResult
         {
             get { return notHaveResult; }
-            set { SetProperty(ref notHaveResult , value); }
+            set { SetProperty(ref notHaveResult, value); }
         }
 
 
         public Command LoadCommand { get; }
 
-        public PelanggaranViewModel()
+        public DataKejadianViewModel()
         {
-            LoadCommand = new Command(Load);
+            LoadCommand = new Command(LoadAction);
             LoadCommand.Execute(null);
         }
 
-        private async void Load()
+        private async void LoadAction(object obj)
         {
             try
             {
-                var source = await Pelanggarans.GetItemsAsync();
+                var source = await Pelanggarans.GetItemsKejadianAsync(true);
                 if (source == null || source.Count() <= 0)
                     NotHaveResult = true;
                 else
@@ -112,6 +92,11 @@ namespace MobileApp.Views
             {
                 Helper.ErrorMessage(ex.Message);
             }
+            finally
+            {
+                IsBusy = false;
+            }
         }
+
     }
 }

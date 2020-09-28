@@ -7,23 +7,23 @@
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Profiles.PerusahaanSekarangView">
     <ContentPage.Content>
-        <Frame Style="{DynamicResource  entryFrameStyle}" CornerRadius="30" Padding="20">
+        <Frame Style="{DynamicResource  MainBackground}" Padding="20">
             <StackLayout Grid.Row="1">
                 <StackLayout Orientation="Horizontal">
                     <FlexLayout >
-                        <Label Margin="0,0,0,0" Text="&#xf007;" 
+                        <Label Margin="0,0,0,0" Text="&#xf1ad;" 
                                FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
-                        <Label Margin="5,0,0,20" Text="PERUSAHAAN SEKARANG"  FontSize="Small" FontAttributes="Bold"/>
+                        <Label Margin="5,0,0,20" x:Name="title" Text="PERUSAHAAN SEKARANG"  FontSize="Small" FontAttributes="Bold"/>
                     </FlexLayout>
                     <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="OrangeRed" >
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="Red" >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
                 <Frame  BorderColor="White" HorizontalOptions="Center" HeightRequest="100" WidthRequest="80" Margin="3"  Padding="0" 
-                           CornerRadius="40" Style="{DynamicResource frameInputOut}" BackgroundColor="{DynamicResource MainColor}">
+                           CornerRadius="40" Style="{DynamicResource frameInputOut}" BackgroundColor="{DynamicResource PageBackgroundColor}">
                     <ffimageloading:CachedImage   Aspect="Fill"
                               Source="{Binding  Data.Perusahaan.LogoView}"
                               LoadingPlaceholder = "LoaderImage" 

@@ -6,11 +6,24 @@
              mc:Ignorable="d"
              x:Class="MobileApp.Views.AboutPage"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="Red"
              Title="{Binding Title}">
 
-    <Grid>
-        <Label Text="About"/>
-    </Grid>
+    <Frame  Style="{DynamicResource MainBackground}"  >
+        <StackLayout Grid.Row="0">
+            <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="Red" >
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
+                </Label.GestureRecognizers>
+            </Label>
+            <StackLayout Margin="0,50" VerticalOptions="CenterAndExpand">
+            <Image Source="logo2.png" Margin="20" HorizontalOptions="Center"  WidthRequest="150" />
+                <Label Margin="0,-5,0,0" Text="APLIKASI PELANGGARAN DAN ABSENSI" FontSize="15" HorizontalOptions="CenterAndExpand"/>
+                <Label Margin="0,-5,0,0" Text="PT. PERTAMINA - JAYAPURA" FontSize="15" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="version" Margin="0,-5,0,0" Text="Version 1.1 (100)" FontSize="10" HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+                <Label x:Name="powerBy" Margin="0,-5,0,0" Text="Power By Octagon Cendrawasih  Solution" FontSize="8" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+    </Frame>
 
 </ContentPage>

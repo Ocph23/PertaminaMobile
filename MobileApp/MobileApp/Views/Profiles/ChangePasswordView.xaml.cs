@@ -22,6 +22,33 @@ namespace MobileApp.Views.Profiles
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
+
+        private void eyeOpen(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void tapOldPassword(object sender, EventArgs e)
+        {
+            var label = sender as Label;
+
+            label.Text = oldPassword.IsPassword ? "\xf06e" : "\xf070";
+            oldPassword.IsPassword = !oldPassword.IsPassword;
+        }
+        private void tapNewPassword(object sender, EventArgs e)
+        {
+            var label = sender as Label;
+
+            label.Text = newPassword.IsPassword ? "\xf06e" : "\xf070";
+            newPassword.IsPassword = !newPassword.IsPassword;
+        }
+        private void tapConfirmPassword(object sender, EventArgs e)
+        {
+            var label = sender as Label;
+
+            label.Text = confirmPassword.IsPassword ? "\xf06e" : "\xf070";
+            confirmPassword.IsPassword = !confirmPassword.IsPassword;
+        }
     }
 
 

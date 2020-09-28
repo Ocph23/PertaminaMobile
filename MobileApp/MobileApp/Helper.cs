@@ -1,9 +1,12 @@
-﻿using MobileApp.Models;
+﻿using MobileApp.Controls;
+using MobileApp.Models;
+using MobileApp.Themes;
 using Newtonsoft.Json;
 using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MobileApp
@@ -38,6 +41,27 @@ namespace MobileApp
                 Xamarin.Essentials.SecureStorage.SetAsync("url", value);
 
             }
+        }
+
+        internal static  Task<bool> SetTheme(Theme theme)
+        {
+            Application.Current.Resources.MergedDictionaries.Clear();
+
+            switch (theme)
+            {
+                case Theme.White:
+                    Application.Current.Resources.MergedDictionaries.Add(new WhiteTheme());
+                    break;
+                case Theme.RedOrange:
+                    Application.Current.Resources.MergedDictionaries.Add(new OrangeRed());
+                    break;
+                default:
+                    Application.Current.Resources.MergedDictionaries.Add(new WhiteTheme());
+                    break;
+            }
+
+            return Task.FromResult(true);
+
         }
 
         public static UserProfile Account { get {
@@ -86,6 +110,11 @@ namespace MobileApp
         {
             //MessagingCenter.Send(new MessagingCenterAlert { Cancel = "OK", Message = message, Title = "Error" }, "message");
             Application.Current.MainPage.Navigation.PushPopupAsync(new Controls.ErrorAlert(message));
+        }
+
+        internal static void ShowLemburInput(InputLembur page)
+        {
+            Application.Current.MainPage.Navigation.PushPopupAsync(page);
         }
 
         public static void InfoMessage(string message)

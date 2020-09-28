@@ -34,9 +34,9 @@ namespace MobileApp.Views
             var image = (Image)sender;
             var fn = image.Source.ToString().Split(' ')[1];
             var imageData = dataModel.Files.Where(x => x.ThumbView == fn).FirstOrDefault();
-
-            var page = new MobileApp.Views.Profiles.ImageView();
-            page.BackgroundImageSource = imageData==null?image.Source: new Uri(imageData.FileView);
+            
+            var source = imageData==null?image.Source: new Uri(imageData.FileView);
+            var page = new MobileApp.Views.Profiles.ImageView(source);
             Navigation.PushModalAsync(page);
         }
     }

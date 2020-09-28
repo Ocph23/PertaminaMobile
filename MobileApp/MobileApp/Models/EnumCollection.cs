@@ -11,7 +11,10 @@ namespace MobileApp.Models
 
     public enum TypeProfileView
     {
-        ChangeProfile, ChangePassword, Absen, Pelanggaran, Pelaporan, Perusahaan, MutasiPerusahaan 
+        ChangeProfile, ChangePassword, Absen, Pelanggaran, Pelaporan, Perusahaan, MutasiPerusahaan,
+        Kejadian,
+        Theme,
+        About
     }
 
     public enum StatusPelanggaran

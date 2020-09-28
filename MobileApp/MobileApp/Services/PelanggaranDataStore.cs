@@ -11,6 +11,7 @@ namespace MobileApp.Services
     public interface IPelanggaranDataStore<T>:IDataStore<T>
     {
         Task<IEnumerable<T>> GetItemsmelaporkanAsync(bool forceRefresh = false);
+        Task<IEnumerable<Kejadian>> GetItemsKejadianAsync(bool forceRefresh = false);
     }
 
 
@@ -19,6 +20,7 @@ namespace MobileApp.Services
 
         List<Pelanggaran> items;
         List<Pelanggaran> melaporkan;
+        List<Kejadian> kejadian;
         string controller = "/api/datakaryawan";
 
         public PelanggaranDataStore()
@@ -125,6 +127,31 @@ namespace MobileApp.Services
             else
             {
                 return melaporkan;
+            }
+        }
+
+        public async Task<IEnumerable<Kejadian>> GetItemsKejadianAsync(bool forceRefresh = false)
+        {
+            if (kejadian == null)
+            {
+                using (var client = new RestService())
+                {
+                    var result = await client.GetAsync(controller + "/pelaporan");
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var resultString = await result.Content.ReadAsStringAsync();
+                        kejadian= Newtonsoft.Json.JsonConvert.DeserializeObject<List<Kejadian>>(resultString);
+                        return kejadian;
+                    }
+                    else
+                    {
+                        throw new SystemException(await client.Error(result));
+                    }
+                }
+            }
+            else
+            {
+                return kejadian;
             }
         }
     }

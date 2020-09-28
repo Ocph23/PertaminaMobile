@@ -22,12 +22,20 @@
       HasBackgroundAnimation="True"/>
     </pages:PopupPage.Animation>
     <StackLayout >
-        <Frame CornerRadius="20" BackgroundColor="White" HasShadow="True" Margin="20" VerticalOptions="CenterAndExpand">
+        <Frame CornerRadius="20" Style="{DynamicResource MainBackground}" HasShadow="True" Margin="20" VerticalOptions="CenterAndExpand">
+            <Frame.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource PageBackgroundColor}"
+                          Offset="0.1" />
+                    <GradientStop Color="{StaticResource PageBackgroundSecoundaryColor}"
+                          Offset="1.0" />
+                </LinearGradientBrush>
+            </Frame.Background>
             <ScrollView>
-                <StackLayout HeightRequest="200" >
+                <StackLayout >
                     <StackLayout >
                         <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="30" TextColor="OrangeRed" >
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="30" TextColor="Red" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnClose"></TapGestureRecognizer>
                             </Label.GestureRecognizers>
@@ -35,7 +43,7 @@
                         <Image HorizontalOptions="CenterAndExpand" Margin="0,-20,0,0" HeightRequest="75" WidthRequest="75" Source="logo2.png"/>
                     </StackLayout>
                     <StackLayout Margin="10">
-                        <Label x:Name="message"  HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="Black"/>
+                        <Label x:Name="message" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="18" />
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

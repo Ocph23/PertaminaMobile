@@ -4,20 +4,20 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:controls="clr-namespace:MobileApp.Controls"
-             BackgroundColor="{DynamicResource MainColor}"
+             BackgroundColor="{DynamicResource PageBackgroundColor}"
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Profiles.ChangeProfileView">
     <ContentPage.Content>
-        <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="30">
+        <Frame Style="{DynamicResource MainBackground}" Margin="0">
             <StackLayout  Padding="20" Grid.Row="1">
                 <StackLayout Orientation="Horizontal">
                     <FlexLayout >
                         <Label Margin="0,0,0,0" Text="&#xf007;" 
                                FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="Medium" FontAttributes="Bold"/>
-                        <Label Margin="5,0,0,20" Text="UBAH PROFILE"  FontSize="Small" FontAttributes="Bold"/>
+                        <Label Margin="5,0,0,20" Text="UBAH PROFILE"  FontSize="Medium" FontAttributes="Bold"/>
                     </FlexLayout>
                     <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="OrangeRed"  >
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="Red"  >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
                         </Label.GestureRecognizers>
@@ -54,7 +54,7 @@
                 <Label Margin="5,10,0,0" Text="Alamat" Style="{DynamicResource dataTitle}"/>
                 <Frame Style="{DynamicResource frameInputOut}">
                     <Frame Style="{DynamicResource frameInputIn}" CornerRadius="25">
-                        <controls:EditorCustom Text="{Binding Alamat}" HeightRequest="100" Padding="15,15" ></controls:EditorCustom>
+                        <controls:EditorCustom Text="{Binding Alamat}" BackgroundColor="{DynamicResource EntryColor}" HeightRequest="100" Padding="15,15" ></controls:EditorCustom>
                     </Frame>
                 </Frame>
 

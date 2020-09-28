@@ -1,6 +1,5 @@
 ﻿using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using MobileApp.Services;
 using MobileApp.Views;
 using MobileApp.Models;
@@ -9,9 +8,8 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using System.Threading.Tasks;
 using MobileApp.Models.Datas;
-using System.Collections.Generic;
-using MobileApp.Themes;
 using System.Globalization;
+using Xamarin.Essentials;
 
 namespace MobileApp
 {
@@ -31,25 +29,7 @@ namespace MobileApp
                 requestCulture = CultureInfo.CurrentCulture;
             }
             System.Threading.Thread.CurrentThread.CurrentCulture = requestCulture;
-            //ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
-            //var theme = Theme.White;
-            //if (mergedDictionaries != null)
-            //{
-            //    mergedDictionaries.Clear();
 
-            //    switch (theme)
-            //    {
-            //        case Theme.White:
-            //            mergedDictionaries.Add(new WhiteTheme());
-            //            break;
-            //        case Theme.RedOrange:
-            //            mergedDictionaries.Add(new OrangeRed());
-            //            break;
-            //        default:
-            //            mergedDictionaries.Add(new WhiteTheme());
-            //            break;
-            //    }
-            //}
 
 
             MessagingCenter.Subscribe<MessagingCenterAlert>(this, "message", async (message) =>
@@ -82,8 +62,24 @@ namespace MobileApp
             DependencyService.Register<KaryawanDataStore>();
             DependencyService.Register<LevelPelangagranDataStore>();
             DependencyService.Register<NotificationDataStore>();
+            DependencyService.Register<KejadianDataStore>();
+
             AppCenter.Start("2531af1d-fce1-49da-94ba-d603aff80d84",
                    typeof(Analytics), typeof(Crashes));
+
+
+            string themeString = SecureStorage.GetAsync("Theme").Result;
+            Theme theme = Theme.White;
+            if (!string.IsNullOrEmpty(themeString))
+            {
+                theme = (Theme)Enum.Parse(typeof(Theme), themeString);
+            }
+            else
+            {
+                SecureStorage.SetAsync("Theme", theme.ToString());
+            }
+
+           var isSet =  Helper.SetTheme(theme).Result;
 
             if (Helper.Account != null)
             {
@@ -94,6 +90,7 @@ namespace MobileApp
                 MainPage = new LoginView();
 
             }
+
 
         }
 

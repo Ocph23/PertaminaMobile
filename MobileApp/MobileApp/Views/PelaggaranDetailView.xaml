@@ -6,92 +6,92 @@
              mc:Ignorable="d"
              x:Class="MobileApp.Views.PelaggaranDetailView">
     <ContentPage.Content>
-        <ScrollView >
-                <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="35">
-                    <StackLayout>
-                        <Label HorizontalOptions="EndAndExpand" Margin="10" Text="&#xf057;" 
-                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="OrangeRed" >
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <Label HorizontalOptions="CenterAndExpand" Margin="10" Text="&#xf071;" FontFamily="{DynamicResource FontAwesomeSolid}"
-                               FontSize="50" TextColor="OrangeRed" ></Label>
-                        <StackLayout Padding="20">
-                            <StackLayout>
-                                <Label Style="{DynamicResource dataTitle}" Text="Tanggal Kejadian" FontSize="15"></Label>
-                                <Label Style="{DynamicResource dataValue}" Margin="10,0,0,0"  Text="{Binding Data.TanggalKejadian, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"></Label>
-                            </StackLayout>
-                            <BoxView HeightRequest="1" BackgroundColor="White"/>
-                            <Expander>
-                                <Expander.Header>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Style="{DynamicResource dataTitle}" FontSize="15" Text="Pelanggaran"></Label>
-                                        <Label Style="{DynamicResource Icons}" HorizontalOptions="EndAndExpand" FontSize="20" Text="&#xf107;"></Label>
-                                    </StackLayout>
-                                </Expander.Header>
-                                <Expander.ContentTemplate>
-                                    <DataTemplate>
-                                        <ListView HeightRequest="250" HasUnevenRows="True" SelectionMode="None" ItemsSource="{Binding Data.ItemPelanggarans}">
-                                            <ListView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <ViewCell>
-                                                        <Grid Padding="10">
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="*"/>
-                                                                <ColumnDefinition Width="auto"/>
-                                                            </Grid.ColumnDefinitions>
-                                                            <StackLayout>
-                                                                <Label Text="{Binding DetailLevel.Level.Nama}" Style="{DynamicResource dataTitle }"/>
-                                                                <Label Text="{Binding DetailLevel.Nama}" />
-                                                            </StackLayout>
-                                                            <Label Grid.Column="1" Text="{Binding NilaiKaryawan}" VerticalOptions="CenterAndExpand"/>
-                                                        </Grid>
-                                                    </ViewCell>
-                                                </DataTemplate>
-                                            </ListView.ItemTemplate>
-                                        </ListView>
-                                    </DataTemplate>
-                                </Expander.ContentTemplate>
-                            </Expander>
-                            <BoxView HeightRequest="1" BackgroundColor="White"/>
-                            <StackLayout>
-                                <Label Style="{DynamicResource dataTitle}" FontSize="15" Text="Total Pengurangan"></Label>
-                                <Label Style="{DynamicResource dataValue}"  Text="{Binding Data.TotalPengurangan}"></Label>
-                            </StackLayout>
-                            <BoxView HeightRequest="1" BackgroundColor="White"/>
-                            <StackLayout>
-                                <Label Style="{DynamicResource dataTitle}" FontSize="15" Text="Bukti Pelanggaran"></Label>
-                                <CarouselView VerticalOptions="StartAndExpand" ItemsSource="{Binding Data.Files}" HeightRequest="200" WidthRequest="200"
+        <Frame Style="{DynamicResource MainBackground}" >
+            <StackLayout>
+                <Label HorizontalOptions="EndAndExpand" Margin="10" Text="&#xf057;" 
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="Red" >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label HorizontalOptions="CenterAndExpand" Text="&#xf071;" FontFamily="{DynamicResource FontAwesomeSolid}"
+                               FontSize="50" TextColor="Yellow" ></Label>
+                <ScrollView>
+                    <StackLayout Padding="10">
+                        <StackLayout>
+                            <Label Style="{DynamicResource dataTitle}" Text="Tanggal Kejadian" FontSize="15"></Label>
+                            <Label Style="{DynamicResource dataValue}" Margin="10,0,0,0"  Text="{Binding Data.TanggalKejadian, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"></Label>
+                        </StackLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="White"/>
+                        <Expander>
+                            <Expander.Header>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Style="{DynamicResource dataTitle}" FontSize="15" Text="Pelanggaran"></Label>
+                                    <Label Style="{DynamicResource Icons}" HorizontalOptions="EndAndExpand" FontSize="20" Text="&#xf107;"></Label>
+                                </StackLayout>
+                            </Expander.Header>
+                            <Expander.ContentTemplate>
+                                <DataTemplate>
+                                    <ListView HeightRequest="250" HasUnevenRows="True" SelectionMode="None" ItemsSource="{Binding Data.ItemPelanggarans}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell>
+                                                    <Grid Padding="10">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackLayout>
+                                                            <Label Text="{Binding DetailLevel.Level.Nama}" Style="{DynamicResource dataTitle }"/>
+                                                            <Label Text="{Binding DetailLevel.Nama}" />
+                                                        </StackLayout>
+                                                        <Label Grid.Column="1" Text="{Binding NilaiKaryawan}" VerticalOptions="CenterAndExpand"/>
+                                                    </Grid>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </DataTemplate>
+                            </Expander.ContentTemplate>
+                        </Expander>
+                        <BoxView HeightRequest="1" BackgroundColor="White"/>
+                        <StackLayout>
+                            <Label Style="{DynamicResource dataTitle}" FontSize="15" Text="Total Pengurangan"></Label>
+                            <Label Style="{DynamicResource dataValue}"  Text="{Binding Data.TotalPengurangan}"></Label>
+                        </StackLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="White"/>
+                        <StackLayout>
+                            <Label Style="{DynamicResource dataTitle}" FontSize="15" Text="Bukti Pelanggaran"></Label>
+                            <CarouselView VerticalOptions="StartAndExpand" ItemsSource="{Binding Data.Files}" HeightRequest="200" WidthRequest="200"
                                               IndicatorView="indicatorview">
-                                    <CarouselView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid>
-                                                <Frame HasShadow="True" HorizontalOptions="Center"
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Frame HasShadow="True" HorizontalOptions="Center"
                                                    CornerRadius="5" Padding="3"
                                                    Margin="20" HeightRequest="200" WidthRequest="200"
                                                    VerticalOptions="CenterAndExpand">
-                                                    <Image Source="{Binding ThumbView}" Aspect="Fill">
-                                                        <Image.GestureRecognizers>
-                                                            <TapGestureRecognizer Tapped="showImage"></TapGestureRecognizer>
-                                                        </Image.GestureRecognizers>
-                                                    </Image>
-                                                </Frame>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </CarouselView.ItemTemplate>
-                                </CarouselView>
-                                <IndicatorView
+                                                <Image Source="{Binding ThumbView}" Aspect="Fill">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="showImage"></TapGestureRecognizer>
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                            </Frame>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView
                                 x:Name="indicatorview"
                                 AbsoluteLayout.LayoutBounds="0.5,0.95,100,100"
                                 AbsoluteLayout.LayoutFlags="PositionProportional"
                                 IndicatorColor="LightGray"
                                 IndicatorSize="10"   
                                 SelectedIndicatorColor="Black" />
-                            </StackLayout>
                         </StackLayout>
                     </StackLayout>
-                </Frame>
-        </ScrollView>
+                </ScrollView>
+            </StackLayout>
+        </Frame>
     </ContentPage.Content>
 </ContentPage>
