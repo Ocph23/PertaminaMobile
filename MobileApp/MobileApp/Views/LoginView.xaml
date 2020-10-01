@@ -30,7 +30,6 @@
                                 <controls:EntryCustom  Text="{Binding UserName}" Placeholder="User Name"  ></controls:EntryCustom>
                             </Frame>
                         </Frame>
-
                         <Frame Style="{DynamicResource  frameInputOut}" >
                             <Frame Style="{DynamicResource  frameInputIn}" >
                                 <Grid>
@@ -44,12 +43,11 @@
                                 </Grid>
                             </Frame>
                         </Frame>
-
                         <Frame Style="{DynamicResource entryFrameStyle}" Padding="0" Margin="0,20,0,0" CornerRadius="30">
                             <Button Style="{DynamicResource okButton}" Text="Login"  HeightRequest="50"   Margin="0" Padding="0" Command="{Binding LoginCommand}" />
                         </Frame>
                         <Frame Style="{DynamicResource entryFrameStyle}" Padding="0" Margin="0,0,0,0" CornerRadius="30">
-                            <ImageButton CornerRadius="10" Command="{Binding GoogleLoginCommand}"  Aspect="AspectFit" 
+                            <ImageButton CornerRadius="10" Command="{Binding GoogleLoginCommand}" BackgroundColor="Transparent"  Aspect="AspectFit" 
                                          Source="google.png" Padding="10" ></ImageButton>
                         </Frame>
                         <Label Style="{DynamicResource dataValue}" Margin="20" HorizontalOptions="Center" Text="Forgot Your Password ?">
@@ -65,7 +63,6 @@
                     <Frame Style="{DynamicResource frameInputOut}" x:Name="ipaddress" IsVisible="False" >
                         <Frame Style="{DynamicResource  frameInputIn}" >
                             <controls:EntryCustom  Text="{Binding URL}" Placeholder="IP ADDRESS"  HorizontalTextAlignment="Center" ></controls:EntryCustom>
-
                         </Frame>
                     </Frame>
                     <StackLayout>

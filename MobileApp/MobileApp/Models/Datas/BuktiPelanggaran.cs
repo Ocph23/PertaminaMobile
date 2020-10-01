@@ -33,7 +33,10 @@ namespace MobileApp.Models.Datas
         {
             get
             {
+                if(FileType.ToLower().Contains("video"))
+                    return $"{Helper.Url}/bukti/videos/{FileName}";
                 return $"{Helper.Url}/bukti/images/{FileName}";
+
             }
         }
 

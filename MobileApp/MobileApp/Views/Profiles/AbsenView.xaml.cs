@@ -57,7 +57,7 @@ namespace MobileApp.Views.Profiles
         {
             try
             {
-                var periodes = await Periodes.GetItemsAsync();
+                var periodes = await Periodes.GetItemsAsync(true);
                 DataPeriode.Clear();
                 foreach (var item in periodes.OrderByDescending(x=>x.Mulai))
                 {

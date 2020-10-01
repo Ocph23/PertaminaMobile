@@ -1,27 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary  xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:controls="clr-namespace:MobileApp.Controls"
+             x:Class="MobileApp.Themes.OrangeTheme">
 
-<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                      xmlns:controls="clr-namespace:MobileApp.Controls"
-                   x:Class="MobileApp.Themes.WhiteTheme">
-
-    <Color x:Key="PageBackgroundColor">#ececec</Color>
-    <Color x:Key="PageBackgroundSecoundaryColor">White</Color>
-    <Color x:Key="EntryColor">White</Color>
-    <Color x:Key="NavigationPrimary">White</Color>
-    <Color x:Key="NavigationBarColor">WhiteSmoke</Color>
-    <Color x:Key="PrimaryColor">#F2F2F2</Color>
-    <Color x:Key="SecondaryColor">#F8F8F8</Color>
+    <Color x:Key="PageBackgroundColor">#FF7B00</Color>
+    <Color x:Key="PageBackgroundSecoundaryColor">#FF9500</Color>
+    <Color x:Key="EntryColor">#ffdf9e</Color>
+    <Color x:Key="EntryOutColor">#FFAA00</Color>
+    <Color x:Key="EntryInColor">#FFEA00</Color>
+    
+    <Color x:Key="NavigationPrimary">#FF7B00</Color>
+    <Color x:Key="NavigationBarColor">#FF7B00</Color>
+    <Color x:Key="PrimaryColor">#FFAA00</Color>
+    <Color x:Key="SecondaryColor">#fcb503</Color>
     <Color x:Key="TertiaryColor">#fcb503</Color>
     <Color x:Key="PrimaryTextColor">Black</Color>
-    <Color x:Key="SecondaryTextColor">Black</Color>
-    <Color x:Key="TertiaryTextColor">Gray</Color>
+    <Color x:Key="SecondaryTextColor">White</Color>
+    <Color x:Key="TertiaryTextColor">#cad7e3</Color>
     <Color x:Key="TransparentColor">Transparent</Color>
     <Color x:Key="CancelButtoColor">Red</Color>
     <Color x:Key="OkButtonColor">#68A357</Color>
-
-
-
 
     <OnPlatform x:Key="FontAwesomeSolid" x:TypeArguments="x:String">
         <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
@@ -44,50 +43,51 @@
     <Style x:Key="Icons" TargetType="Label">
         <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid }" />
         <Setter Property="FontSize" Value="16" />
-        <Setter Property="TextColor" Value="{DynamicResource TertiaryTextColor}" />
+        <Setter Property="TextColor" Value="{StaticResource TertiaryTextColor}" />
         <Setter Property="WidthRequest" Value="18" />
         <Setter Property="Margin" Value="0,0,5,0" />
     </Style>
     <Style x:Key="BrandIcons" TargetType="Label">
         <Setter Property="FontFamily" Value="{StaticResource FontAwesomeBrand }" />
         <Setter Property="FontSize" Value="16" />
-        <Setter Property="TextColor" Value="{DynamicResource TertiaryTextColor}" />
+        <Setter Property="TextColor" Value="{StaticResource TertiaryTextColor}" />
         <Setter Property="WidthRequest" Value="18" />
         <Setter Property="Margin" Value="0,0,5,0" />
     </Style>
 
     <Style TargetType="Label">
-        <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}" />
+        <Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}" />
     </Style>
 
     <Style TargetType="{x:Type controls:EntryCustom}">
         <Setter Property="HeightRequest" Value="40"/>
         <Setter Property="Padding" Value="15,0"/>
-        <Setter Property="BackgroundColor" Value="{DynamicResource EntryColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource EntryColor}"/>
         <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="TextColor" Value="{DynamicResource  PrimaryTextColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource  PrimaryTextColor}"/>
     </Style>
     <Style TargetType="{x:Type controls:SearchBarCustom}">
         <Setter Property="HeightRequest" Value="40"/>
         <Setter Property="Padding" Value="15,0"/>
-        <Setter Property="BackgroundColor" Value="{DynamicResource EntryColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource EntryColor}"/>
         <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}"/>
     </Style>
     <Style TargetType="{x:Type controls:EditorCustom}">
         <Setter Property="HeightRequest" Value="40"/>
         <Setter Property="Padding" Value="15,0"/>
-        <Setter Property="BackgroundColor" Value="{DynamicResource EntryColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource EntryColor}"/>
         <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}"/>
     </Style>
     <Style TargetType="{x:Type controls:PickerCustom}">
         <Setter Property="HeightRequest" Value="40"/>
         <Setter Property="Padding" Value="15,0"/>
-        <Setter Property="BackgroundColor" Value="{DynamicResource EntryColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource EntryColor}"/>
         <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="TextColor" Value="{DynamicResource  PrimaryTextColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource  PrimaryTextColor}"/>
     </Style>
+
 
     <Style x:Key="MainBackground" TargetType="Frame">
         <Setter Property="Margin" Value="0"/>
@@ -108,8 +108,6 @@
     </Style>
 
 
-
-
     <Style TargetType="FlexLayout">
         <Setter Property="Padding" Value="5" />
     </Style>
@@ -118,16 +116,16 @@
 
     <Style x:Key="dataTitle" TargetType="Label">
         <Setter Property="FontSize" Value="Micro"/>
-        <Setter Property="TextColor" Value="{DynamicResource TertiaryTextColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource TertiaryTextColor}"/>
     </Style>
     <Style x:Key="dataValue" TargetType="Label">
-        <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}"/>
         <Setter Property="FontSize" Value="Small"/>
     </Style>
 
 
     <Style x:Key="hr" TargetType="BoxView">
-        <Setter Property="BackgroundColor" Value="{DynamicResource TertiaryTextColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource TertiaryTextColor}"/>
         <Setter Property="HeightRequest" Value="0.5"/>
     </Style>
 
@@ -145,7 +143,7 @@
     </Style>
 
     <Style TargetType="ImageButton">
-        <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}"/>
         <Setter Property="HeightRequest" Value="50"/>
         <Setter Property="Margin" Value="0"/>
     </Style>
@@ -154,7 +152,7 @@
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="HasShadow" Value="True"/>
-        <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}"/>
         <Setter Property="CornerRadius" Value="30"/>
     </Style>
     <Style x:Key="frameInputIn" TargetType="Frame">
@@ -162,7 +160,7 @@
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="HasShadow" Value="True"/>
-        <Setter Property="BackgroundColor" Value="{DynamicResource EntryInColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource EntryInColor}"/>
     </Style>
 
 
@@ -170,8 +168,7 @@
         <Setter Property="Margin" Value="5"/>
         <Setter Property="Padding" Value="2"/>
         <Setter Property="HasShadow" Value="True"/>
-        <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"/>
     </Style>
-
 
 </ResourceDictionary>

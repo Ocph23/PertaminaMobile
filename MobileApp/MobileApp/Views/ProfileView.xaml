@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:model="clr-namespace:MobileApp.Models" 
+             xmlns:local="clr-namespace:MobileApp" 
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:controls="clr-namespace:MobileApp.Controls"
              NavigationPage.HasNavigationBar="False"
              mc:Ignorable="d"
@@ -39,7 +39,7 @@
                                     <BoxView Style="{DynamicResource  hr}" ></BoxView>
                                     <FlexLayout >
                                         <FlexLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.ChangeProfile}" />
+                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static local:TypeProfileView.ChangeProfile}" />
                                         </FlexLayout.GestureRecognizers>
                                         <Label Text="&#xf007;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Ubah Profile" FontSize="Small" Style="{DynamicResource dataValue}">
@@ -48,7 +48,7 @@
                                     <BoxView Style="{DynamicResource  hr}" ></BoxView>
                                     <FlexLayout>
                                         <FlexLayout.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.ChangePassword}" />
+                                                <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static local:TypeProfileView.ChangePassword}" />
                                         </FlexLayout.GestureRecognizers>
                                         <Label Text="&#xf084;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Ubah Password" FontSize="Small">
@@ -57,7 +57,7 @@
                                     <BoxView Style="{DynamicResource  hr}" ></BoxView>
                                     <FlexLayout>
                                         <FlexLayout.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding GoogleCommand}" CommandParameter="{x:Static model:TypeProfileView.ChangePassword}" />
+                                                <TapGestureRecognizer Command="{Binding GoogleCommand}" CommandParameter="{x:Static local:TypeProfileView.ChangePassword}" />
                                         </FlexLayout.GestureRecognizers>
 
                                         <Label Text="&#xf1a0;" Style="{DynamicResource BrandIcons}"/>
@@ -73,7 +73,7 @@
                                     <BoxView Style="{DynamicResource  hr}" ></BoxView>
                                     <FlexLayout>
                                         <FlexLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Absen}" />
+                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static local:TypeProfileView.Absen}" />
                                         </FlexLayout.GestureRecognizers>
                                         <Label Text="&#xf783;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Absen Kehadiran" FontSize="Small">
@@ -89,7 +89,7 @@
                                     <BoxView Style="{DynamicResource  hr}" ></BoxView>
                                     <FlexLayout>
                                         <FlexLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Kejadian}" />
+                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static local:TypeProfileView.Kejadian}" />
                                         </FlexLayout.GestureRecognizers>
                                         <Label Text="&#xf0a1;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Peristiwa/Kejadian" FontSize="Small">
@@ -99,7 +99,7 @@
                                     <BoxView Style="{DynamicResource  hr}" ></BoxView>
                                     <FlexLayout>
                                         <FlexLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Pelaporan}" />
+                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static local:TypeProfileView.Pelaporan}" />
                                         </FlexLayout.GestureRecognizers>
                                         <Label Text="&#xf46d;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Pelanggaran" FontSize="Small">
@@ -114,7 +114,7 @@
                                     <BoxView Style="{DynamicResource  hr}" ></BoxView>
                                     <FlexLayout>
                                         <FlexLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.Perusahaan}" />
+                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static local:TypeProfileView.Perusahaan}" />
                                         </FlexLayout.GestureRecognizers>
                                         <Label Text="&#xf1ad;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Perusahaan Sekarang" FontSize="Small"/>
@@ -123,7 +123,7 @@
                                     <BoxView Style="{DynamicResource  hr}" ></BoxView>
                                     <FlexLayout>
                                         <FlexLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.MutasiPerusahaan}" />
+                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static local:TypeProfileView.MutasiPerusahaan}" />
                                         </FlexLayout.GestureRecognizers>
                                         <Label Text="&#xf362;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Mutasi Perusahaan ?" FontSize="Small"/>
@@ -147,7 +147,7 @@
                                     <BoxView Style="{DynamicResource  hr}" ></BoxView>
                                     <FlexLayout>
                                         <FlexLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static model:TypeProfileView.About}" />
+                                            <TapGestureRecognizer Command="{Binding ShowDetailCommand}" CommandParameter="{x:Static local:TypeProfileView.About}" />
                                         </FlexLayout.GestureRecognizers>
                                         <Label Text="&#xf059;" Style="{DynamicResource Icons}"/>
                                         <Label Text="About" FontSize="Small"/>

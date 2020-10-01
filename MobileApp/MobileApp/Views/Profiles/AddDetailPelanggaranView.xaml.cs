@@ -79,7 +79,7 @@ namespace MobileApp.Views.Profiles
         {
             try
             {
-                var datas = await LevelPelanggaran.GetItemsAsync();
+                var datas = await LevelPelanggaran.GetItemsAsync(true);
                 if (datas != null)
                 {
                     Items.Clear();

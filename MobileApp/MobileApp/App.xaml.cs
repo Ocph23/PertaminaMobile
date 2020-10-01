@@ -15,7 +15,6 @@ namespace MobileApp
 {
     public partial class App : Application, INotification
     {
-
         public App()
         {
             InitializeComponent();
@@ -30,14 +29,11 @@ namespace MobileApp
             }
             System.Threading.Thread.CurrentThread.CurrentCulture = requestCulture;
 
-
-
             MessagingCenter.Subscribe<MessagingCenterAlert>(this, "message", async (message) =>
             {
                 await Current.MainPage.DisplayAlert(message.Title, message.Message, message.Cancel);
             });
 
-           
             //Auth 
             MessagingCenter.Subscribe<IAuthService, bool>(this, "signout", async (sender, result) =>
             {
@@ -54,7 +50,6 @@ namespace MobileApp
                 DependencyService.Get<IDataStore<Notification>>().AddItemAsync(result);
             });
 
-            //DataStore Register
             DependencyService.Register<AuthService>();
             DependencyService.Register<PelanggaranDataStore>();
             DependencyService.Register<PeriodeDataStore>();
@@ -69,7 +64,7 @@ namespace MobileApp
 
 
             string themeString = SecureStorage.GetAsync("Theme").Result;
-            Theme theme = Theme.White;
+            Theme theme = Theme.Red;
             if (!string.IsNullOrEmpty(themeString))
             {
                 theme = (Theme)Enum.Parse(typeof(Theme), themeString);
@@ -79,7 +74,7 @@ namespace MobileApp
                 SecureStorage.SetAsync("Theme", theme.ToString());
             }
 
-           var isSet =  Helper.SetTheme(theme).Result;
+            var isSet =  Helper.SetTheme(theme).Result;
 
             if (Helper.Account != null)
             {
@@ -90,8 +85,6 @@ namespace MobileApp
                 MainPage = new LoginView();
 
             }
-
-
         }
 
 

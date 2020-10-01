@@ -52,8 +52,11 @@ namespace MobileApp
                 case Theme.White:
                     Application.Current.Resources.MergedDictionaries.Add(new WhiteTheme());
                     break;
-                case Theme.RedOrange:
-                    Application.Current.Resources.MergedDictionaries.Add(new OrangeRed());
+                case Theme.Red:
+                    Application.Current.Resources.MergedDictionaries.Add(new RedTheme());
+                    break;
+                case Theme.Orange:
+                    Application.Current.Resources.MergedDictionaries.Add(new OrangeTheme());
                     break;
                 default:
                     Application.Current.Resources.MergedDictionaries.Add(new WhiteTheme());
@@ -132,8 +135,5 @@ namespace MobileApp
     }
 
 
-    public enum Theme
-    {
-        White, RedOrange
-    }
+   
 }

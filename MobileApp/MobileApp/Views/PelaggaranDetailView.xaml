@@ -9,7 +9,7 @@
         <Frame Style="{DynamicResource MainBackground}" >
             <StackLayout>
                 <Label HorizontalOptions="EndAndExpand" Margin="10" Text="&#xf057;" 
-                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="Red" >
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="{DynamicResource CancelButtoColor}" >
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
                     </Label.GestureRecognizers>
@@ -62,7 +62,7 @@
                         <BoxView HeightRequest="1" BackgroundColor="White"/>
                         <StackLayout>
                             <Label Style="{DynamicResource dataTitle}" FontSize="15" Text="Bukti Pelanggaran"></Label>
-                            <CarouselView VerticalOptions="StartAndExpand" ItemsSource="{Binding Data.Files}" HeightRequest="200" WidthRequest="200"
+                            <CarouselView VerticalOptions="StartAndExpand" ItemsSource="{Binding Data.Files}" CurrentItemChanged="CarouselView_CurrentItemChanged"  HeightRequest="200" WidthRequest="200"
                                               IndicatorView="indicatorview">
                                 <CarouselView.ItemTemplate>
                                     <DataTemplate>

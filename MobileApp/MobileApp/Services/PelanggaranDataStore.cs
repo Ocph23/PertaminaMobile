@@ -83,7 +83,7 @@ namespace MobileApp.Services
 
         public async Task<IEnumerable<Pelanggaran>> GetItemsAsync(bool forceRefresh = false)
         {
-            if (items == null)
+            if (items == null || forceRefresh)
             {
                 using (var client = new RestService())
                 {

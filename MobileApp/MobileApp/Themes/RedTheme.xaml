@@ -2,24 +2,22 @@
 <ResourceDictionary  xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:controls="clr-namespace:MobileApp.Controls"
-             x:Class="MobileApp.Themes.OrangeRed">
+             x:Class="MobileApp.Themes.RedTheme">
 
-    <Color x:Key="PageBackgroundColor">#FF7B00</Color>
-    <Color x:Key="PageBackgroundSecoundaryColor">#FF9500</Color>
-    <Color x:Key="EntryColor">#ffdf9e</Color>
-    <Color x:Key="EntryOutColor">#FFAA00</Color>
-    <Color x:Key="EntryInColor">#FFEA00</Color>
-    
+    <Color x:Key="PageBackgroundColor">#ff0059</Color>
+    <Color x:Key="PageBackgroundSecoundaryColor">#c800ff</Color>
+    <Color x:Key="EntryColor">#f193d8</Color>
+  
     <Color x:Key="NavigationPrimary">#FF7B00</Color>
     <Color x:Key="NavigationBarColor">#FF7B00</Color>
-    <Color x:Key="PrimaryColor">#FFAA00</Color>
-    <Color x:Key="SecondaryColor">#fcb503</Color>
+    <Color x:Key="PrimaryColor">#f93e8e</Color>
+    <Color x:Key="SecondaryColor">#ff00dd</Color>
     <Color x:Key="TertiaryColor">#fcb503</Color>
-    <Color x:Key="PrimaryTextColor">Black</Color>
-    <Color x:Key="SecondaryTextColor">White</Color>
-    <Color x:Key="TertiaryTextColor">#cad7e3</Color>
+    <Color x:Key="PrimaryTextColor">White</Color>
+    <Color x:Key="SecondaryTextColor">Black</Color>
+    <Color x:Key="TertiaryTextColor">LightGray</Color>
     <Color x:Key="TransparentColor">Transparent</Color>
-    <Color x:Key="CancelButtoColor">#960200</Color>
+    <Color x:Key="CancelButtoColor">Orange</Color>
     <Color x:Key="OkButtonColor">#68A357</Color>
 
     <OnPlatform x:Key="FontAwesomeSolid" x:TypeArguments="x:String">
@@ -56,7 +54,7 @@
     </Style>
 
     <Style TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
 
     <Style TargetType="{x:Type controls:EntryCustom}">
@@ -99,6 +97,8 @@
                           Offset="0.1" />
                     <GradientStop Color="{StaticResource PageBackgroundColor }"
                           Offset="1.0" />
+                    <GradientStop Color="{StaticResource PageBackgroundColor }"
+                          Offset="1.0" />
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
@@ -117,7 +117,7 @@
         <Setter Property="TextColor" Value="{StaticResource TertiaryTextColor}"/>
     </Style>
     <Style x:Key="dataValue" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource TertiaryTextColor}"/>
         <Setter Property="FontSize" Value="Small"/>
     </Style>
 
@@ -128,7 +128,7 @@
     </Style>
 
     <Style x:Key="okButton" TargetType="Button">
-        <Setter Property="TextColor" Value="{StaticResource TertiaryTextColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}"/>
         <Setter Property="BackgroundColor" Value="{StaticResource TransparentColor}"/>
         <Setter Property="HeightRequest" Value="45"/>
         <Setter Property="Margin" Value="0"/>
@@ -150,7 +150,7 @@
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="HasShadow" Value="True"/>
-        <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"/>
         <Setter Property="CornerRadius" Value="30"/>
     </Style>
     <Style x:Key="frameInputIn" TargetType="Frame">
@@ -158,7 +158,7 @@
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="HasShadow" Value="True"/>
-        <Setter Property="BackgroundColor" Value="{StaticResource EntryInColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}"/>
     </Style>
 
 

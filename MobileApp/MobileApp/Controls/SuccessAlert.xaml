@@ -23,19 +23,11 @@
     </pages:PopupPage.Animation>
     <StackLayout >
         <Frame CornerRadius="20" Style="{DynamicResource MainBackground}" HasShadow="True" Margin="20" VerticalOptions="CenterAndExpand">
-            <Frame.Background>
-                <LinearGradientBrush>
-                    <GradientStop Color="{StaticResource PageBackgroundColor}"
-                          Offset="0.1" />
-                    <GradientStop Color="{StaticResource PageBackgroundSecoundaryColor}"
-                          Offset="1.0" />
-                </LinearGradientBrush>
-            </Frame.Background>
             <ScrollView>
                 <StackLayout >
                     <StackLayout >
                         <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="30" TextColor="GreenYellow" >
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="30" TextColor="{DynamicResource CancelButtoColor}" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnClose"></TapGestureRecognizer>
                             </Label.GestureRecognizers>

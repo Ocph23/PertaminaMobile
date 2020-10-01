@@ -1,5 +1,7 @@
-﻿using MobileApp.Models.Datas;
+﻿using MediaManager;
+using MobileApp.Models.Datas;
 using MobileApp.ViewModels;
+using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,23 +33,43 @@ namespace MobileApp.Views
 
         private void showImage(object sender, EventArgs e)
         {
-            var image = (Image)sender;
-            var fn = image.Source.ToString().Split(' ')[1];
-            var imageData = dataModel.Files.Where(x => x.ThumbView == fn).FirstOrDefault();
-            
-            var source = imageData==null?image.Source: new Uri(imageData.FileView);
-            var page = new MobileApp.Views.Profiles.ImageView(source);
-            Navigation.PushModalAsync(page);
+            viewModels.ShowImage();
+        }
+
+        private void CarouselView_CurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
+        {
+            viewModels.SetSelected = (BuktiPelanggaran)e.CurrentItem;
         }
     }
 
     public class PelaggaranDetailViewModel : BaseViewModel
     {
         public Pelanggaran Data { get; set; }
+        public BuktiPelanggaran SetSelected { get;  set; }
 
         public PelaggaranDetailViewModel(Pelanggaran data)
         {
             this.Data = data;
+        }
+
+        internal void ShowImage()
+        {
+            if (SetSelected != null)
+            {
+
+                if(SetSelected.FileType.ToLower().Contains("image"))
+                {
+                    var source = new Uri(SetSelected.FileView);
+                    var page = new Profiles.ImageView(source);
+                    Application.Current.MainPage.Navigation.PushModalAsync(page);
+                }else if (SetSelected.FileType.ToLower().Contains("video"))
+                {
+                    var page = new Profiles.VideosView(SetSelected.FileView);
+                    Application.Current.MainPage.Navigation.PushModalAsync(page);
+                   
+                }
+
+            }
         }
     }
 }

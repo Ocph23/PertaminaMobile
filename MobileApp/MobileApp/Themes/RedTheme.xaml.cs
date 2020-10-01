@@ -8,9 +8,9 @@ namespace MobileApp.Themes
 {
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OrangeRed : ResourceDictionary
+    public partial class OrangeTheme : ResourceDictionary
     {
-        public OrangeRed()
+        public OrangeTheme()
         {
             InitializeComponent();
         }

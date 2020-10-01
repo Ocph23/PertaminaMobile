@@ -21,7 +21,7 @@
                             <Label Margin="5,0,0,20" Text="PILIH PELANGGARAN"  FontSize="Small" FontAttributes="Bold"/>
                         </FlexLayout>
                         <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{DynamicResource FontAwesomeSolid}" TextColor="OrangeRed" FontSize="25" >
+                               FontFamily="{DynamicResource FontAwesomeSolid}" TextColor="{DynamicResource CancelButtoColor}" FontSize="25" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
                             </Label.GestureRecognizers>

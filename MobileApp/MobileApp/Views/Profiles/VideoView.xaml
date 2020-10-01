@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:local="clr-namespace:MobileApp.Controls" 
+             xmlns:video="clr-namespace:MediaManager.Forms;assembly=MediaManager.Forms"
+             mc:Ignorable="d"
+             x:Class="MobileApp.Views.Profiles.VideosView">
+    <ContentPage.Content>
+        <Frame Style="{DynamicResource MainBackground}" Padding="0" >
+            <local:PinchToZoomContainer >
+                <local:PinchToZoomContainer.Content>
+                    <video:VideoView ShowControls="True" AutoPlay="False" 
+                                     Source="{Binding VideoSource}"></video:VideoView>   
+                </local:PinchToZoomContainer.Content>
+            </local:PinchToZoomContainer>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

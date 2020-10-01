@@ -82,8 +82,8 @@ namespace MobileApp.Views
                         if (DateTime.Now >= qrData.Mulai && DateTime.Now <= qrData.Selesai)
                         {
                             var absen = new Absen { KaryawanId = Helper.Profile.Karyawan.Id, Masuk = DateTime.Now, Pulang = null };
-                            absen.AbsenType = this.SanningStatus == SanningStatus.Absen ? Models.AbsenType.Kerja : Models.AbsenType.Lembur;
-                            if(absen.AbsenType== Models.AbsenType.Kerja)
+                            absen.AbsenType = this.SanningStatus == SanningStatus.Absen ? AbsenType.Kerja : AbsenType.Lembur;
+                            if(absen.AbsenType== AbsenType.Kerja)
                             {
                                 var result = await Absens.AddItemAsync(absen);
                             }

@@ -11,7 +11,7 @@
     <Frame  Style="{DynamicResource MainBackground}"  >
         <StackLayout Grid.Row="0">
             <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="Red" >
+                               FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="{DynamicResource CancelButtoColor}"  >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="closetap"></TapGestureRecognizer>
                 </Label.GestureRecognizers>

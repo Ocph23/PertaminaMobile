@@ -1,11 +1,8 @@
-﻿using MobileApp.Models;
-using MobileApp.Models.Datas;
+﻿using MobileApp.Models.Datas;
 using MobileApp.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -49,12 +46,6 @@ namespace MobileApp.Views
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
-
-
-        //private  void Close_tab(object sender, EventArgs e)
-        //{
-        //  Application.Current.MainPage.Navigation.PopModalAsync();
-        //}
     }
 
 
@@ -91,7 +82,7 @@ namespace MobileApp.Views
         {
             try
             {
-                var source = await Pelanggarans.GetItemsAsync();
+                var source = await Pelanggarans.GetItemsAsync(true);
                 if (source == null || source.Count() <= 0)
                     NotHaveResult = true;
                 else

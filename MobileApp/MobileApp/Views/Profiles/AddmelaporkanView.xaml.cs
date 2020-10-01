@@ -92,18 +92,18 @@ namespace MobileApp.Views.Profiles
                 var pelangagran = new Pelanggaran()
                 {
                     Files = Files,
-                    Jenis = Models.PelanggaranType.Pengaduan,
+                    Jenis = PelanggaranType.Pengaduan,
                     TanggalKejadian = DateTime.Now,
                     Tanggal = DateTime.Now,
                     PelaporId = Helper.Profile.Karyawan.Id,
                     TerlaporId = Karyawan.Id,
                     PerusahaanId = Karyawan.Perusahaan.Id,
-                    Status = Models.StatusPelanggaran.Baru
+                    Status =StatusPelanggaran.Baru
                 };
 
 
                 if (Helper.Profile.Roles.Contains("admin")|| Helper.Profile.Roles.Contains("manager"))
-                    pelangagran.Jenis = Models.PelanggaranType.Pelanggaran;
+                    pelangagran.Jenis = PelanggaranType.Pelanggaran;
 
                 pelangagran.ItemPelanggarans = new List<DetailPelanggaran>();
                 foreach (var item in Details)

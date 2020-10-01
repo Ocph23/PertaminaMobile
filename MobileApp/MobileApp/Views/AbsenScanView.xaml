@@ -28,7 +28,7 @@
                 <zxing:ZXingScannerView x:Name="scannerView" ScanResultCommand="{Binding ScanningCommand}" IsVisible="{Binding IsScanning}" IsAnalyzing="{Binding IsAnalyzing}" 
                                         IsScanning="{Binding IsScanning}"></zxing:ZXingScannerView>
             </Grid>
-            <Frame Grid.Row="2" Style="{DynamicResource entryFrameStyle}" CornerRadius="10"  Padding="0" >
+            <Frame Grid.Row="2" Style="{DynamicResource entryFrameStyle}" CornerRadius="25"  Padding="0" >
                 <FlexLayout WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center" >
                     <Button CornerRadius="5" WidthRequest="100" Command="{Binding AbsenCommand}" Style="{DynamicResource okButton}" Text="Absen"></Button>
                     <BoxView BackgroundColor="LightGray" Margin="3" WidthRequest="1"></BoxView>

@@ -18,6 +18,8 @@ using Plugin.Media;
 using Android.Support.V4.App;
 using Android.Gms.Common;
 using System.Threading.Tasks;
+using MediaManager.Forms.Platforms.Android;
+using MediaManager;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MainActivity))]
 namespace MobileApp.Droid
@@ -43,6 +45,8 @@ namespace MobileApp.Droid
             
             base.OnCreate(savedInstanceState);
             Forms.SetFlags(new string[] { "Expander_Experimental", "Brush_Experimental" });
+
+            CrossMediaManager.Current.Init(this);
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
             
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);

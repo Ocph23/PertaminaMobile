@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MobileApp.Models
+namespace MobileApp
 {
-    class EnumCollection
+
+    public enum Theme
     {
+        White, Orange, Red
     }
-
-
     public enum TypeProfileView
     {
         ChangeProfile, ChangePassword, Absen, Pelanggaran, Pelaporan, Perusahaan, MutasiPerusahaan,
