@@ -21,8 +21,6 @@
     <Color x:Key="OkButtonColor">#68A357</Color>
 
 
-
-
     <OnPlatform x:Key="FontAwesomeSolid" x:TypeArguments="x:String">
         <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
         <On Platform="iOS" Value="fa-solid-900" />
