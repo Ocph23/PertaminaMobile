@@ -24,6 +24,8 @@ namespace MobileApp.Models.Datas
         {
             get
             {
+                if (FileType.ToLower().Contains("video"))
+                    return "pngegg.png";
                 return $"{Helper.Url}/bukti/thumbs/{Thumb}";
             }
         }

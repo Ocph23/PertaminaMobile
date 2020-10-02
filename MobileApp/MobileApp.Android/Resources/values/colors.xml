@@ -5,4 +5,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
   <color name="splash_screen">#FFFFFF</color>
+  <color name="listViewSelected">@android:color/transparent</color>
+  <color name="listViewHighlighted">#E39696</color>
 </resources>

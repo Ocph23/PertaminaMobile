@@ -9,8 +9,6 @@
              x:Class="MobileApp.Views.Profiles.AddmelaporkanView">
     <ContentPage.Content>
         <Frame Style="{DynamicResource  MainBackground}">
-            <Frame.Background>
-            </Frame.Background>
             <Grid Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -97,15 +95,15 @@
                                         <DataTemplate>
                                             <Grid>
                                                 <Grid HorizontalOptions="CenterAndExpand">
-                                                    <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="5" Padding="10" MinimumHeightRequest="140">
-                                                        <Image Source="{Binding DataView }" Aspect="AspectFill" WidthRequest="140" HeightRequest="140" >
+                                                    <Frame Style="{DynamicResource entryFrameStyle}" CornerRadius="10" Padding="0" MinimumHeightRequest="140">
+                                                        <Image Source="{Binding DataView }" Aspect="Fill" WidthRequest="140" HeightRequest="140" >
                                                             <Image.GestureRecognizers>
                                                                 <TapGestureRecognizer Tapped="showImage"></TapGestureRecognizer>
                                                             </Image.GestureRecognizers>
                                                         </Image>
                                                     </Frame>
                                                     <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
-                                                    FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="20" TextColor="OrangeRed" >
+                                                    FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="20" Margin="8" TextColor="{DynamicResource CancelButtoColor}" >
                                                         <Label.GestureRecognizers>
                                                             <TapGestureRecognizer Tapped="deleteImage"></TapGestureRecognizer>
                                                         </Label.GestureRecognizers>

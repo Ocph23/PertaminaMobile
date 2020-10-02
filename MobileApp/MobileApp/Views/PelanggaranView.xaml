@@ -34,7 +34,7 @@
                               ItemSelected="OnSelected" ItemsSource="{Binding SourceView}" HasUnevenRows="True" SelectionMode="Single" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <ViewCell>
+                                <ViewCell >
                                     <Frame CornerRadius="10" HasShadow="True" Margin="5,3" Style="{DynamicResource entryFrameStyle}"
                                        BackgroundColor="{DynamicResource PrimaryColor}" Padding="10" >
                                         <Grid >

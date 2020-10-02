@@ -30,7 +30,7 @@ namespace MobileApp.Views
 
         private void themePicker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var picker = sender as PickerCustom;
+            var picker = sender as Picker;
             if (picker.SelectedItem != null)
             {
                 var theme = (Theme)picker.SelectedItem;

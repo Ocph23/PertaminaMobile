@@ -14,7 +14,7 @@
                     <StackLayout Orientation="Horizontal">
                         <FlexLayout >
                             <Label Margin="5,0,0,0" Text="&#xf0f3;" Style="{DynamicResource Icons}" FontSize="Large" FontAttributes="Bold"/>
-                            <Label Margin="5,0,0,0" Text="NOTIFICATION"  FontSize="Small" TextColor="{StaticResource SecondaryTextColor}" FontAttributes="Bold"/>
+                            <Label Margin="5,0,0,0" Text="NOTIFICATION"  FontSize="Medium"  FontAttributes="Bold"/>
                         </FlexLayout>
                         <Label HorizontalOptions="EndAndExpand" Text="&#xf057;" 
                                FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="25" TextColor="{DynamicResource CancelButtoColor}" >

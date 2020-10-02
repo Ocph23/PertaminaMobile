@@ -141,8 +141,8 @@
                                         </FlexLayout.GestureRecognizers>
                                         <Label Text="&#xf53f;" Style="{DynamicResource Icons}"/>
                                         <Label Text="Themes" x:Name="themeLabel" FontSize="Small"/>
-                                        <controls:PickerCustom x:Name="themePicker" SelectedIndexChanged="themePicker_SelectedIndexChanged" 
-                                                               BackgroundColor="{DynamicResource EntryColor}" IsVisible="False"  />
+                                        <Picker x:Name="themePicker" SelectedIndexChanged="themePicker_SelectedIndexChanged" 
+                                                              IsVisible="False"  />
                                     </FlexLayout>
                                     <BoxView Style="{DynamicResource  hr}" ></BoxView>
                                     <FlexLayout>

@@ -32,18 +32,26 @@ namespace MobileApp.Views.Profiles
         {
             var selected = TheCarousel.CurrentItem as BuktiPelanggaran;
             vm.Files.Remove(selected);
+            Device.BeginInvokeOnMainThread( async() =>
+            {
+               await Task.Delay(100);
+                if (vm.Files.Count == 0)
+                {
+                    TheCarousel.CurrentItem = null;
+                }
+            });
 
         }
         private void showImage(object sender, EventArgs e)
         {
             var image = (Image)sender;
-            var page = new MobileApp.Views.Profiles.ImageView(image.Source);
+            var page = new ImageView(image.Source);
             Navigation.PushModalAsync(page);
         }
     }
 
 
-    public class AddmelaporkanViewModel : MobileApp.ViewModels.BaseViewModel
+    public class AddmelaporkanViewModel : ViewModels.BaseViewModel
     {
         public Pelanggaran Data { get; set; }
         public ObservableCollection<BuktiPelanggaran> Files { get; set; } = new ObservableCollection<BuktiPelanggaran>();

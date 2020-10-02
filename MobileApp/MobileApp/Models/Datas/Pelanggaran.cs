@@ -46,6 +46,8 @@ namespace MobileApp.Models.Datas
                 if (Files != null && Files.Count > 0)
                 {
                     var images = Files.FirstOrDefault();
+                    if (images.FileType.ToLower().Contains("video"))
+                        return "pngegg.png";
                     return $"{Helper.Url}/bukti/thumbs/{images.Thumb}";
                 } else
                     return $"noimage.png";

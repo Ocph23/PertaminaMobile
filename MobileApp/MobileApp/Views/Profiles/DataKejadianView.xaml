@@ -27,7 +27,7 @@
                 </StackLayout>
                 <Grid Grid.Row="1" >
                     <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding NotHaveResult}" 
-                               Text="Anda Belum Pernah Melaporkan Pelanggaran" ></Label>
+                               Text="Anda Belum Pernah Melaporkan Kejadian/Peristiwa" ></Label>
                     <ListView  SeparatorVisibility="None"  VerticalOptions="StartAndExpand"
                               IsPullToRefreshEnabled="True" 
                                   IsRefreshing="{Binding IsBusy}" 

@@ -37,7 +37,7 @@
                     </Frame>
                     <StackLayout Grid.Column="1" Margin="0,10">
                         <Label VerticalOptions="Center" Text="Hello," Margin="0" TextColor="{DynamicResource TertiaryTextColor}"/>
-                        <Label VerticalOptions="Center" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" Text="{Binding ProfileName}"/>
+                        <Label VerticalOptions="Center" FontSize="Medium" Text="{Binding ProfileName}"/>
                     </StackLayout>
                     <StackLayout Grid.Column="2" HorizontalOptions="End" Padding="10" >
                         <StackLayout.GestureRecognizers>
