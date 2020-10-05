@@ -44,7 +44,8 @@
                             </Frame>
                         </Frame>
                         <Frame Style="{DynamicResource entryFrameStyle}" Padding="0" Margin="0,20,0,0" CornerRadius="30">
-                            <Button Style="{DynamicResource okButton}" Text="Login"  HeightRequest="50"   Margin="0" Padding="0" Command="{Binding LoginCommand}" />
+                            <Button Style="{DynamicResource okButton}" Text="Login"  HeightRequest="50"   Margin="0" Padding="0" 
+                                    Command="{Binding LoginCommand}" />
                         </Frame>
                         <Frame Style="{DynamicResource entryFrameStyle}" Padding="0" Margin="0,0,0,0" CornerRadius="30">
                             <ImageButton CornerRadius="10" Command="{Binding GoogleLoginCommand}" BackgroundColor="Transparent"  Aspect="AspectFit" 

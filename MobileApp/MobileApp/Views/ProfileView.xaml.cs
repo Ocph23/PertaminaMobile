@@ -3,6 +3,8 @@ using MobileApp.Models;
 using MobileApp.Services;
 using MobileApp.ViewModels;
 using System;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -52,21 +54,18 @@ namespace MobileApp.Views
             SignoutCommand = new Command(SignoutAction, x => true);
             GoogleCommand = new Command(GooleAccountAction);
 
-            MessagingCenter.Subscribe<IAuthService, UserProfile>(this, "UserLink", async (sender, arg) => {
+            MessagingCenter.Subscribe<UserProfile>(this,"UserLink", async ( arg) => {
                 try
                 {
-                    await Task.Delay(200);
+                    await Task.Delay(2000);
                     if (arg != null)
                     {
                         Helper.Account = arg;
 
                         if (arg.Provider == AuthProvider.Google)
                         {
-
                             await AuthService.JoinExternalUSer(arg.Id, arg.Provider);
-
                             GoogleAccount = arg.Email;
-
                         }
                     }
                     else
@@ -84,9 +83,10 @@ namespace MobileApp.Views
 
         }
 
-        private void GooleAccountAction(object obj)
+        private async void GooleAccountAction(object obj)
         {
-            DependencyService.Get<IAuthService>().LinkAccount(AuthProvider.Google);
+            if(GoogleAccount==googleAccount)
+                await   DependencyService.Get<IAuthService>().LinkAccount(AuthProvider.Google);
         }
 
         private async void SignoutAction(object obj)
@@ -149,18 +149,18 @@ namespace MobileApp.Views
         public Command NotifCommand { get; }
 
 
-        private string googleAccount = "Hubungkan ...";
+        private string googleAccount = "Hubungkan ...!";
 
         public string GoogleAccount
         {
             get {
-                var google= Xamarin.Essentials.SecureStorage.GetAsync("GoogleAccount").Result;
-                if (string.IsNullOrEmpty(google))
-                    return googleAccount;
-                return google; }
+                if (Helper.Profile.ExternalLogin != null && Helper.Profile.ExternalLogin.Count>0)
+                {
+                    return Helper.Profile.ExternalLogin.FirstOrDefault().ProviderKey;
+                }
+                return googleAccount; }
             set {
                 SetProperty(ref  googleAccount , value);
-                Xamarin.Essentials.SecureStorage.SetAsync("GoogleAccount", value);
             }
         }
 

@@ -64,7 +64,7 @@ namespace MobileApp
 
 
             string themeString = SecureStorage.GetAsync("Theme").Result;
-            Theme theme = Theme.Red;
+            Theme theme = Theme.White;
             if (!string.IsNullOrEmpty(themeString))
             {
                 theme = (Theme)Enum.Parse(typeof(Theme), themeString);

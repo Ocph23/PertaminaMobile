@@ -17,7 +17,7 @@ namespace MobileApp
         private static Profile _profile;
 
         //private static string urlDefault= "http://192.168.1.5";
-        private static string urlDefault= "http://36.94.6.214:8080";
+        private static string urlDefault= "http://epenthinkpapua.com";
         private static string url ;
 
         public static string Url

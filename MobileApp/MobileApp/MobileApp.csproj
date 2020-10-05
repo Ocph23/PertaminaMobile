@@ -35,6 +35,9 @@
     <Compile Update="Themes\OrangeTheme.xaml.cs">
       <DependentUpon>OrangeTheme.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\KejadianDetailView.xaml.cs">
+      <DependentUpon>KejadianDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Profiles\DataKejadianView.xaml.cs">
       <DependentUpon>DataKejadianView.xaml</DependentUpon>
     </Compile>

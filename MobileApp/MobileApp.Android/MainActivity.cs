@@ -20,6 +20,7 @@ using Android.Gms.Common;
 using System.Threading.Tasks;
 using MediaManager.Forms.Platforms.Android;
 using MediaManager;
+using MobileApp.Views;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MainActivity))]
 namespace MobileApp.Droid
@@ -202,7 +203,7 @@ namespace MobileApp.Droid
                 MessagingCenter.Send<IAuthService, UserProfile>(this, "UserLogin", datas);
 
             if(intentId==52)
-                MessagingCenter.Send<IAuthService, UserProfile>(this, "UserLink", datas);
+                MessagingCenter.Send<UserProfile>(datas, "UserLink" );
         }
 
         public void OnSuccess(Java.Lang.Object result)

@@ -47,13 +47,10 @@
                                                     <ColumnDefinition Width="100"/>
                                                     <ColumnDefinition Width="100*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <Image Grid.Column="0" Source="{Binding Photo}" WidthRequest="50" Aspect="AspectFill" />
+                                                <Image Grid.Column="0" Source="{Binding Photo}" HeightRequest="75" VerticalOptions="Start" WidthRequest="50" Aspect="AspectFill" />
                                                 <StackLayout Grid.Column="1" >
-                                                    <Label HorizontalOptions="EndAndExpand" Text="{Binding Tanggal, StringFormat='{0:dd-MM-yyyy HH:mm:ss}'}" FontSize="Small"/>
-                                                    <Label Text="{Binding Terlapor.NamaKaryawan}" FontSize="Medium" Margin="0" Style="{DynamicResource dataValue}"/>
-                                                    <BoxView HeightRequest="1" Style="{DynamicResource hr}" />
-                                                    <Label Text="{Binding Jenis}" Margin="0" Style="{DynamicResource dataTitle}"/>
-                                                    <Label Text="{Binding Status}" Margin="0" Style="{DynamicResource dataTitle}"/>
+                                                    <Label HorizontalOptions="EndAndExpand" Text="{Binding Waktu, StringFormat='{0:dd-MM-yyyy HH:mm:ss}'}" FontSize="Small"/>
+                                                    <Label Text="{Binding DeskripsiShort}" FontSize="Small" Margin="0" Style="{DynamicResource dataValue}"/>
                                                 </StackLayout>
                                             </Grid>
                                         </StackLayout>

@@ -132,11 +132,11 @@ namespace MobileApp.Services
 
         public async Task<IEnumerable<Kejadian>> GetItemsKejadianAsync(bool forceRefresh = false)
         {
-            if (kejadian == null)
+            if (kejadian == null || forceRefresh)
             {
                 using (var client = new RestService())
                 {
-                    var result = await client.GetAsync(controller + "/pelaporan");
+                    var result = await client.GetAsync(controller + "/kejadian");
                     if (result.IsSuccessStatusCode)
                     {
                         var resultString = await result.Content.ReadAsStringAsync();

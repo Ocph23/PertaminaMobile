@@ -160,7 +160,7 @@ namespace MobileApp.Services
             {
                 try
                 {
-                    var profileResult = await client.GetAsync($"/api/user/ProfilebyproviderId?Id={userProfile.Id}&provider={userProfile.Provider}");
+                    var profileResult = await client.GetAsync($"/api/user/profilebyproviderid?id={userProfile.Id}&provider={userProfile.Provider}");
                     if (profileResult.IsSuccessStatusCode)
                     {
                         var profileString = await profileResult.Content.ReadAsStringAsync();
@@ -241,7 +241,7 @@ namespace MobileApp.Services
                 try
                 {
                     string dataprovider = provider.ToString();
-                    var resutl = await client.GetAsync($"/api/user/jointexternalUser?key={key}&provider={dataprovider}");
+                    var resutl = await client.GetAsync($"/api/user/jointexternaluser?key={key}&provider={dataprovider}");
                     if (resutl.IsSuccessStatusCode)
                     {
                         var restulString = await resutl.Content.ReadAsStringAsync();

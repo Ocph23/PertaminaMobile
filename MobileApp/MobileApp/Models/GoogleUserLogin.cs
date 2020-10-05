@@ -21,18 +21,29 @@ namespace MobileApp.Models
 
     public class Profile
     {
-        public string UserName{ get; set; }
-        public UserIdentity User{ get; set; }
-        public List<string> Roles{ get; set; }
+        public string UserName { get; set; }
+        public UserIdentity User { get; set; }
+        public List<string> Roles { get; set; }
         public Karyawan Karyawan { get; set; }
         public string Token { get; set; }
+        public List<UserLoginInfo> ExternalLogin { get; set; } = new List<UserLoginInfo>();
+
     }
+
+public class UserLoginInfo
+{
+    public string LoginProvider { get; set; }
+    public string ProviderDisplayName { get; set; }
+    public string ProviderKey{ get; set; }
+
+}
 
 
     public class UserIdentity
     {
         public string Id { get; set; }
         public string UserName { get; set; }
+        public string Email { get; set; }
     }
 
     public enum AuthProvider

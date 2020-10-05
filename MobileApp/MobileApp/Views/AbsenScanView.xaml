@@ -25,6 +25,7 @@
             <Grid Grid.Row="1" Padding="10">
                 <Label Margin="0,0,0,0" Text="&#xf029;" 
                                FontFamily="{DynamicResource FontAwesomeSolid}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="200" FontAttributes="Bold"/>
+                <ActivityIndicator IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand"/>
                 <zxing:ZXingScannerView x:Name="scannerView" ScanResultCommand="{Binding ScanningCommand}" IsVisible="{Binding IsScanning}" IsAnalyzing="{Binding IsAnalyzing}" 
                                         IsScanning="{Binding IsScanning}"></zxing:ZXingScannerView>
             </Grid>

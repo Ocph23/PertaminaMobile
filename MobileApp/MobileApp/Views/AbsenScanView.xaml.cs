@@ -71,15 +71,17 @@ namespace MobileApp.Views
                
                 try
                 {
+                    IsBusy = true;
                     var data = obj as Result;
                     var qrData = JsonConvert.DeserializeObject<QRData>(data.Text.ToString());
                     if (qrData == null)
                         return;
 
-
                     if (qrData != null)
                     {
-                        if (DateTime.Now >= qrData.Mulai && DateTime.Now <= qrData.Selesai)
+                        qrData.Mulai = qrData.Mulai.ToLocalTime();
+                        qrData.Selesai= qrData.Selesai.ToLocalTime();
+                        if (qrData.Mulai <= DateTime.Now  && qrData.Selesai >= DateTime.Now )
                         {
                             var absen = new Absen { KaryawanId = Helper.Profile.Karyawan.Id, Masuk = DateTime.Now, Pulang = null };
                             absen.AbsenType = this.SanningStatus == SanningStatus.Absen ? AbsenType.Kerja : AbsenType.Lembur;
@@ -89,8 +91,17 @@ namespace MobileApp.Views
                             }
                             else
                             {
-                                var page = new InputLembur(absen);
-                                Helper.ShowLemburInput(page);
+                                var absens = await Absens.GetItemsAsync(true);
+                                var lemburToday = absens.Where(x => x.AbsenType == AbsenType.Lembur && x.Masuk.Value.Year == DateTime.Now.Year 
+                                                    && x.Masuk.Value.Month == DateTime.Now.Month && x.Masuk.Value.Day == DateTime.Now.Day).FirstOrDefault();
+                                if (lemburToday != null)
+                                {
+                                    await Absens.AddItemAsync(absen);
+                                }
+                                else
+                                {
+                                    Helper.ShowLemburInput(new InputLembur(absen));
+                                }
                             }
                             SanningStatus = SanningStatus.None;
                         }
@@ -99,7 +110,7 @@ namespace MobileApp.Views
                             throw new SystemException("QR Code Sudah Tidak Berlaku, Hubungi Petugas");
                         }
                     }
-                    SetCommand();
+                   await SetCommand();
                 }
                 catch (Exception ex)
                 {
@@ -111,7 +122,11 @@ namespace MobileApp.Views
 
                     }else
                         Helper.ErrorMessage(ex.Message);
-                    SetCommand();
+                   await SetCommand();
+                }
+                finally
+                {
+                    IsBusy = false;
                 }
             });
         }

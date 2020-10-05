@@ -48,7 +48,7 @@
                 <Label Margin="5,10,0,0" Text="Email" Style="{DynamicResource dataTitle}"/>
                 <Frame Style="{DynamicResource frameInputOut}">
                     <Frame Style="{DynamicResource frameInputIn}">
-                        <controls:EntryCustom Text="{Binding Email}" ></controls:EntryCustom>
+                        <controls:EntryCustom Text="{Binding Email}" IsEnabled="False" ></controls:EntryCustom>
                     </Frame>
                 </Frame>
                 <Label Margin="5,10,0,0" Text="Alamat" Style="{DynamicResource dataTitle}"/>

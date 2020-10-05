@@ -27,7 +27,7 @@ namespace MobileApp.Views.Profiles
             var senderItem = sender as ListView;
             if (senderItem.SelectedItem != null)
             {
-                await Navigation.PushModalAsync(new PelaggaranDetailView(senderItem.SelectedItem));
+                await Navigation.PushModalAsync(new KejadianDetailView(senderItem.SelectedItem));
                 senderItem.SelectedItem = null;
             }
         }
