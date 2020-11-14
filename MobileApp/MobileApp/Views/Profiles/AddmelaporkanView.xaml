@@ -54,6 +54,16 @@
                             <StackLayout Orientation="Horizontal"  Padding="0">
                                 <FlexLayout VerticalOptions="CenterAndExpand" Margin="0,10">
                                     <Label Text="&#xf46d;" Style="{DynamicResource Icons}"/>
+                                    <Label Text="Tanggal" />
+                                </FlexLayout>
+                                <DatePicker Date="{Binding TanggalKejadian}" FontSize="15" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand"/>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <StackLayout VerticalOptions="StartAndExpand">
+                            <StackLayout Orientation="Horizontal"  Padding="0">
+                                <FlexLayout VerticalOptions="CenterAndExpand" Margin="0,10">
+                                    <Label Text="&#xf46d;" Style="{DynamicResource Icons}"/>
                                     <Label Text="Pelanggaran" VerticalOptions="CenterAndExpand"/>
                                 </FlexLayout>
                                 <Button HorizontalOptions="EndAndExpand" VerticalOptions="Center" Text="&#xf46c;" 

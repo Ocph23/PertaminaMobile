@@ -132,6 +132,9 @@ namespace MobileApp
             var app =(App)Application.Current;
             app.SetMainPage();
         }
+
+
+
     }
 
 

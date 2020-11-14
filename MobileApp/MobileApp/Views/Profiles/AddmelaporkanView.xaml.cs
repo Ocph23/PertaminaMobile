@@ -53,7 +53,11 @@ namespace MobileApp.Views.Profiles
 
     public class AddmelaporkanViewModel : ViewModels.BaseViewModel
     {
+        private DateTime _tanggalKejadian = DateTime.Now;
+
         public Pelanggaran Data { get; set; }
+
+      
         public ObservableCollection<BuktiPelanggaran> Files { get; set; } = new ObservableCollection<BuktiPelanggaran>();
         public ObservableCollection<DetailLevel> Details { get; set; } = new ObservableCollection<DetailLevel>();
 
@@ -63,6 +67,8 @@ namespace MobileApp.Views.Profiles
         public Command FolderCommand { get; }
         public Command CancelCommand { get; }
         public Command SaveCommand { get; }
+
+        public DateTime TanggalKejadian { get { return _tanggalKejadian; } set { SetProperty(ref _tanggalKejadian, value); } }
 
         public AddmelaporkanViewModel(Karyawan karyawan)
         {
@@ -101,8 +107,8 @@ namespace MobileApp.Views.Profiles
                 {
                     Files = Files,
                     Jenis = PelanggaranType.Pengaduan,
-                    TanggalKejadian = DateTime.Now,
-                    Tanggal = DateTime.Now,
+                    TanggalKejadian = TimeZoneInfo.ConvertTime(TanggalKejadian, TimeZoneInfo.Utc),
+                    Tanggal = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc),
                     PelaporId = Helper.Profile.Karyawan.Id,
                     TerlaporId = Karyawan.Id,
                     PerusahaanId = Karyawan.Perusahaan.Id,

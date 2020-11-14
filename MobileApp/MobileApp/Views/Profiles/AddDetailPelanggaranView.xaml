@@ -31,10 +31,14 @@
                                  IsGrouped="True">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <FlexLayout>
+                                <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
                                     <CheckBox IsChecked="{Binding Selected}" VerticalOptions="CenterAndExpand"></CheckBox>
-                                    <Label Text="{Binding Nama}" Margin="7" VerticalOptions="CenterAndExpand"/>
-                                </FlexLayout>
+                                    <Label Grid.Column="1" Text="{Binding Nama}" Margin="7" VerticalOptions="CenterAndExpand"/>
+                                </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.GroupHeaderTemplate>

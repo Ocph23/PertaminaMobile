@@ -1,11 +1,7 @@
 ﻿using MobileApp.Models.Datas;
 using Plugin.Media;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -45,6 +41,7 @@ namespace MobileApp.Views
 
     public class MelaporkanKejadianViewModel : MobileApp.ViewModels.BaseViewModel
     {
+        private DateTime _tanggalKejadian =DateTime.Now;
 
         public Kejadian Model { get; set; } = new Kejadian() {  PelaporId= Helper.Profile.Karyawan.Id, Waktu=DateTime.Now};
 
@@ -53,6 +50,8 @@ namespace MobileApp.Views
         public Command FolderCommand { get; }
         public Command CancelCommand { get; }
         public Command SaveCommand { get; }
+
+        public DateTime TanggalKejadian { get { return _tanggalKejadian; } set { SetProperty(ref _tanggalKejadian, value); } }
 
         public MelaporkanKejadianViewModel()
         {
@@ -70,23 +69,27 @@ namespace MobileApp.Views
             {
                 if (IsBusy) return;
 
-
+                IsBusy = true;
+                Model.Waktu = TimeZoneInfo.ConvertTime(Model.Waktu, TimeZoneInfo.Utc);
                 var saved = await Kejadians.AddItemAsync(Model);
                 if (saved)
                 {
                     Helper.InfoMessage("Anda Berhasil Melaporkan Pelanggaran");
                     await Application.Current.MainPage.Navigation.PopModalAsync();
                 }
+
+                IsBusy = false;
             }
             catch (Exception ex)
             {
-
                 IsBusy = false;
                 Helper.ErrorMessage(ex.Message);
             }
+            finally
+            {
+                IsBusy = false;
+            }
         }
-
-      
 
         private async void FolderAction(object obj)
         {

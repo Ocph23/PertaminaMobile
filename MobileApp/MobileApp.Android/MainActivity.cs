@@ -26,7 +26,8 @@ using MobileApp.Views;
 namespace MobileApp.Droid
 {
 
-    [Activity(Label = "MobileApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait , WindowSoftInputMode = Android.Views.SoftInput.AdjustResize)]
+    [Activity(Label = "MobileApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = false,
+        ScreenOrientation = ScreenOrientation.Portrait , WindowSoftInputMode = Android.Views.SoftInput.AdjustResize)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IAuthService, Android.Gms.Tasks.IOnSuccessListener, Android.Gms.Tasks.IOnFailureListener
     {
 
