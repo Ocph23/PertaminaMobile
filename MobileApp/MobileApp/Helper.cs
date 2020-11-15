@@ -134,6 +134,14 @@ namespace MobileApp
         }
 
 
+        public static DateTime ConvertToJayapura(DateTime date)
+        {
+            var tzs = TimeZoneInfo.GetSystemTimeZones();
+
+            TimeZoneInfo tz = TimeZoneInfo.FindSystemTimeZoneById("Asia/Jayapura");
+
+            return TimeZoneInfo.ConvertTime(date, tz);
+        }
 
     }
 

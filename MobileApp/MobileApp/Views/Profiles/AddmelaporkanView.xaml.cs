@@ -107,8 +107,8 @@ namespace MobileApp.Views.Profiles
                 {
                     Files = Files,
                     Jenis = PelanggaranType.Pengaduan,
-                    TanggalKejadian = TimeZoneInfo.ConvertTime(TanggalKejadian, TimeZoneInfo.Utc),
-                    Tanggal = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc),
+                    TanggalKejadian = Helper.ConvertToJayapura(TanggalKejadian),
+                    Tanggal = Helper.ConvertToJayapura(TanggalKejadian),
                     PelaporId = Helper.Profile.Karyawan.Id,
                     TerlaporId = Karyawan.Id,
                     PerusahaanId = Karyawan.Perusahaan.Id,

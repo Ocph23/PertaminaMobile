@@ -19,6 +19,9 @@ namespace MobileApp
         {
             InitializeComponent();
             CultureInfo requestCulture;
+
+        
+
             try
             {
                 requestCulture = CultureInfo.CreateSpecificCulture("id-ID");
