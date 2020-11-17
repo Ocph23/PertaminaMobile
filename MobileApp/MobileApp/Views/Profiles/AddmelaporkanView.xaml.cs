@@ -111,7 +111,7 @@ namespace MobileApp.Views.Profiles
                     Tanggal = Helper.ConvertToJayapura(TanggalKejadian),
                     PelaporId = Helper.Profile.Karyawan.Id,
                     TerlaporId = Karyawan.Id,
-                    PerusahaanId = Karyawan.Perusahaan.Id,
+                    PerusahaanId = Karyawan.Perusahaan.PerusahaanId,
                     Status =StatusPelanggaran.Baru
                 };
 
